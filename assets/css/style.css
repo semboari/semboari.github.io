@@ -1,0 +1,164 @@
+body {
+	background-image: url('../img/BACKROUND.png');
+	background-size: cover;
+	background-repeat: no-repeat;
+	background-attachment: scroll;
+	z-index: -1;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+}
+
+.text-barlow {
+	font-family: 'Barlow', sans-serif;
+}
+
+.nav-link:hover {
+	font-weight: bold;
+}
+
+.footer {
+	padding-top: 30px;
+	padding-bottom: 30px;
+}
+
+
+.header01 {
+	text-align: center;
+	position: relative;
+	font-weight: bold;
+	color: #fff;
+	text-shadow: 8px 8px 10px #000;
+}
+
+.header01 h3 {
+	margin-top: 30px;
+}
+
+.header01 img {
+	width: 150px;
+	height: 150px;
+}
+
+.header01 hr {
+	border-top: 1px solid #000;
+	margin-top: 50px;
+}
+
+
+.col-md-3 img {
+	border: 1px solid #000;
+	margin-left: 25px;
+}
+
+.card {
+	box-shadow: 8px 8px 10px #aaa;
+}
+
+.card-biru {
+	background-color: #95e6ff;
+}
+
+.card-kuning {
+	background-color: #DBFF33;
+}
+
+.garis-biru {
+	width: 400px;
+	height: 400px;
+	background: #1200FF;
+	border-radius: 100%;
+	margin-left: 90px;
+}
+
+.garis-kuning {
+	width: 370px;
+	height: 370px;
+	background: #FFE401;
+	border-radius: 100%;
+	position: relative;
+	top: 15px;
+	left: 15px;
+}
+
+.garis-kuning a {
+	color: #000;
+	font-size: 20px;
+
+}
+
+.garis-kuning a:hover {
+	font-size: 25px;
+	font-weight: bold;
+}
+
+.biru-muda {
+	width: 150px;
+	height: 150px;
+	background: #27BEF6;
+	border-radius: 100%;
+	position: relative;
+	top: 120px;
+	left: 110px;
+}
+
+.biru-muda h2 {
+	position: relative;
+	top: 40px;
+
+}
+
+.biru-muda p {
+	font-size: 20px;
+	position: relative;
+	top: 40px;
+}
+
+.alamat1 {
+	top: 50px;
+	left: 40px;
+}
+
+.alamat2 {
+	top: 50px;
+	left: 240px;
+}
+
+.alamat3 {
+	top: 220px;
+	left: 30px;
+}
+
+.alamat4 {
+	top: 220px;
+	left: 240px;
+}
+
+.alamat1,
+.alamat2,
+.alamat3,
+.alamat4 {
+	position: absolute;
+	width: 100px;
+	height: 100px;
+	border-radius: 100%;
+	background-color: #FFE401;
+}
+
+.alamat1 p,
+.alamat2 p,
+.alamat3 p,
+.alamat4 p {
+	text-align: center;
+	line-height: 100px;
+}
+
+.btn {
+	display: inline-block;
+	width: 100px;
+}
+
+.col-md-2 img {
+	border: 1px solid #000;
+}
