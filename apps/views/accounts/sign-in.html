@@ -2,12 +2,13 @@
 <hr>
 <form class="form-group">
 	<div class="form-group">
-		<label class="control-label">NIP</label>
-		<input class="form-control" type="number" name="" placeholder="Masukan NIP Anda" required="">
+		<label class="control-label">User Name</label>
+		<input class="form-control" ng-model="model.username" type="text" name="" placeholder="User Anda" required="">
 	</div>
 	<div class="form-group">
 		<label class="control-label">Password</label>
-		<input class="form-control" type="password" name="" placeholder="Masukan Password Anda" required="">
+		<input class="form-control" ng-model="model.password" type="password" name=""
+			placeholder="Masukan Password Anda" required="">
 	</div>
-	<button class="btn btn-primary" name="" id="">Login</button>
+	<button ng-click="login(model)" class="btn btn-primary" name="" id="">Login</button>
 </form>
