@@ -1,0 +1,27 @@
+{
+  "name": "appangkakredit-rein",
+  "version": "1.0.0",
+  "description": "skripis",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/semboari/desain-ta-rein.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@uirouter/angularjs": "^1.0.22",
+    "angular": "^1.7.8",
+    "angular-local-storage": "^0.7.1",
+    "angular-route": "1.7.8",
+    "swangular": "^1.4.3",
+    "font-awesome": "^4.7.0"
+  },
+  "bugs": {
+    "url": "https://github.com/semboari/desain-ta-rein/issues"
+  },
+  "homepage": "https://github.com/semboari/desain-ta-rein#readme"
+}
