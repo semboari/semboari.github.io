@@ -46,6 +46,10 @@ body {
 	margin-top: 50px;
 }
 
+.garis {
+	border-top: 1px solid #000;
+}
+
 
 .col-md-3 img {
 	border: 1px solid #000;
@@ -67,27 +71,19 @@ body {
 .garis-biru {
 	width: 400px;
 	height: 400px;
-	background: linear-gradient(90deg, rgba(253, 187, 45, 0.5) 0%, rgba(34, 192, 195, 0.55) 100%);
+	background: #1200FF;
 	border-radius: 100%;
+	margin-left: 90px;
 }
 
 .garis-kuning {
-	width: 90%;
-	height: 90%;
-	background: linear-gradient(90deg, #FDBB2D 0%, #22C1C3 100%);
-	border-radius: 50%;
+	width: 370px;
+	height: 370px;
+	background: #FFE401;
+	border-radius: 100%;
 	position: relative;
-	transform: translate(5%, 5%);
-	text-align: center;
-}
-
-
-.biru-muda {
-	width: 50%;
-	height: 50%;
-	background: linear-gradient(90deg, rgba(253, 187, 45, 0.8) 0%, rgba(34, 192, 195, 0.85) 100%);
-	border-radius: 50%;
-	transform: translate(50%, 50%);
+	top: 15px;
+	left: 15px;
 }
 
 .garis-kuning a {
@@ -101,6 +97,15 @@ body {
 	font-weight: bold;
 }
 
+.biru-muda {
+	width: 150px;
+	height: 150px;
+	background: #27BEF6;
+	border-radius: 100%;
+	position: relative;
+	top: 120px;
+	left: 110px;
+}
 
 .biru-muda h2 {
 	position: relative;
@@ -115,23 +120,23 @@ body {
 }
 
 .alamat1 {
-	top: 60px;
-	left: 30px;
+	top: 50px;
+	left: 40px;
 }
 
 .alamat2 {
-	top: 60px;
-	left: 230px;
+	top: 50px;
+	left: 240px;
 }
 
 .alamat3 {
-	top: 200px;
+	top: 220px;
 	left: 30px;
 }
 
 .alamat4 {
-	top: 200px;
-	left: 230px;
+	top: 220px;
+	left: 240px;
 }
 
 .alamat1,
@@ -142,7 +147,7 @@ body {
 	width: 100px;
 	height: 100px;
 	border-radius: 100%;
-	background: linear-gradient(90deg, #e3ffe7 0%, #d9e7ff 100%);
+	background-color: #FFE401;
 }
 
 .alamat1 p,
@@ -155,7 +160,6 @@ body {
 
 .btn {
 	display: inline-block;
-	width: 100px;
 }
 
 .col-md-2 img {
