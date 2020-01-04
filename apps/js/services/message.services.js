@@ -1,59 +1,75 @@
-angular.module("message.service", []).factory("message", MessageServices);
+angular.module('message.service', []).factory('message', MessageServices);
 
 function MessageServices(swangular, $q) {
-  return { info: info, error: error, warning: warning, dialog: dialog };
+	return { info: info, error: error, warning: warning, dialog: dialog };
 
-  function info(params) {
-    swangular.swal({
-      title: "Sukses",
-      text: params,
-      type: "info"
-    });
-  }
+	function info(params) {
+		swangular.swal({
+			title: 'Sukses',
+			text: params,
+			type: 'info'
+		});
+	}
 
-  function error(params) {
-    swangular.swal({
-      title: "Error",
-      text: params,
-      type: "error"
-    });
-  }
+	function error(params) {
+		var title = 'Error';
+		if (params.status) {
+			switch (params.status) {
+				case 401:
+					title = 'Hak Akses';
+					break;
+				case 402:
+					title = 'LINK';
+					break;
 
-  function warning(params) {
-    swangular.swal({
-      title: "Sukses",
-      text: params,
-      type: "warning"
-    });
-  }
+				default:
+					title = params.status;
+					break;
+			}
+		}
 
-  function dialog(messageText, yesBtn, cancelBtn) {
-    var def = $q.defer();
-    var yesText = "Ya";
-    var cancelText = "Batal";
+		swangular.swal({
+			title: title,
+			text: params.data.message,
+			type: 'error'
+		});
+	}
 
-    if (yesBtn) yesText = yesBtn;
+	function warning(params) {
+		swangular.swal({
+			title: 'Sukses',
+			text: params,
+			type: 'warning'
+		});
+	}
 
-    if (cancelBtn) cancelText = cancelBtn;
+	function dialog(messageText, yesBtn, cancelBtn) {
+		var def = $q.defer();
+		var yesText = 'Ya';
+		var cancelText = 'Batal';
 
-    swangular
-      .swal({
-        title: "Yakin ?",
-        text: messageText,
-        type: "warning",
-        showCancelButton: true,
-        confirmButtonText: yesText,
-        cancelButtonText: cancelText,
-        reverseButtons: true
-      })
-      .then(result => {
-        if (result.value) {
-          def.resolve(result.value);
-        } else {
-          def.reject(result.value);
-        }
-      });
+		if (yesBtn) yesText = yesBtn;
 
-    return def.promise;
-  }
+		if (cancelBtn) cancelText = cancelBtn;
+
+		swangular
+			.swal({
+				title: 'Yakin ?',
+				text: messageText,
+				type: 'warning',
+				showCancelButton: true,
+				confirmButtonText: yesText,
+				cancelButtonText: cancelText,
+				reverseButtons: true
+			})
+			.then((result) => {
+				if (result.value) {
+					def.resolve(result.value);
+				} else {
+					def.reject(result.value);
+				}
+			});
+
+		return def.promise;
+	}
 }

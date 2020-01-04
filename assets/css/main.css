@@ -1,8 +1,8 @@
 .rotate {
   -webkit-animation-name: Rotate;
           animation-name: Rotate;
-  -webkit-animation-duration: 5s;
-          animation-duration: 5s;
+  -webkit-animation-duration: 30s;
+          animation-duration: 30s;
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
   -webkit-animation-timing-function: linear;
@@ -11,8 +11,8 @@
 }
 
 .rotate:hover {
-  -webkit-animation-name: null;
-          animation-name: null;
+  -webkit-animation-name: none;
+          animation-name: none;
 }
 
 @-webkit-keyframes Rotate {

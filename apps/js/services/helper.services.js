@@ -1,12 +1,8 @@
-angular.module("helper.service",[])
-.factory("helperServices",helperServices)
-;
+angular.module('helper.service', []).factory('helperServices', helperServices);
 
+function helperServices() {
+	var service = {};
+	service.url = 'http://localhost:5500';
 
-
-function helperServices (){
-    var service={};
-    service.url="http://localhost";
-
-    return {url:service.url};
+	return { url: service.url };
 }

@@ -1,13 +1,13 @@
 .rotate {
   animation-name: Rotate;
-  animation-duration: 5s;
+  animation-duration: 30s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   overflow: hidden;
 }
 
 .rotate:hover {
-  animation-name: null;
+  animation-name: none;
 }
 
 @keyframes Rotate {

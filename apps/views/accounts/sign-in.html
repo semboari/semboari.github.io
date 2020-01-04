@@ -2,12 +2,18 @@
 <hr>
 <form class="form-group">
 	<div class="form-group">
+<<<<<<< HEAD
 		<label class="control-label">Email</label>
 		<input class="form-control" type="email" name="" placeholder="Masukan Email Anda" required="">
+=======
+		<label class="control-label">User Name</label>
+		<input class="form-control" ng-model="model.username" type="text" name="" placeholder="User Anda" required="">
+>>>>>>> 2b3d8c50b82a0a9543fbb1e788f5d081725b5447
 	</div>
 	<div class="form-group">
 		<label class="control-label">Password</label>
-		<input class="form-control" type="password" name="" placeholder="Masukan Password Anda" required="">
+		<input class="form-control" ng-model="model.password" type="password" name=""
+			placeholder="Masukan Password Anda" required="">
 	</div>
-	<button class="btn btn-primary" name="" id="">Login</button>
+	<button ng-click="login(model)" class="btn btn-primary" name="" id="">Login</button>
 </form>
