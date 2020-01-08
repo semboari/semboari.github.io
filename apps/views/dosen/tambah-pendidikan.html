@@ -1,43 +1,47 @@
 <div class="row">
     <div class="col-lg-12 mt-3">
-        <h3 class="mt-1" style="display: inline;">Data Sub Unsur Kegiatan</h3>
+        <h3 class="mt-1" style="display: inline;">Tambah Sub Unsur Pelaksana Pendidikan</h3>
         <hr class="garis">
         <form action="">
             <div class="row">
                 <div class="col-lg-6">
                     <div class="form-group">
-                        <label for="Tahun">Tahun</label>
-                        <input type="text" class="form-control" placeholder="example 2019" required id="" name="">
+                        <label for="" class="control-label">Tahun</label>
+                        <input type="date" id="" required class="form-control">
                     </div>
                     <div class="form-group">
-                        <label for="unsur">Unsur</label>
+                        <label for="" class="control-label">Sub Unsur</label>
+                        <textarea name="" class="form-control" id="" cols="30" rows="5"
+                            placeholder="Example Melaksanan Proses Pengajaran Selama 2 SMT"></textarea>
+                    </div>
+                </div>
+                <div class="col-lg-6">
+                    <div class="form-group">
+                        <label for="" class="control-label">Uraian Kegiatan</label>
+                        <textarea name="" class="form-control" id="" cols="30" rows="5"
+                            placeholder="Example Melaksanan Proses Pengajaran Selama 2 SMT"></textarea>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label">Tanggal</label>
+                        <input type="date" id="" required class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label">Satuan Hasil</label>
                         <select name="" class="form-control" id="">
-                            <option value="">-- Pilih Unsur --</option>
+                            <option value="">-- Pilih Level --</option>
+                            <option value="">Pemeriksa Penelitian</option>
+                            <option value="">Rektor</option>
+                            <option value="">Kaprodi</option>
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="sub-unsur">Sub Unsur</label>
-                        <textarea name="" id="" cols="30" rows="5" class="form-control"
-                            placeholder="example Asisten ahli untuk 10 SKS Pertama" required></textarea>
+                        <label for="" class="control-label">Email</label>
+                        <input type="email" class="form-control" placeholder="example Reinhardsemboari471@gmail.com"
+                            required>
                     </div>
-                </div>
-
-                <div class="col-lg-6">
-                    <div class="form-group">
-                        <label for="satuan-hasil">Satuan Hasil</label>
-                        <input type="text" class="form-control" placeholder="example 1 smt" required id="" name="">
-                    </div>
-                    <div class="form-group">
-                        <label for="angka-kredit">Angka Kredit</label>
-                        <input type="number" class="form-control" placeholder="example 1" required id="" name="">
-                    </div>
-                    <div class="form-group">
-                        <label for="pelaksanaan-kegiatan">Pelaksanaan Kegiatan</label>
-                        <input type="text" class="form-control" placeholder="example Terlaksana" required id="" name="">
-                    </div>
-                    <a href="data-sub-unsur.html" style="width: 100px;" class="btn btn-outline-primary"
+                    <a href="data-pejabat-pemeriksa.html" style="width: 100px;" class="btn btn-outline-primary"
                         data-toggle="modal" data-target="#save"><span class="fas fa-save"></span> Save</a>
-                    <a ui-sref="admin-sub-unsur" style="width: 100px;" class="btn btn-outline-danger"><span
+                    <a ui-sref="dosen-pendidikan" style="width: 100px;" class="btn btn-outline-danger"> <span
                             class="fas fa-close"></span> Exit</a>
                 </div>
             </div>

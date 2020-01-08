@@ -33,6 +33,33 @@ angular.module('app.admin.router', ['ui.router']).config(function ($stateProvide
 		templateUrl: '../apps/views/admin/progdi.html'
 	})
 
+	$stateProvider.state('admin-pejabat-pemeriksa', {
+
+		url: '/pejabat-pemeriksa',
+		parent: 'admin',
+		templateUrl: '../apps/views/admin/pejabat-pemeriksa.html'
+	})
+
+	$stateProvider.state('admin-tambah-pejabat', {
+
+		url: '/tambah-pejabat',
+		parent: 'admin',
+		templateUrl: '../apps/views/admin/tambah-pejabat.html'
+	})
+
+	$stateProvider.state('admin-sub-unsur', {
+
+		url: '/sub-unsur',
+		parent: 'admin',
+		templateUrl: '../apps/views/admin/sub-unsur.html'
+	})
+
+	$stateProvider.state('admin-tambah-sub-unsur', {
+
+		url: '/tambah-sub-unsur',
+		parent: 'admin',
+		templateUrl: '../apps/views/admin/tambah-sub-unsur.html'
+	})
 
 	;
 });
