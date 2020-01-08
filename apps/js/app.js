@@ -13,15 +13,17 @@ angular
 		'auth.service',
 		'storage.services',
 		'helper.service',
+		'admin.service',
 
 		'app.conponent',
 
-		'auth.controller'
+		'auth.controller',
+		'admin.controller'
 	])
 	.controller('homeController', homeController);
 
 function homeController($scope, AuthService) {
-	$scope.logOff = function() {
+	$scope.logOff = function () {
 		AuthService.logOff();
 	};
 }

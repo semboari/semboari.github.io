@@ -1,0 +1,34 @@
+    <div class="row">
+        <div class="col-md-12 mt-3">
+            <h2 class="mt-1" style="display: inline;">Data Fakultas</h2>
+            <button class="btn btn-outline-primary pull-right" data-toggle="modal" data-target="#fakultas">Tambah
+                Fakultas</button>
+            <hr class="garis">
+            <div class="table table-responsive">
+                <table class="table table-bordered table-hover" id="myTable">
+                    <thead class=" bg-primary">
+                        <tr>
+                            <th class="text-center">No</th>
+                            <th>Nama Universitas</th>
+                            <th>Nama Fakultas</th>
+                            <th class="text-center">Opsi</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="item in Datas">
+                            <td class="text-center">1</td>
+                            <td>{{item.Universitas}}</td>
+                            <td>Ilmu Komputer Dan Manajemen</td>
+                            <td class="text-center">
+                                <button class="btn btn-outline-success">Ubah</button>
+                                <button class="btn btn-outline-danger" data-toggle="modal"
+                                    data-target="#delete">Hapus</button>
+                            </td>
+                        </tr>
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>

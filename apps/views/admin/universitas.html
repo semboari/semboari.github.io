@@ -1,0 +1,121 @@
+  <div class="container">
+      <div class="row">
+
+          <div class="container text-barlow">
+
+              <div class="row">
+                  <div class="col-md-12 mt-3">
+                      <h2 class="mt-1" style="display: inline;">Data Universitas</h2>
+                      <button class="btn btn-outline-primary pull-right" data-toggle="modal"
+                          data-target="#universitas">Tambah
+                          Universitas</button>
+                      <hr class="garis">
+                      <div class="table table-responsive">
+                          <table class="table table-bordered table-hover" id="myTable">
+                              <thead class=" bg-primary">
+                                  <tr>
+                                      <th class="text-center">No</th>
+                                      <th>Nama Universitas</th>
+                                      <th class="text-center">Opsi</th>
+                                  </tr>
+                              </thead>
+                              <tbody ng-repeat="item in Datas">
+                                  <tr>
+                                      <td class="text-center">{{$index+1}}</td>
+                                      <td>{{item.Universitas}}</td>
+                                      <td class="text-center">
+                                          <button ng-click="SelectedItem(item)" data-toggle="modal"
+                                              data-target="#universitas" class="btn btn-outline-success">Ubah</button>
+                                          <button ng-click="SelectedItem(item)" class="btn btn-outline-danger"
+                                              data-toggle="modal" data-target="#delete">Hapus</button>
+                                      </td>
+                                  </tr>
+
+                              </tbody>
+                          </table>
+                      </div>
+                  </div>
+
+              </div>
+          </div>
+      </div>
+  </div>
+  <div class="container-fluid text-barlow">
+      <div class="row">
+          <div class="col-md-12 mt-5 text-center footer bg-secondary text-light">
+              Lembaga Layanan Pendidikan Tinggi Wilayah XIV Papua Dan Papua Barat
+          </div>
+      </div>
+  </div>
+
+  <!-- Modal tambah universitas-->
+  <div class="modal fade" id="universitas" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Tambah Universitas</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <form ng-submit="Save(model)">
+                  <div class="modal-body">
+                      <div class="form-group">
+                          <label for="" class="control-label">Nama Universitas</label>
+                          <input type="text" ng-model="model.Universitas" class="form-control"
+                              placeholder="Masukan Nama Universitas" required>
+                      </div>
+                  </div>
+                  <div class="modal-footer">
+                      <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                      <button type="submit" class="btn btn-primary">Save</button>
+                  </div>
+              </form>
+          </div>
+      </div>
+  </div>
+
+  <!-- Modal delete-->
+  <div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">SIPAK</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <p class=" text-uppercase">Apakah Anda Yakin Ingin Menghapus {{model.Universitas}}?</p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button ng-click="delete(model)" type="button" class="btn btn-primary">Delete</button>
+              </div>
+          </div>
+      </div>
+  </div>
+
+  <!-- Modal logout-->
+  <div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+      aria-hidden="true">
+      <div class="modal-dialog" role="document">
+          <div class="modal-content">
+              <div class="modal-header">
+                  <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                  </button>
+              </div>
+              <div class="modal-body">
+                  <p class=" text-uppercase">Apakah Anda Yakin Ingin Keluar ?</p>
+              </div>
+              <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-primary">Ok</button>
+              </div>
+          </div>
+      </div>
+  </div>
