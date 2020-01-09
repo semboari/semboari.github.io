@@ -5,47 +5,49 @@
             <span class="fas fa-plus"></span>
         </button>
         <hr class="garis" />
-        <div class="table table-responsive">
-            <table class="table table-bordered table-hover" id="myTable">
-                <thead class=" bg-primary">
-                    <tr>
-                        <th class="text-center">No</th>
-                        <th>Tahun</th>
-                        <th>Sub Unsur</th>
-                        <th>Uraian Kegiatan</th>
-                        <th>Tanggal</th>
-                        <th>Satua Hasil</th>
-                        <th>Jumlah Volume Kegiatan</th>
-                        <th>Bukti Fisik</th>
-                        <th class="text-center">Opsi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <td class="text-center">{{$index+1}}</td>
-                        <td>2019</td>
-                        <td>Melaksanakan Pengajarang Selama 2 Semeseter SKS=12</td>
-                        <td>Melaksanakan Pengajarang Selama 2 Semeseter SKS=12</td>
-                        <td>2018/2019</td>
-                        <td>2 smt</td>
-                        <td>2</td>
-                        <td><button class="btn btn-primary"><span class="fas fa-file"></span
-                                    class="fas fa-file"></button></td>
-                        <td class="text-center">
-                            <button ng-click="SelectedItem(item)" data-toggle="modal" data-target="#universitas"
-                                class="btn btn-outline-success">
-                                <span class="fas fa-edit"></span>
-                            </button>
-                            <button ng-click="SelectedItem(item)" class="btn btn-outline-danger" data-toggle="modal"
-                                data-target="#delete">
-                                <span class="fas fa-eraser"></span>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-        </div>
+        <div class="table table-responsive"></div>
+        <table class="table table-bordered table-hover" id="myTable">
+            <thead class=" bg-primary">
+                <tr>
+                    <th class="text-center">No</th>
+                    <th>Tahun Peraturan Rubrik</th>
+                    <th>Sub Unsur</th>
+                    <th>Uraian Kegiatan</th>
+                    <th>Tanggal</th>
+                    <th>Satuan Hasil</th>
+                    <th>Jumlah Volume Kegiatan</th>
+                    <th>Jumlah AK</th>
+                    <th>Bukti Fisik</th>
+                    <th class="text-center">Opsi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td class="text-center">{{$index+1}}</td>
+                    <td>2019</td>
+                    <td>Melaksanakan Pengajarang Selama 2 Semeseter SKS=12</td>
+                    <td>Melaksanakan Pengajarang Selama 2 Semeseter SKS=12</td>
+                    <td>2018/2019</td>
+                    <td>2 smt</td>
+                    <td>2</td>
+                    <td>2</td>
+                    <td><button class="btn btn-primary"><span class="fas fa-file"></span class="fas fa-file"></button>
+                    </td>
+                    <td class="text-center">
+                        <button ng-click="SelectedItem(item)" data-toggle="modal" data-target="#universitas"
+                            class="btn btn-outline-success">
+                            <span class="fas fa-edit"></span>
+                        </button>
+                        <button ng-click="SelectedItem(item)" class="btn btn-outline-danger" data-toggle="modal"
+                            data-target="#delete">
+                            <span class="fas fa-eraser"></span>
+                        </button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
+</div>
 </div>
 
 <!-- Modal delete-->

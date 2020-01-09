@@ -41,6 +41,24 @@ angular.module('app.dosen.router', ['ui.router']).config(function ($stateProvide
 		templateUrl: '../apps/views/dosen/tambah-pendidikan.html'
 	})
 
+	$stateProvider.state('dosen-tambah-penelitian', {
+		url: '/tambah-penelitian',
+		parent: 'dosen',
+		templateUrl: '../apps/views/dosen/tambah-penelitian.html'
+	})
+
+	$stateProvider.state('dosen-tambah-pengabdian', {
+		url: '/tambah-pengabdian',
+		parent: 'dosen',
+		templateUrl: '../apps/views/dosen/tambah-pengabdian.html'
+	})
+
+	$stateProvider.state('dosen-tambah-penunjang', {
+		url: '/tambah-penunjang',
+		parent: 'dosen',
+		templateUrl: '../apps/views/dosen/tambah-penunjang.html'
+	})
+
 
 	;
 });
