@@ -16,9 +16,9 @@
                     </thead>
                     <tbody>
                         <tr ng-repeat="item in Datas">
-                            <td class="text-center">1</td>
+                            <td class="text-center">{{$index+1}}</td>
                             <td>{{item.Universitas}}</td>
-                            <td>Ilmu Komputer Dan Manajemen</td>
+                            <td>{{item.Fakultas}}</td>
                             <td class="text-center">
                                 <button class="btn btn-outline-success"><span class="fas fa-edit"></span></button>
                                 <button class="btn btn-outline-danger" data-toggle="modal" data-target="#delete"><span

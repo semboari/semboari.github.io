@@ -1,8 +1,13 @@
 angular.module('admin.controller', [])
     .controller("fakultasController", fakultasController)
-    .controller("universitasController", universitasController1);
+    .controller("universitasController", universitasController1)
+    .controller("ProgdiController", progdiController);
 
 function fakultasController($scope, UniversitasService) {
+    $scope.Datas = UniversitasService.get();
+}
+
+function progdiController($scope, UniversitasService) {
     $scope.Datas = UniversitasService.get();
 }
 

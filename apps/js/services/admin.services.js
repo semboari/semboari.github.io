@@ -2,8 +2,6 @@ angular.module('admin.service', [])
 
     .factory("UniversitasService", UniversitasService)
 
-
-
 ;
 
 function UniversitasService() {
@@ -16,6 +14,12 @@ function UniversitasService() {
 
     }, {
         Id: 2,
+        Universitas: "Sains Dan Teknologi Jayapura",
+        Fakultas: "Ilmu Komputer Dan Manajemen",
+        ProgramStudi: "Teknik Informatika"
+
+    }, {
+        Id: 3,
         Universitas: "Sains Dan Teknologi Jayapura",
         Fakultas: "Ilmu Komputer Dan Manajemen",
         ProgramStudi: "Teknik Informatika"

@@ -30,6 +30,7 @@ angular.module('app.admin.router', ['ui.router']).config(function ($stateProvide
 
 		url: '/progdi',
 		parent: 'admin',
+		controller: 'ProgdiController',
 		templateUrl: '../apps/views/admin/progdi.html'
 	})
 
@@ -39,6 +40,7 @@ angular.module('app.admin.router', ['ui.router']).config(function ($stateProvide
 		parent: 'admin',
 		templateUrl: '../apps/views/admin/pejabat-pemeriksa.html'
 	})
+
 
 	$stateProvider.state('admin-tambah-pejabat', {
 
