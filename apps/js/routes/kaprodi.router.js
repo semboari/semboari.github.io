@@ -11,5 +11,17 @@ angular.module('app.kaprodi.router', ['ui.router']).config(function ($stateProvi
 		templateUrl: '../apps/views/kaprodi/home.html'
 	})
 
+	$stateProvider.state('kaprodi-pengusul', {
+		url: '/pengusul',
+		parent: 'kaprodi',
+		templateUrl: '../apps/views/kaprodi/pengusul.html'
+	})
+
+	$stateProvider.state('kaprodi-berkas-pengusulan', {
+		url: '/berkas-pengusulan',
+		parent: 'kaprodi',
+		templateUrl: '../apps/views/kaprodi/berkas-pengusulan.html'
+	})
+
 	;
 });
