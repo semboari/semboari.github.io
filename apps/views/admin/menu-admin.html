@@ -1,0 +1,53 @@
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12 header01">
+            <img src="assets/img/tutwuri01.png" class="img-fluid" align="left">
+            <img src="assets/img/lldikti.png" class="img-fluid" align="right">
+            <H3 class='text-uppercase text-center'>sistem informasi perhitungan angka kredit dosen</H3>
+            <p style="font-size: 20px;" class="text-capitalize">lembaga layanan pendidikan tinggi wilayah XIV
+                papua
+                dan papua barat</p>
+        </div>
+        <div class="container text-barlow">
+            <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+                <a class="navbar-brand" ui-sref="dosen-home">SIPAK</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse"
+                    data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav mr-auto">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" href="#" role="button"
+                                aria-haspopup="true" aria-expanded="false">Data PT</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" ui-sref="admin-universitas">Universitas</a>
+                                <a class="dropdown-item" ui-sref="admin-fakultas">Fakultas</a>
+                                <a class="dropdown-item" ui-sref="admin-progdi">Progdi</a>
+                            </div>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" ui-sref="admin-sub-unsur">Sub Unsur</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" ui-sref="admin-pejabat">Pejabat</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" ui-sref="#logout">Logout</a>
+                        </li>
+                    </ul>
+                </div>
+            </nav>
+            <ui-view></ui-view>
+        </div>
+    </div>
+</div>
+<div class="container-fluid text-barlow">
+    <div class="row">
+        <div class="col-md-12 mt-5 text-center footer bg-secondary text-light">
+            Lembaga Layanan Pendidikan Tinggi Wilayah XIV Papua Dan Papua Barat
+        </div>
+    </div>
+</div>
