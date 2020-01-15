@@ -1,5 +1,4 @@
 angular.module('app.pemeriksa.router', ['ui.router']).config(function ($stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise('/pemeriksa/home');
 	$stateProvider.state('pemeriksa', {
 		url: '/pemeriksa',
 		templateUrl: '../apps/views/pemeriksa/menu-pemeriksa.html'

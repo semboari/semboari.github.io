@@ -3,13 +3,6 @@ angular.module('admin.controller', [])
     .controller("universitasController", universitasController1)
     .controller("ProgdiController", progdiController);
 
-function fakultasController($scope, UniversitasService) {
-    $scope.Datas = UniversitasService.get();
-}
-
-function progdiController($scope, UniversitasService) {
-    $scope.Datas = UniversitasService.get();
-}
 
 
 function universitasController1($scope, UniversitasService) {
@@ -31,5 +24,40 @@ function universitasController1($scope, UniversitasService) {
     $scope.delete = function (params) {
         var index = $scope.Datas.indexOf(params);
         $scope.Datas.slice(index, 1);
+    }
+}
+
+function fakultasController($scope, UniversitasService) {
+    $scope.Datas = UniversitasService.get();
+
+    $scope.Save = function (data) {
+
+        if (data.Id === undefined)
+            $scope.Datas.push(data);
+        else {
+
+        }
+    }
+
+    $scope.SelectedItem = function (params) {
+        $scope.model = params;
+    }
+
+}
+
+function progdiController($scope, UniversitasService) {
+    $scope.Datas = UniversitasService.get();
+
+    $scope.Save = function (data) {
+
+        if (data.Id === undefined)
+            $scope.Datas.push(data);
+        else {
+
+        }
+    }
+
+    $scope.SelectedItem = function (params) {
+        $scope.model = params;
     }
 }
