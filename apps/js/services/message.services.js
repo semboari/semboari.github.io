@@ -21,16 +21,18 @@ function MessageServices(swangular, $q) {
 				case 402:
 					title = 'LINK';
 					break;
-
 				default:
-					title = params.status;
+					if (params.status > 0) title = params.status;
 					break;
 			}
 		}
 
+		var text = 'Terjadi Kesalahan';
+		if (params.data) text = params.data.message;
+
 		swangular.swal({
 			title: title,
-			text: params.data.message,
+			text: text,
 			type: 'error'
 		});
 	}
