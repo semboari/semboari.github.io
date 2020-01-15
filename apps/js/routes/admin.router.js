@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 angular.module('app.admin.router', ['ui.router']).config(function ($stateProvider, $urlRouterProvider) {
 
 	$stateProvider.state('main	', {
@@ -7,10 +6,6 @@ angular.module('app.admin.router', ['ui.router']).config(function ($stateProvide
 		controller: 'LoginController',
 		templateUrl: '../apps/views/accounts/sign-in.html'
 	})
-=======
-angular.module('app.admin.router', [ 'ui.router' ]).config(function($stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise('/admin/home');
->>>>>>> 7ec534fd96b100e4f93140137f5c5653cf9a2890
 	$stateProvider.state('admin', {
 		url: '/admin',
 		templateUrl: '../apps/views/admin/menu-admin.html'
