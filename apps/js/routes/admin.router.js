@@ -1,4 +1,10 @@
 angular.module('app.admin.router', [ 'ui.router' ]).config(function($stateProvider, $urlRouterProvider) {
+	$stateProvider.state('main	', {
+		url: '/',
+		parent: 'account',
+		controller: 'LoginController',
+		templateUrl: '../apps/views/accounts/sign-in.html'
+	});
 	$stateProvider.state('admin', {
 		url: '/admin',
 		templateUrl: '../apps/views/admin/menu-admin.html'
