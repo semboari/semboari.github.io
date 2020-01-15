@@ -1,0 +1,130 @@
+<div class="row">
+    <div class="col-md-12 mt-3">
+        <h2 class="mt-1" style="display: inline;">Data Program Studi</h2>
+        <button class="btn btn-outline-primary pull-right" data-toggle="modal" data-target="#progdi"><span
+                class="fas fa-plus"></span></button>
+        <hr class="garis">
+        <div class="table table-responsive">
+            <table class="table table-bordered table-hover" id="myTable">
+                <thead class="bg-primary">
+                    <tr>
+                        <th class="text-center">No</th>
+                        <th>Nama Unniversitas</th>
+                        <th>Nama Fakultas</th>
+                        <th>Nama Program Studi</th>
+                        <th class="text-center">Opsi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="item in Datas">
+                        <td class="text-center">{{$index+1}}</td>
+                        <td>{{item.Universitas}}</td>
+                        <td>{{item.Fakultas}}</td>
+                        <td>{{item.ProgramStudi}}</td>
+                        <td class="text-center">
+                            <button class="btn btn-outline-success"><span class="fas fa-edit"></span></button>
+                            <button class="btn btn-outline-danger" data-toggle="modal" data-target="#delete"><span
+                                    class="fas fa-eraser"></span></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+<!-- Modal tambah program studi-->
+<div class="modal fade" id="progdi" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Program Studi</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form ng-submit="Save(model)">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="" class="control-label">Nama Universitas</label>
+                        <select name="" id="" class="form-control" required>
+                            <option> -- Pilih Universitas -- </option>
+                            <option value="">Universitas sains dan
+                                teknologi jayapura</option>
+                            <option value="">Universitas cenrawasih</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label">Nama Fakultas</label>
+                        <select name="" id="" class="form-control">
+                            <option> -- Pilih Fakultas -- </option>
+                            <option value="">Ilmu Komputer Dan Manajemen</option>
+                            <option value="">Ilmu Ekonomi Sosial Dan Politik</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="" class="control-label">Nama Program Studi</label>
+                        <input type="text" ng-model="model.progdi" class="form-control"
+                            placeholder="Masukan Nama Program Studi" required />
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">
+                        <span class="fas fa-close"></span> Close
+                    </button>
+                    <button type="submit" class="btn btn-primary"> <span class="fas fa-save"></span> Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal delete-->
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">SIPAK</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class=" text-uppercase">
+                    Apakah Anda Yakin Ingin Menghapus {{model.Universitas}}?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <span class="fas fa-close"></span> Close
+                </button>
+                <button ng-click="delete(model)" type="button" class="btn btn-danger">
+                    <span class="fas fa-eraser"></span> Delete
+                </button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal logout-->
+<div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class=" text-uppercase">Apakah Anda Yakin Ingin Keluar ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    Close
+                </button>
+                <button type="button" class="btn btn-primary">Ok</button>
+            </div>
+        </div>
+    </div>
+</div>
