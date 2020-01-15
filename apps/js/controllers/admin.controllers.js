@@ -6,6 +6,7 @@ angular.module('admin.controller', [])
 function fakultasController($scope, UniversitasService) {
     $scope.Datas = UniversitasService.get();
 }
+
 function progdiController($scope, UniversitasService) {
     $scope.Datas = UniversitasService.get();
 }
