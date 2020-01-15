@@ -1,5 +1,4 @@
 angular.module('app.rektor.router', ['ui.router']).config(function ($stateProvider, $urlRouterProvider) {
-	$urlRouterProvider.otherwise('/rektor/home');
 	$stateProvider.state('rektor', {
 		url: '/rektor',
 		templateUrl: '../apps/views/rektor/menu-rektor.html'

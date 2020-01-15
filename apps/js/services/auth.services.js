@@ -18,21 +18,27 @@ function AuthService($http, $q, StorageService, $state, helperServices, message)
 		var def = $q.defer();
 		var a = helperServices.url;
 		var b = getHeader();
-		$http({
-			method: 'post',
-			url: helperServices.url + '/api/auth/login',
-			headers: getHeader(),
-			data: user
-		}).then(
-			(res) => {
-				StorageService.addObject('user', res.data);
-				def.resolve(res.data);
-			},
-			(err) => {
-				def.reject();
-				message.error(err);
-			}
-		);
+		// $http({
+		// 	method: 'post',
+		// 	url: helperServices.url + '/api/auth/login',
+		// 	headers: getHeader(),
+		// 	data: user
+		// }).then(
+		// 	(res) => {
+		// 		StorageService.addObject('user', res.data);
+		// 		def.resolve(res.data);
+		// 	},
+		// 	(err) => {
+		// 		def.reject();
+		// 		message.error(err);
+		// 	}
+		// );
+
+
+		def.resolve({
+			role: 'admin'
+		});
+
 
 		return def.promise;
 	}
