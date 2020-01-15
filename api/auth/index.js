@@ -23,7 +23,7 @@ router.post('/login', async (req, res) => {
 		contextDb.Users.login(user).then(
 			(data) => {
 				if (data && bcrypt.compareSync(req.body.password, data.password)) {
-					var token = jwt.sign({ id: data.iduser, role: data.role }, config.secret, {
+					var token = jwt.sign({ id: data.idusers, role: data.role }, config.secret, {
 						expiresIn: 86400 // expires in 24 hours
 					});
 					data.password = null;
@@ -41,7 +41,7 @@ router.post('/login', async (req, res) => {
 	}
 });
 
-router.post('/register', async (req, res) => {
+router.post('/registerdosen', async (req, res) => {
 	try {
 		const user = req.body;
 		user.password = bcrypt.hashSync(req.body.password, 8);
