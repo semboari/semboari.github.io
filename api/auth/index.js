@@ -22,18 +22,27 @@ router.post('/login', async (req, res) => {
 		const user = req.body;
 		contextDb.Users.login(user).then(
 			(data) => {
-				if (data && bcrypt.compareSync(req.body.password, data.password)) {
-					var token = jwt.sign({ id: data.idusers, role: data.role }, config.secret, {
+				if (!data || data.length <= 0) {
+					res.status(401).json({ message: 'Anda Tidak Memiliki User Akses' });
+				} else {
+					var item = data[0];
+					if (!bcrypt.compareSync(req.body.password, item.password))
+						res.status(401).json({ message: 'Anda Tidak Memiliki User Akses' });
+					item.roles = [];
+					data.forEach((element) => {
+						item.roles.push(element.role);
+					});
+
+					var token = jwt.sign({ id: item.idusers, roles: item.roles }, config.secret, {
 						expiresIn: 86400 // expires in 24 hours
 					});
-					data.password = null;
-					res.status(200).json({ user: data, token: token });
-				} else {
-					res.status(401).json({ message: 'Anda Tidak Memiliki User Akses' });
+					item.password = null;
+					item.token = token;
+					res.status(200).json(item);
 				}
 			},
 			(err) => {
-				throw new Error(err.message);
+				res.status(401).json({ message: 'Anda Tidak Memiliki User Akses' });
 			}
 		);
 	} catch (error) {
@@ -53,6 +62,21 @@ router.post('/registerdosen', async (req, res) => {
 			},
 			(err) => {
 				throw new Error(err.message);
+			}
+		);
+	} catch (error) {
+		res.status(400).json({ message: error.message });
+	}
+});
+
+router.get('/profile', [ authJwt.verifyToken ], async (req, res) => {
+	try {
+		contextDb.Users.profile().then(
+			(response) => {
+				res.status(200).json(response);
+			},
+			(err) => {
+				res.status(400).json({ message: error.message });
 			}
 		);
 	} catch (error) {

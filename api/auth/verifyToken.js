@@ -21,7 +21,7 @@ verifyToken = (req, res, next) => {
 					message: 'Fail to Authentication. Error -> ' + err
 				});
 			}
-			req.role = decoded.role;
+			req.roles = decoded.roles;
 			req.userId = decoded.id;
 			next();
 		});

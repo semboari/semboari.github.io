@@ -17,7 +17,7 @@
                 <tbody ng-repeat="item in Datas">
                     <tr>
                         <td class="text-center">{{$index+1}}</td>
-                        <td>{{item.Universitas}}</td>
+                        <td>{{item.namauniversitas}}</td>
                         <td class="text-center">
                             <button ng-click="SelectedItem(item)" data-toggle="modal" data-target="#universitas"
                                 class="btn btn-outline-success">
@@ -50,7 +50,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="" class="control-label">Nama Universitas</label>
-                        <input type="text" ng-model="model.Universitas" class="form-control"
+                        <input type="text" ng-model="model.namauniversitas" class="form-control"
                             placeholder="Masukan Nama Universitas" required />
                     </div>
                 </div>

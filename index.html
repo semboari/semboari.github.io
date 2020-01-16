@@ -1,65 +1,56 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>SIPAK</title>
-    <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css" />
-    <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
-    <link
-      href="https://fonts.googleapis.com/css?family=Barlow&display=swap"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="/node_modules/font-awesome/css/font-awesome.css"
-    />
-    <link
-      rel="stylesheet"
-      href="/node_modules/sweetalert2/dist/sweetalert2.css"
-    />
-    <link rel="stylesheet" href="./assets/css/main.css" />
-  </head>
 
-  <body ng-app="app">
-    <ui-view></ui-view>
-  </body>
-  <script src="/node_modules/angular/angular.js"></script>
-  <script src="/node_modules/angular-route/angular-route.js"></script>
-  <script src="/node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
-  <script src="/node_modules/angular-local-storage/dist/angular-local-storage.js"></script>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+  <title>SIPAK</title>
+  <link rel="stylesheet" type="text/css" href="assets/css/bootstrap.css" />
+  <link rel="stylesheet" type="text/css" href="/assets/css/style.css" />
+  <link href="https://fonts.googleapis.com/css?family=Barlow&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="/node_modules/font-awesome/css/font-awesome.css" />
+  <link rel="stylesheet" href="/node_modules/sweetalert2/dist/sweetalert2.css" />
+  <link rel="stylesheet" href="./assets/css/main.css" />
+</head>
 
-  <script src="/apps/js/app.js"></script>
-  <script src="/apps/js/routes/account.router.js"></script>
-  <script src="/apps/js/routes/admin.router.js"></script>
-  <script src="/apps/js/routes/dosen.router.js"></script>
-  <script src="/apps/js/routes/kaprodi.router.js"></script>
-  <script src="/apps/js/routes/pemeriksa.router.js"></script>
-  <script src="/apps/js/routes/rektor.router.js"></script>
+<body ng-app="app">
+  <ui-view></ui-view>
+</body>
+<script src="/node_modules/angular/angular.js"></script>
+<script src="/node_modules/angular-route/angular-route.js"></script>
+<script src="/node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
+<script src="/node_modules/angular-local-storage/dist/angular-local-storage.js"></script>
 
-  <script src="/apps/js/controllers/auth.controllers.js"></script>
-  <script src="/apps/js/controllers/admin.controllers.js"></script>
+<script src="/apps/js/app.js"></script>
+<script src="/apps/js/routes/app.routers.js"></script>
+<script src="/apps/js/routes/account.router.js"></script>
+<script src="/apps/js/routes/admin.router.js"></script>
+<script src="/apps/js/routes/dosen.router.js"></script>
+<script src="/apps/js/routes/kaprodi.router.js"></script>
+<script src="/apps/js/routes/pemeriksa.router.js"></script>
+<script src="/apps/js/routes/rektor.router.js"></script>
 
-  <script src="/apps/js/services/message.services.js"></script>
-  <script src="/apps/js/services/auth.services.js"></script>
-  <script src="/apps/js/services/storage.services.js"></script>
-  <script src="/apps/js/services/helper.services.js"></script>
-  <script src="./apps/js/services/admin.services.js"></script>
+<script src="/apps/js/controllers/app.controllers.js"></script>
+<script src="/apps/js/controllers/auth.controllers.js"></script>
+<script src="/apps/js/controllers/admin.controllers.js"></script>
 
-  <script src="/apps/js/component.js"></script>
-  <script src="/node_modules/sweetalert2/dist/sweetalert2.js"></script>
-  <script src="/node_modules/swangular/swangular.js"></script>
+<script src="/apps/js/services/app.services.js"></script>
+<script src="/apps/js/services/dosen.service.js"></script>
+<script src="/apps/js/services/message.services.js"></script>
+<script src="/apps/js/services/auth.services.js"></script>
+<script src="/apps/js/services/storage.services.js"></script>
+<script src="/apps/js/services/helper.services.js"></script>
+<script src="./apps/js/services/kampus.services.js"></script>
 
-  <script
-    src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"
-  ></script>
-  <script
-    src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"
-  ></script>
-  <script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
+<script src="/apps/js/component.js"></script>
+<script src="/node_modules/sweetalert2/dist/sweetalert2.js"></script>
+<script src="/node_modules/swangular/swangular.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+  integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+  integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+<script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
+
 </html>

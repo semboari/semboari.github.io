@@ -1,4 +1,4 @@
-angular.module('app.admin.router', [ 'ui.router' ]).config(function($stateProvider, $urlRouterProvider) {
+angular.module('admin.router', [ 'ui.router' ]).config(function($stateProvider, $urlRouterProvider) {
 	$stateProvider.state('main	', {
 		url: '/',
 		parent: 'account',
