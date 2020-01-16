@@ -1,35 +1,105 @@
 const pool = require('./dbconnection');
 const rx = require('rxjs');
 const helper = require('../helper');
-const programStudiDb = {};
+const UniversitasDb = {};
 
-programStudiDb.post = (idfakultas, data) => {
+UniversitasDb.get = async () => {
+	return new Promise((resolve, reject) => {
+		pool.query(
+			`SELECT *
+		  FROM
+			programstudi `,
+			(err, result) => {
+				if (err) return reject(err);
+				resolve(result);
+			}
+		);
+	});
+};
+
+UniversitasDb.getById = async (id) => {
+	return new Promise((resolve, reject) => {
+		pool.query(
+			`SELECT *
+		  FROM
+			programstudi where idprogramstudi=?`,
+			[ id ],
+			(err, result) => {
+				if (err) return reject(err);
+				resolve(result[0]);
+			}
+		);
+	});
+};
+
+UniversitasDb.getByParentId = async (id) => {
+	return new Promise((resolve, reject) => {
+		pool.query(
+			`SELECT *
+		  FROM
+			programstudi where idfakultas=?`,
+			[ id ],
+			(err, result) => {
+				if (err) return reject(err);
+				resolve(result);
+			}
+		);
+	});
+};
+
+UniversitasDb.post = async (params) => {
 	return new Promise((resolve, reject) => {
 		try {
 			pool.query(
 				'insert into programstudi (idfakultas,namaprogramstudi) values(?,?)',
-				[ idfakultas, data.namaprogramstudi ],
+				[ params.idfakultas, params.namaprogramstudi ],
 				(err, result) => {
 					if (err) throw Error();
-					resolve(result.insertId);
+
+					params.idprogramstudi = result.insertId;
+					resolve(params);
 				}
 			);
-		} catch (err) {
-			reject(err);
+		} catch (error) {
+			reject(error);
 		}
 	});
 };
 
-programStudiDb.put = (id, data) => {
+UniversitasDb.put = async (data) => {
 	return new Promise((resolve, reject) => {
-		pool.query('update programstudi set ', [], (err, result) => {});
+		try {
+			pool.query(
+				'update programstudi set namaprogramstudi=? where idprogramstudi=? ',
+				[ data.namaprogramstudi, data.idprogramstudi ],
+				(err, result) => {
+					if (err) {
+						reject(err);
+					}
+
+					resolve(data);
+				}
+			);
+		} catch (error) {
+			reject(error);
+		}
 	});
 };
 
-programStudiDb.delete = (id) => {
+UniversitasDb.delete = (id) => {
 	return new Promise((resolve, reject) => {
-		pool.query('delete from programstudi where idprogramstudi=?', [ id ], (err, result) => {});
+		try {
+			pool.query('delete from programstudi where idprogramstudi=? ', [ id ], (err, result) => {
+				if (err) {
+					reject(err);
+				}
+
+				resolve(true);
+			});
+		} catch (error) {
+			reject(error);
+		}
 	});
 };
 
-module.exports = programStudiDb;
+module.exports = UniversitasDb;

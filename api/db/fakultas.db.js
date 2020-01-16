@@ -1,33 +1,105 @@
 const pool = require('./dbconnection');
-const fakultasDb = {};
+const rx = require('rxjs');
+const helper = require('../helper');
+const UniversitasDb = {};
 
-fakultasDb.post = (iduniversitas, data) => {
+UniversitasDb.get = async () => {
+	return new Promise((resolve, reject) => {
+		pool.query(
+			`SELECT *
+		  FROM
+			fakultas `,
+			(err, result) => {
+				if (err) return reject(err);
+				resolve(result);
+			}
+		);
+	});
+};
+
+UniversitasDb.getById = async (id) => {
+	return new Promise((resolve, reject) => {
+		pool.query(
+			`SELECT *
+		  FROM
+			fakultas where idfakultas=?`,
+			[ id ],
+			(err, result) => {
+				if (err) return reject(err);
+				resolve(result[0]);
+			}
+		);
+	});
+};
+
+UniversitasDb.getByParentId = async (id) => {
+	return new Promise((resolve, reject) => {
+		pool.query(
+			`SELECT *
+		  FROM
+			fakultas where iduniversitas=?`,
+			[ id ],
+			(err, result) => {
+				if (err) return reject(err);
+				resolve(result);
+			}
+		);
+	});
+};
+
+UniversitasDb.post = async (params) => {
 	return new Promise((resolve, reject) => {
 		try {
 			pool.query(
 				'insert into fakultas (iduniversitas,namafakultas) values(?,?)',
-				[ iduniversitas, data.namauniversitas ],
+				[ params.iduniversitas, params.namafakultas ],
 				(err, result) => {
 					if (err) throw Error();
-					resolve(result.insertId);
+
+					params.idfakultas = result.insertId;
+					resolve(params);
 				}
 			);
-		} catch (err) {
-			reject(err);
+		} catch (error) {
+			reject(error);
 		}
 	});
 };
 
-fakultasDb.put = (id, data) => {
+UniversitasDb.put = async (data) => {
 	return new Promise((resolve, reject) => {
-		pool.query('update fakultas set ', [], (err, result) => {});
+		try {
+			pool.query(
+				'update fakultas set namafakultas=? where idfakultas=? ',
+				[ data.namafakultas, data.idfakultas ],
+				(err, result) => {
+					if (err) {
+						reject(err);
+					}
+
+					resolve(data);
+				}
+			);
+		} catch (error) {
+			reject(error);
+		}
 	});
 };
 
-fakultasDb.delete = (id) => {
+UniversitasDb.delete = (id) => {
 	return new Promise((resolve, reject) => {
-		pool.query('delete from fakultas where idfakultas=?', [ id ], (err, result) => {});
+		try {
+			pool.query('delete from fakultas where idfakultas=? ', [ id ], (err, result) => {
+				if (err) {
+					reject(err);
+				}
+
+				resolve(true);
+			});
+		} catch (error) {
+			reject(error);
+		}
 	});
 };
 
-module.exports = fakultasDb;
+module.exports = UniversitasDb;

@@ -3,5 +3,7 @@ module.exports = function(app) {
 	app.use(bodyParser.json());
 	app.use('/api/auth', require('../auth'));
 	app.use('/api/universitas', require('./universitas.route'));
+	app.use('/api/fakultas', require('./fakultas.route'));
+	app.use('/api/programstudi', require('./programstudi.route'));
 	app.use('/api/unsur', require('./unsur.route'));
 };

@@ -7,36 +7,46 @@ Content-Type: application/json
 }
 
 ####
-GET http://localhost:5500/api/universitas HTTP/1.1
+GET http://localhost:5500/api/fakultas HTTP/1.1
 Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTc5MTgwODc4LCJleHAiOjE1NzkyNjcyNzh9.vWlOrUzpxA7eQ-GPmgkRXK-Gpxh-6-qoGfkqQtA7nnM
 
 ####
 
-POST http://localhost:5500/api/universitas HTTP/1.1
+
+####
+GET http://localhost:5500/api/fakultas/byparentid/10 HTTP/1.1
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTc5MTgwODc4LCJleHAiOjE1NzkyNjcyNzh9.vWlOrUzpxA7eQ-GPmgkRXK-Gpxh-6-qoGfkqQtA7nnM
+
+####
+
+POST http://localhost:5500/api/fakultas HTTP/1.1
 Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTc5MTgwODc4LCJleHAiOjE1NzkyNjcyNzh9.vWlOrUzpxA7eQ-GPmgkRXK-Gpxh-6-qoGfkqQtA7nnM
 
 {
-    "namauniversitas":"USTJ"
+    "iduniversitas":10,
+    "namafakultas":"Pendidikan"
 }
 
 
 ####
 
-PUT http://localhost:5500/api/universitas HTTP/1.1
+PUT http://localhost:5500/api/fakultas HTTP/1.1
 Content-Type: application/json
 Authorization:bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTc5MTgwODc4LCJleHAiOjE1NzkyNjcyNzh9.vWlOrUzpxA7eQ-GPmgkRXK-Gpxh-6-qoGfkqQtA7nnM
 
 {
- "iduniversitas":10,
- "namauniversitas":"UNCEN"
+  "idfakultas": 2,
+    "iduniversitas": 10,
+    "namafakultas": "Teknik"
 }
 
 
 
 ####
 
-DELETE http://localhost:5500/api/universitas/11 HTTP/1.1
+DELETE http://localhost:5500/api/fakultas/3 HTTP/1.1
 Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTc5MTgwODc4LCJleHAiOjE1NzkyNjcyNzh9.vWlOrUzpxA7eQ-GPmgkRXK-Gpxh-6-qoGfkqQtA7nnM

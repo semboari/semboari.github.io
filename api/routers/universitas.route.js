@@ -6,8 +6,9 @@ const permit = require('../auth/permission');
 
 router.get('/', [ authJwt.verifyToken ], async (req, res) => {
 	try {
-		const result = await contextDb.Universitas.get();
-		res.status(200).json(result);
+		contextDb.Universitas.get().then((result) => {
+			res.status(200).json(result);
+		});
 	} catch (error) {
 		res.status(400).json({ message: err.message });
 	}
