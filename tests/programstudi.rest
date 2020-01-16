@@ -7,36 +7,46 @@ Content-Type: application/json
 }
 
 ####
-GET http://localhost:5500/api/universitas HTTP/1.1
+GET http://localhost:5500/api/programstudi HTTP/1.1
 Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTc5MTgwODc4LCJleHAiOjE1NzkyNjcyNzh9.vWlOrUzpxA7eQ-GPmgkRXK-Gpxh-6-qoGfkqQtA7nnM
 
 ####
 
-POST http://localhost:5500/api/universitas HTTP/1.1
+
+####
+GET http://localhost:5500/api/programstudi/byparentid/1 HTTP/1.1
+Content-Type: application/json
+Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTc5MTgwODc4LCJleHAiOjE1NzkyNjcyNzh9.vWlOrUzpxA7eQ-GPmgkRXK-Gpxh-6-qoGfkqQtA7nnM
+
+####
+
+POST http://localhost:5500/api/programstudi HTTP/1.1
 Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTc5MTgwODc4LCJleHAiOjE1NzkyNjcyNzh9.vWlOrUzpxA7eQ-GPmgkRXK-Gpxh-6-qoGfkqQtA7nnM
 
 {
-    "namauniversitas":"USTJ"
+    "idfakultas":1,
+    "namaprogramstudi":"MIPA"
 }
 
 
 ####
 
-PUT http://localhost:5500/api/universitas HTTP/1.1
+PUT http://localhost:5500/api/programstudi HTTP/1.1
 Content-Type: application/json
 Authorization:bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTc5MTgwODc4LCJleHAiOjE1NzkyNjcyNzh9.vWlOrUzpxA7eQ-GPmgkRXK-Gpxh-6-qoGfkqQtA7nnM
 
 {
- "iduniversitas":10,
- "namauniversitas":"UNCEN"
+   "idfakultas": 1,
+  "namaprogramstudi": "OLAH RAGA",
+  "idprogramstudi": 6
 }
 
 
 
 ####
 
-DELETE http://localhost:5500/api/universitas/11 HTTP/1.1
+DELETE http://localhost:5500/api/programstudi/3 HTTP/1.1
 Content-Type: application/json
 Authorization: bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTc5MTgwODc4LCJleHAiOjE1NzkyNjcyNzh9.vWlOrUzpxA7eQ-GPmgkRXK-Gpxh-6-qoGfkqQtA7nnM
