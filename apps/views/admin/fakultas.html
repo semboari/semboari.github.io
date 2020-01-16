@@ -4,7 +4,7 @@
             <button class="btn btn-outline-primary pull-right" data-toggle="modal" data-target="#fakultas"><span
                     class="fas fa-plus"></span></button>
             <hr class="garis">
-            <select ng-change="SelectUniversitas" class="form-control col-3" ng-model="univ" ng-options="item.namauniversitas for item in
+            <select ng-change="SelectUniversitas(univ)" class="form-control col-3" ng-model="univ" ng-options="item.namauniversitas for item in
                  Universitas track by item.iduniversitas"></select>
             <div class="table table-responsive">
                 <table class="table table-bordered table-hover" id="myTable">

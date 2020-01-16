@@ -4,7 +4,7 @@ angular
 	.controller('universitasController', universitasController1)
 	.controller('ProgdiController', progdiController);
 
-function universitasController1($scope, UniversitasService, message) {
+function universitasController1($scope, UniversitasService, FakultasService, message) {
 	UniversitasService.get().then((result) => {
 		$scope.Datas = result;
 	});
@@ -36,7 +36,7 @@ function universitasController1($scope, UniversitasService, message) {
 	};
 }
 
-function fakultasController($scope, UniversitasService) {
+function fakultasController($scope, UniversitasService, FakultasService) {
 	UniversitasService.get().then(x => {
 		$scope.Universitas = x;
 	})
@@ -60,7 +60,7 @@ function fakultasController($scope, UniversitasService) {
 	};
 
 	$scope.SelectUniversitas = function (params) {
-		fakultasController.Service.getById(params.iduniversitas).then(result => {
+		FakultasService.getByPerentId(params.iduniversitas).then(result => {
 			$scope.Datas = result;
 		})
 	}
