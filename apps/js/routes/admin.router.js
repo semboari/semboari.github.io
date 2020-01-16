@@ -1,18 +1,16 @@
-angular.module('app.admin.router', ['ui.router']).config(function ($stateProvider, $urlRouterProvider) {
-
+angular.module('admin.router', [ 'ui.router' ]).config(function($stateProvider, $urlRouterProvider) {
 	$stateProvider.state('main	', {
 		url: '/',
 		parent: 'account',
 		controller: 'LoginController',
 		templateUrl: '../apps/views/accounts/sign-in.html'
-	})
+	});
 	$stateProvider.state('admin', {
 		url: '/admin',
 		templateUrl: '../apps/views/admin/menu-admin.html'
 	});
 
 	$stateProvider.state('admin-home', {
-
 		url: '/home',
 		parent: 'admin',
 		templateUrl: '../apps/views/admin/home.html'

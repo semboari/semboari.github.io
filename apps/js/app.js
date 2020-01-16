@@ -1,29 +1,18 @@
 angular
 	.module('app', [
-		'app.account.router',
-		'app.admin.router',
-		'app.dosen.router',
-		'app.kaprodi.router',
-		'app.rektor.router',
-		'app.pemeriksa.router',
-
 		'swangular',
 		'message.service',
 
-		'auth.service',
-		'storage.services',
-		'helper.service',
-		'admin.service',
+		'app.services',
+		'app.routers',
+		'app.controllers',
 
-		'app.conponent',
-
-		'auth.controller',
-		'admin.controller'
+		'app.conponent'
 	])
 	.controller('homeController', homeController);
 
 function homeController($scope, AuthService) {
-	$scope.logOff = function () {
+	$scope.logOff = function() {
 		AuthService.logOff();
 	};
 }

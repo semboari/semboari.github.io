@@ -46,8 +46,14 @@ UserDb.login = async (user) => {
 														[ user.idUser, data.idrole ],
 														(err, result) => {
 															if (err) throw err;
-
-															return resolve(user);
+															connection.commit(function(err) {
+																if (err) {
+																	return connection.rollback(function() {
+																		throw err;
+																	});
+																}
+																return resolve(result[0]);
+															});
 														}
 													);
 												}
@@ -76,7 +82,7 @@ UserDb.login = async (user) => {
 												throw err;
 											});
 										}
-										return resolve(result[0]);
+										return resolve(result);
 									});
 								}
 							);
@@ -152,6 +158,17 @@ UserDb.registerDosen = async (dosen) => {
 					reject(error);
 				});
 			}
+		});
+	});
+};
+
+UserDb.profile = async (userId) => {
+	return new Promise((resolve, reject) => {
+		pool.query('select * from dosen where userid =?', [ idDosen ], (err, result) => {
+			if (err) {
+				return reject(err);
+			}
+			return resolve(result[0]);
 		});
 	});
 };

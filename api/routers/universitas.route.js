@@ -7,45 +7,61 @@ const permit = require('../auth/permission');
 router.get('/', [ authJwt.verifyToken ], async (req, res) => {
 	try {
 		const result = await contextDb.Universitas.get();
-		res.status(200).json({
-			data: result
-		});
+		res.status(200).json(result);
 	} catch (error) {
 		res.status(400).json({ message: err.message });
 	}
 });
 
-router.post('/', [ authJwt.verifyToken, permit('admin') ], async (resolve, res) => {
+router.post('/', [ authJwt.verifyToken, permit('admin') ], async (req, res) => {
 	try {
-		var data = res.body;
+		var data = req.body;
 		if (data) {
-			var result = contextDb.Universitas.insertuniversitas(data);
-			if (result) {
-			}
-		}
-	} catch (err) {}
+			contextDb.Universitas.post(data).then((result) => {
+				if (result) {
+					res.status(200).json(result);
+				} else {
+					throw Error('Data Tidak Tersimpan');
+				}
+			});
+		} else throw Error('Data Tidak Tersimpan');
+	} catch (err) {
+		res.status(400).json({ message: err.message });
+	}
 });
 
-router.put('/', [ authJwt.verifyToken, permit('admin') ], async (resolve, res) => {
+router.put('/', [ authJwt.verifyToken, permit('admin') ], async (req, res) => {
 	try {
-		var data = res.body;
+		var data = req.body;
 		if (data) {
-			var result = contextDb.universitas.putuniversitas(data);
-			if (result) {
-			}
-		}
-	} catch (err) {}
+			contextDb.Universitas.put(data).then((result) => {
+				if (result) {
+					res.status(200).json(result);
+				} else {
+					throw Error('Data Tidak Tersimpan');
+				}
+			});
+		} else throw Error('Data Tidak Tersimpan');
+	} catch (err) {
+		res.status(400).json({ message: err.message });
+	}
 });
 
-router.delete('/', [ authJwt.verifyToken, permit('admin') ], async (resolve, res) => {
+router.delete('/:Id', [ authJwt.verifyToken, permit('admin') ], async (req, res) => {
 	try {
-		var data = res.body;
-		if (data) {
-			var result = contextDb.universitas.deleteuniversitas(data);
-			if (result) {
-			}
-		}
-	} catch (err) {}
+		var id = req.params.Id;
+		if (id) {
+			contextDb.Universitas.delete(id).then((result) => {
+				if (result) {
+					res.status(200).json(result);
+				} else {
+					throw Error('Data Tidak Tersimpan');
+				}
+			});
+		} else throw Error('Data Tidak Tersimpan');
+	} catch (err) {
+		res.status(400).json({ message: err.message });
+	}
 });
 
 module.exports = router;

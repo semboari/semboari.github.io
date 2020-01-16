@@ -11,35 +11,27 @@ function AuthService($http, $q, StorageService, $state, helperServices, message)
 		userIsLogin: userIsLogin,
 		userInRole: userInRole,
 		getHeader: getHeader,
+		getToken: getToken,
 		url: service.url
 	};
 
 	function login(user) {
 		var def = $q.defer();
-		var a = helperServices.url;
-		var b = getHeader();
-		// $http({
-		// 	method: 'post',
-		// 	url: helperServices.url + '/api/auth/login',
-		// 	headers: getHeader(),
-		// 	data: user
-		// }).then(
-		// 	(res) => {
-		// 		StorageService.addObject('user', res.data);
-		// 		def.resolve(res.data);
-		// 	},
-		// 	(err) => {
-		// 		def.reject();
-		// 		message.error(err);
-		// 	}
-		// );
-
-
-		def.resolve({
-			role: 'admin'
-		});
-
-
+		$http({
+			method: 'post',
+			url: helperServices.url + '/api/auth/login',
+			headers: getHeader(),
+			data: user
+		}).then(
+			(res) => {
+				StorageService.addObject('user', res.data);
+				def.resolve(res.data);
+			},
+			(err) => {
+				def.reject();
+				message.error(err);
+			}
+		);
 		return def.promise;
 	}
 
@@ -59,6 +51,14 @@ function AuthService($http, $q, StorageService, $state, helperServices, message)
 		}
 	}
 
+	function getToken() {
+		var result = StorageService.getObject('user');
+		if (result) {
+			return result.token;
+		}
+		return '';
+	}
+
 	function logoff() {
 		StorageService.clear();
 		$state.go('login');
@@ -67,15 +67,13 @@ function AuthService($http, $q, StorageService, $state, helperServices, message)
 	function getUserName() {
 		if (userIsLogin) {
 			var result = StorageService.getObject('user');
-			return result.Username;
+			return result.username;
 		}
 	}
 
 	function userIsLogin() {
 		var result = StorageService.getObject('user');
-		if (result) {
-			return true;
-		}
+		return result ? true : false;
 	}
 
 	function userInRole(role) {
@@ -83,5 +81,23 @@ function AuthService($http, $q, StorageService, $state, helperServices, message)
 		if (result && result.roles.find((x) => (x.name = role))) {
 			return true;
 		}
+	}
+	function profile() {
+		var def = $q.defer();
+		$http({
+			method: 'get',
+			url: helperServices.url + '/api/auth/profile',
+			headers: getHeader(),
+			data: user
+		}).then(
+			(res) => {
+				def.resolve(res.data);
+			},
+			(err) => {
+				def.reject();
+				message.error(err);
+			}
+		);
+		return def.promise;
 	}
 }
