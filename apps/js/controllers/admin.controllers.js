@@ -9,7 +9,7 @@ function universitasController1($scope, UniversitasService, message) {
 		$scope.Datas = result;
 	});
 
-	$scope.Save = function(data) {
+	$scope.Save = function (data) {
 		if (data.iduniversitas === undefined) {
 			UniversitasService.post(data).then((result) => {
 				message.info('Data Berhasil disimpan !');
@@ -25,11 +25,11 @@ function universitasController1($scope, UniversitasService, message) {
 		}
 	};
 
-	$scope.SelectedItem = function(params) {
+	$scope.SelectedItem = function (params) {
 		$scope.model = angular.copy(params);
 	};
 
-	$scope.delete = function(params) {
+	$scope.delete = function (params) {
 		UniversitasService.delete(params).then((result) => {
 			message.info('Data Berhasil dihapus !');
 		});
@@ -37,29 +37,63 @@ function universitasController1($scope, UniversitasService, message) {
 }
 
 function fakultasController($scope, UniversitasService) {
+	UniversitasService.get().then(x => {
+		$scope.Universitas = x;
+	})
+
 	$scope.Datas = UniversitasService.get();
 
-	$scope.Save = function(data) {
-		if (data.Id === undefined) $scope.Datas.push(data);
-		else {
+	$scope.Save = function (data) {
+		if (data.Idfakultas === undefined) {
+			FakultasService.post(data).then((result) => {
+				message.info('Data Berhasil disimpan !');
+			});
+		} else {
+			FakultasService.put(data).then((result) => {
+				var item = $scope.Datas.find((x) => x.idfakultas == data.idfakultas);
+				if (item) {
+					item.namafakultas = result.namafakultas;
+				}
+				message.info('Data Berhasil disimpan !');
+			});
 		}
 	};
 
-	$scope.SelectedItem = function(params) {
+	$scope.SelectUniversitas = function (params) {
+		fakultasController.Service.getById(params.iduniversitas).then(result => {
+			$scope.Datas = result;
+		})
+	}
+
+	$scope.SelectedItem = function (params) {
 		$scope.model = params;
 	};
 }
 
 function progdiController($scope, UniversitasService) {
+	UniversitasService.get().then(x => {
+		$scope.Universitas = x;
+	})
+
 	$scope.Datas = UniversitasService.get();
 
-	$scope.Save = function(data) {
+	$scope.Save = function (data) {
 		if (data.Id === undefined) $scope.Datas.push(data);
-		else {
-		}
+		else {}
 	};
 
-	$scope.SelectedItem = function(params) {
+	$scope.SelectUniversitas = function (params) {
+		progdiController.Service.getById(params.iduniversitas).then(result => {
+			$scope.Datas = result;
+		})
+	}
+	$scope.Select = function (params) {
+		progdiController.Service.getById(params.idfakultas).then(result => {
+			$scope.Datas = result;
+		})
+	}
+
+	$scope.SelectedItem = function (params) {
 		$scope.model = params;
 	};
 }
