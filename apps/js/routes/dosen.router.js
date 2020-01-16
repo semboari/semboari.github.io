@@ -10,51 +10,15 @@ angular.module('dosen.router', [ 'ui.router' ]).config(function($stateProvider, 
 		templateUrl: '../apps/views/dosen/home.html'
 	});
 
-	$stateProvider.state('dosen-pendidikan', {
-		url: '/pendidikan',
+	$stateProvider.state('dosen-pengusulan', {
+		url: '/pengusulan',
 		parent: 'dosen',
-		templateUrl: '../apps/views/dosen/pendidikan.html'
+		templateUrl: '../apps/views/dosen/pengusulan.html'
 	});
 
-	$stateProvider.state('dosen-penelitian', {
-		url: '/penelitian',
+	$stateProvider.state('dosen-tambah-pengusulan', {
+		url: '/tambah-pengusulan',
 		parent: 'dosen',
-		templateUrl: '../apps/views/dosen/penelitian.html'
-	});
-
-	$stateProvider.state('dosen-pengabdian', {
-		url: '/pengabdian',
-		parent: 'dosen',
-		templateUrl: '../apps/views/dosen/pengabdian.html'
-	});
-
-	$stateProvider.state('dosen-penunjang', {
-		url: '/penunjang',
-		parent: 'dosen',
-		templateUrl: '../apps/views/dosen/penunjang.html'
-	});
-
-	$stateProvider.state('dosen-tambah-pendidikan', {
-		url: '/tambah-pendidikan',
-		parent: 'dosen',
-		templateUrl: '../apps/views/dosen/tambah-pendidikan.html'
-	});
-
-	$stateProvider.state('dosen-tambah-penelitian', {
-		url: '/tambah-penelitian',
-		parent: 'dosen',
-		templateUrl: '../apps/views/dosen/tambah-penelitian.html'
-	});
-
-	$stateProvider.state('dosen-tambah-pengabdian', {
-		url: '/tambah-pengabdian',
-		parent: 'dosen',
-		templateUrl: '../apps/views/dosen/tambah-pengabdian.html'
-	});
-
-	$stateProvider.state('dosen-tambah-penunjang', {
-		url: '/tambah-penunjang',
-		parent: 'dosen',
-		templateUrl: '../apps/views/dosen/tambah-penunjang.html'
+		templateUrl: '../apps/views/dosen/tambah-pengusulan.html'
 	});
 });
