@@ -1,12 +1,20 @@
     <div class="row">
         <div class="col-md-12 mt-3">
             <h2 class="mt-1" style="display: inline;">Data Fakultas</h2>
-            <button class="btn btn-outline-primary pull-right" data-toggle="modal" data-target="#fakultas"><span
-                    class="fas fa-plus"></span></button>
+
             <hr class="garis">
-            <select ng-change="SelectUniversitas(univ)" class="form-control col-3" ng-model="univ" ng-options="item.namauniversitas for item in
+            <div class="row">
+                <div class="col-md-4">
+                    <select ng-change="SelectUniversitas(univ)" class="form-control" ng-model="univ" ng-options="item.namauniversitas for item in
                  Universitas track by item.iduniversitas"></select>
-            <div class="table table-responsive">
+                </div>
+                <div class="col-md-8">
+                    <button class="btn btn-outline-primary fa-pull-right" data-toggle="modal"
+                        data-target="#fakultas"><span class="fas fa-plus"></span></button>
+                </div>
+            </div>
+
+            <div class="table table-responsive mt-3">
                 <table class="table table-bordered table-hover" id="myTable">
                     <thead class=" bg-primary">
                         <tr>

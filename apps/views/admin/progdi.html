@@ -1,14 +1,23 @@
 <div class="row">
     <div class="col-md-12 mt-3">
-        <h2 class="mt-1" style="display: inline;">Data Program Studi</h2>
-        <button class="btn btn-outline-primary pull-right" data-toggle="modal" data-target="#progdi"><span
-                class="fas fa-plus"></span></button>
+        <h2 class="mt-1">Data Program Studi</h2>
         <hr class="garis">
-        <select ng-change="SelectUniversitas" class="form-control col-3" ng-model="univ" ng-options="item.namauniversitas for item in
+        <div class="row">
+            <div class="col-md-4">
+                <select ng-change="SelectUniversitas" class="form-control" ng-model="univ" ng-options="item.namauniversitas for item in
                  Universitas track by item.iduniversitas"></select>
-        <select ng-change="selectFakultas" class="form-control col-3" ng-model="univ" ng-options="item.namafakultas for item in
+            </div>
+            <div class="col-md-4">
+                <select ng-change="selectFakultas" class="form-control" ng-model="univ" ng-options="item.namafakultas for item in
                  Fakultas track by item.idfakultas"></select>
-        <div class="table table-responsive">
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-outline-primary fa-pull-right" data-toggle="modal" data-target="#progdi"><span
+                        class="fas fa-plus"></span></button>
+            </div>
+        </div>
+
+        <div class="table table-responsive mt-3">
             <table class="table table-bordered table-hover" id="myTable">
                 <thead class="bg-primary">
                     <tr>
