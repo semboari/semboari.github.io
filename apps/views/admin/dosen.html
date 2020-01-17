@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12 mt-3">
-        <h2 class="mt-1" style="display: inline;">Data Pejabat Pemeriksa</h2>
+        <h2 class="mt-1" style="display: inline;">Data Dosen</h2>
         <hr class="garis">
         <div class="row pl-3 mb-2">
             <select name="" id="" class="form-control col-3">
@@ -35,8 +35,10 @@
                         <td>SofialElinan@gmail.com</td>
                         <td>Dosen</td>
                         <td class="text-center">
-                            <button class="btn btn-outline-success" data-toggle="modal" data-target="#pemeriksa"><span
+                            <button class="btn btn-outline-success" data-toggle="modal" data-target="#dosen"><span
                                     class="fas fa-pencil-alt"></span></button>
+                            <button class="btn btn-outline-success" data-toggle="modal" data-target="#detiledosen"><span
+                                    class="fas fa-eye"></span></button>
                         </td>
                     </tr>
                     <tr>
@@ -46,8 +48,10 @@
                         <td>SofialElinan@gmail.com</td>
                         <td>Rektor</td>
                         <td class="text-center">
-                            <button class="btn btn-outline-success" data-toggle="modal" data-target="#pemeriksa"><span
+                            <button class="btn btn-outline-success" data-toggle="modal" data-target="#dosen"><span
                                     class="fas fa-pencil-alt"></span></button>
+                            <button class="btn btn-outline-success" data-toggle="modal" data-target="#detiledosen"><span
+                                    class="fas fa-eye"></span></button>
                         </td>
                     </tr>
                 </tbody>
@@ -57,13 +61,110 @@
 
 </div>
 
-<!-- Modal pemeriksa-->
-<div class="modal fade" id="pemeriksa" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<!-- Modal detail  dosen-->
+<div class="modal fade" id="detiledosen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detile Dosen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-4">
+                        <h5>NIDN</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: 3456789</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Nama</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: Reinhard semboari</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Email</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: Reinhardsemboari471@gmail.com</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Perguruan Tinggi</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: Universitas Sains DAn Teknologi Jayapura</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Fakultas</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: Ilmu Komputer Dan Menejemen</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Program Studi</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: Teknik Informatika</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Tanggal Lahir</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: 03, November 1996</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Tempat Lahir</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: Serui</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Jenis Kelamin</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: Pria</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Pendidikan Terakhir</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: S1</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Jabatan Akademik</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: Lektor</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Masa Kerja</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: 5 Tahum</h5>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> <span class="fas fa-close"></span>
+                    Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal dosen-->
+<div class="modal fade" id="dosen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Pejabat Pemeriksa</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Status Pemeriksa</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -72,7 +173,7 @@
                 <form action="" class="form-group">
                     <div class="form-group">
                         <select name="" id="" class="form-control">
-                            <option value="">-- Select Level Pemeriksa --</option>
+                            <option value="">-- Select Status Pemeriksa --</option>
                             <option value="">Rektor</option>
                             <option value="">Kaprodi</option>
                             <option value="">Pemeriska Penelitian</option>

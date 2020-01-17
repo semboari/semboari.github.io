@@ -41,7 +41,7 @@
 <!-- Modal tambah jafung-->
 <div class="modal fade" id="tambah-jafung" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
-    <div class="modal-dialog" role="document">
+    <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Tambah Jabatan Fungsional</h5>
@@ -52,42 +52,47 @@
             <div class="modal-body">
                 <div class="form-group">
                     <form action="" class="form-group">
-                        <div class="form-group">
-                            <label for="" class="control-label">Jabatan</label>
-                            <input type="text" class="form-control" name="jabatan" placeholder="Example Asisten Ahli"
-                                required>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="" class="control-label">Jabatan</label>
+                                    <input type="text" class="form-control" name="jabatan"
+                                        placeholder="Example Asisten Ahli" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="control-label">Angka Kredit</label>
+                                    <input type="number" class="form-control" name="angkakredit"
+                                        placeholder="Example 0,25" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="control-label">Pangkat</label>
+                                    <input type="text" class="form-control" name="pangkat"
+                                        placeholder="Example Penata Muda" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="" class="control-label">Golongan</label>
+                                    <select name="golongan" id="" class="form-control">
+                                        <option value="">-- Pilih Golongan --</option>
+                                        <option value="I">I</option>
+                                        <option value="II">II</option>
+                                        <option value="III">III</option>
+                                        <option value="IV">IV</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="control-label">Ruang</label>
+                                    <select name="golongan" id="" class="form-control">
+                                        <option value="">-- Pilih Ruang --</option>
+                                        <option value="a">a</option>
+                                        <option value="b">b</option>
+                                        <option value="c">c</option>
+                                        <option value="d">d</option>
+                                    </select>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                            <label for="" class="control-label">Angka Kredit</label>
-                            <input type="number" class="form-control" name="angkakredit" placeholder="Example 0,25"
-                                required>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="control-label">Pangkat</label>
-                            <input type="text" class="form-control" name="pangkat" placeholder="Example Penata Muda"
-                                required>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="control-label">Golongan</label>
-                            <select name="golongan" id="" class="form-control">
-                                <option value="">-- Pilih Golongan --</option>
-                                <option value="I">I</option>
-                                <option value="II">II</option>
-                                <option value="III">III</option>
-                                <option value="IV">IV</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label for="" class="control-label">Ruang</label>
-                            <select name="golongan" id="" class="form-control">
-                                <option value="">-- Pilih Ruang --</option>
-                                <option value="a">a</option>
-                                <option value="b">b</option>
-                                <option value="c">c</option>
-                                <option value="d">d</option>
-                            </select>
-                        </div>
-
                     </form>
                 </div>
             </div>

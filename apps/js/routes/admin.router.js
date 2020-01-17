@@ -37,10 +37,16 @@ angular.module('admin.router', ['ui.router']).config(function ($stateProvider, $
 		templateUrl: '../apps/views/admin/progdi.html'
 	});
 
-	$stateProvider.state('admin-pejabat-pemeriksa', {
-		url: '/pejabat-pemeriksa',
+	$stateProvider.state('admin-dosen', {
+		url: '/dosen',
 		parent: 'admin',
-		templateUrl: '../apps/views/admin/pejabat-pemeriksa.html'
+		templateUrl: '../apps/views/admin/dosen.html'
+	});
+
+	$stateProvider.state('admin-unsur', {
+		url: '/unsur',
+		parent: 'admin',
+		templateUrl: '../apps/views/admin/unsur.html'
 	});
 
 	$stateProvider.state('admin-sub-unsur', {
