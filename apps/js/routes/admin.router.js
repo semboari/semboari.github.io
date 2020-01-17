@@ -1,4 +1,4 @@
-angular.module('admin.router', [ 'ui.router' ]).config(function($stateProvider, $urlRouterProvider) {
+angular.module('admin.router', ['ui.router']).config(function ($stateProvider, $urlRouterProvider) {
 	$stateProvider.state('main	', {
 		url: '/',
 		parent: 'account',
@@ -59,5 +59,11 @@ angular.module('admin.router', [ 'ui.router' ]).config(function($stateProvider, 
 		url: '/tambah-sub-unsur',
 		parent: 'admin',
 		templateUrl: '../apps/views/admin/tambah-sub-unsur.html'
+	});
+
+	$stateProvider.state('admin-jabatan-fungsional', {
+		url: '/jabatan-fungsional',
+		parent: 'admin',
+		templateUrl: '../apps/views/admin/jabatan-fungsional.html'
 	});
 });
