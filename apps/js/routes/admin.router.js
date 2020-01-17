@@ -43,12 +43,6 @@ angular.module('admin.router', ['ui.router']).config(function ($stateProvider, $
 		templateUrl: '../apps/views/admin/pejabat-pemeriksa.html'
 	});
 
-	$stateProvider.state('admin-tambah-pejabat', {
-		url: '/tambah-pejabat',
-		parent: 'admin',
-		templateUrl: '../apps/views/admin/tambah-pejabat.html'
-	});
-
 	$stateProvider.state('admin-sub-unsur', {
 		url: '/sub-unsur',
 		parent: 'admin',
