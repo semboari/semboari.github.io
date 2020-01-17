@@ -1,7 +1,7 @@
 <div class="row">
     <div class="col-md-12 mt-3">
-        <h2 class="mt-1" style="display: inline;">Data Sub Unsur</h2>
-        <button class="btn btn-outline-primary pull-right" ui-sref="dosen-tambah-pengusulan">
+        <h2 class="mt-1" style="display: inline;">Data Penilaian</h2>
+        <button class="btn btn-outline-primary fa-pull-right" data-toggle="modal" data-target="#kegiatan">
             <span class="fas fa-plus"></span>
         </button>
         <hr class="garis" />
@@ -10,8 +10,9 @@
             <thead class=" bg-primary">
                 <tr>
                     <th class="text-center">No</th>
-                    <th>Tahun Peraturan Rubrik</th>
-                    <th>Sub Unsur</th>
+                    <th>Tahun Peraturan</th>
+                    <th>Unsur</th>
+                    <th>Kegiatan</th>
                     <th>Uraian Kegiatan</th>
                     <th>Tanggal</th>
                     <th>Satuan Hasil</th>
@@ -25,6 +26,7 @@
                 <tr>
                     <td class="text-center">{{$index+1}}</td>
                     <td>2019</td>
+                    <td>Pelaksana Pendidikan</td>
                     <td>Melaksanakan Pengajarang Selama 2 Semeseter SKS=12</td>
                     <td>Melaksanakan Pengajarang Selama 2 Semeseter SKS=12</td>
                     <td>2018/2019</td>
@@ -47,6 +49,81 @@
         </table>
     </div>
 </div>
+</div>
+
+<!-- Modal tambah kegiatan-->
+<div class="modal fade" id="kegiatan" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Kegiatan</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="">
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="" class="control-label">Tahun Peraturan</label>
+                                <input type="text" id="" class="form-control" readonly value="2019">
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="control-label">Unsur</label>
+                                <input type="text" id="" class="form-control" placeholder="Example Pelaksana Pendidikan"
+                                    required>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="control-label">Sub Unsur</label>
+                                <textarea name="" class="form-control" id="" cols="30" rows="5"
+                                    placeholder="Example Melaksanan Proses Pengajaran Selama 2 SMT"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="control-label">Uraian Kegiatan</label>
+                                <textarea name="" class="form-control" id="" cols="30" rows="3"
+                                    placeholder="Example Melaksanan Proses Pengajaran Selama 2 SMT"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+                                <label for="" class="control-label">Tanggal</label>
+                                <input type="date" id="" required class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="control-label">Satuan Hasil</label>
+                                <textarea name="" id="" cols="30" rows="3" class="form-control"
+                                    placeholder="Example Lektor 10 SKS pertama = 1"></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="" class="control-label">Jumlah Volume Kegiatan</label>
+                                <input type="number" class="form-control" placeholder="example 1" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="control-label">Angka Kredit</label>
+                                <input type="text" readonly class="form-control">
+                            </div>
+                            <div class="form-group">
+                                <label for="" class="control-label">Keterangan</label>
+                                <input type="text" class="form-control" required
+                                    placeholder="Example No SK 7887865654436">
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <span class="fas fa-close"></span> Close
+                </button>
+                <button ng-click="delete(model)" type="button" class="btn btn-primary">
+                    <span class="fas fa-save"></span> Save
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal delete-->
