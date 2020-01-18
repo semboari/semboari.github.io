@@ -1,6 +1,6 @@
 <div class="container">
     <div class="row">
-        <div class="col-lg-12 header01">
+        <div class="col-sm-12 header01">
             <img src="assets/img/tutwuri01.png" class="img-fluid" align="left">
             <img src="assets/img/lldikti.png" class="img-fluid" align="right">
             <H3 class='text-uppercase text-center'>sistem informasi perhitungan angka kredit dosen</H3>
@@ -8,6 +8,7 @@
                 papua
                 dan papua barat</p>
         </div>
+
         <div class="container text-barlow">
             <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
                 <a class="navbar-brand" ui-sref="admin-home">SIPAK</a>
@@ -21,21 +22,27 @@
                     <ul class="navbar-nav mr-auto">
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="#dropdown-menu"
-                                role="button" aria-haspopup="true" aria-expanded="false">Data PT</a>
+                                role="button" aria-haspopup="true" aria-expanded="false">Data Perguruan Tinggi</a>
                             <div class="dropdown-menu">
                                 <a class="dropdown-item" ui-sref="admin-universitas">Universitas</a>
                                 <a class="dropdown-item" ui-sref="admin-fakultas">Fakultas</a>
                                 <a class="dropdown-item" ui-sref="admin-progdi">Program Studi</a>
                             </div>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" ui-sref="admin-sub-unsur">Sub Unsur</a>
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" data-toggle="dropdown" data-target="#dropdown-menu"
+                                role="button" aria-haspopup="true" aria-expanded="false">Data Master</a>
+                            <div class="dropdown-menu">
+                                <a class="dropdown-item" ui-sref="admin-jabatan-fungsional">Jabatan Fungsional</a>
+                                <a class="dropdown-item" ui-sref="admin-unsur">Unsur</a>
+                                <a class="dropdown-item" ui-sref="admin-sub-unsur">Sub Unsur</a>
+                            </div>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" ui-sref="admin-pejabat-pemeriksa">Pejabat Pemeriksa</a>
+                            <a class="nav-link" ui-sref="admin-dosen">Data Dosen</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" ui-sref="#logout">Logout</a>
+                            <a class="nav-link" data-toggle="modal" data-target="#logout">Logout</a>
                         </li>
                     </ul>
                 </div>
@@ -48,6 +55,27 @@
     <div class="row">
         <div class="col-md-12 mt-5 text-center footer bg-secondary text-light">
             Lembaga Layanan Pendidikan Tinggi Wilayah XIV Papua Dan Papua Barat
+        </div>
+    </div>
+</div>
+
+<!-- Modal logout-->
+<div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class=" text-uppercase">Apakah Anda Yakin Ingin Keluar ?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary">Ok</button>
+            </div>
         </div>
     </div>
 </div>

@@ -1,0 +1,128 @@
+<div class="row">
+    <div class="col-md-12 mt-3">
+        <h2 class="mt-1" style="display: inline;">Data Jabatan Fungsional</h2>
+        <button data-toggle="modal" data-target="#tambah-jafung" class="btn btn-success fa-pull-right"><span
+                class="fas fa-plus"></span></button>
+        <hr class="garis">
+        <div class="table table-responsive">
+            <table class="table table-bordered table-hover" id="myTable">
+                <thead class=" bg-primary">
+                    <tr>
+                        <th class="text-center">No</th>
+                        <th>Nama</th>
+                        <th>Angka Kredit</th>
+                        <th>Pangkat</th>
+                        <th>Golongan</th>
+                        <th>Ruang</th>
+                        <th class="text-center">Opsi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="text-center">{{$index+1}}</td>
+                        <td>Assisten Ahli Madya 100</td>
+                        <td>100</td>
+                        <td>Penata Muda</td>
+                        <td>III</td>
+                        <td>a</td>
+                        <td class="text-center">
+                            <button class="btn btn-outline-success"><span class="fas fa-edit"></span></button>
+                            <button class="btn btn-outline-danger" data-toggle="modal" data-target="#delete"><span
+                                    class="fas fa-eraser"></span></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</div>
+
+<!-- Modal tambah jafung-->
+<div class="modal fade" id="tambah-jafung" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Jabatan Fungsional</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <form action="" class="form-group">
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="" class="control-label">Jabatan</label>
+                                    <input type="text" class="form-control" name="jabatan"
+                                        placeholder="Example Asisten Ahli" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="control-label">Angka Kredit</label>
+                                    <input type="number" class="form-control" name="angkakredit"
+                                        placeholder="Example 0,25" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="control-label">Pangkat</label>
+                                    <input type="text" class="form-control" name="pangkat"
+                                        placeholder="Example Penata Muda" required>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="" class="control-label">Golongan</label>
+                                    <select name="golongan" id="" class="form-control">
+                                        <option value="">-- Pilih Golongan --</option>
+                                        <option value="I">I</option>
+                                        <option value="II">II</option>
+                                        <option value="III">III</option>
+                                        <option value="IV">IV</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="" class="control-label">Ruang</label>
+                                    <select name="golongan" id="" class="form-control">
+                                        <option value="">-- Pilih Ruang --</option>
+                                        <option value="a">a</option>
+                                        <option value="b">b</option>
+                                        <option value="c">c</option>
+                                        <option value="d">d</option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> <span class="fas fa-close"></span>
+                    Close</button>
+                <button type="button" class="btn btn-danger"> <span class="fas fa-save"></span> Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal delete-->
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">SIPAK</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class=" text-uppercase">Apakah Anda Yakin Ingin Menghapus?</p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> <span class="fas fa-close"></span>
+                    Close</button>
+                <button type="button" class="btn btn-danger"> <span class="fas fa-eraser"></span> Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

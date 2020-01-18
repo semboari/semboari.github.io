@@ -1,4 +1,4 @@
-angular.module('admin.router', [ 'ui.router' ]).config(function($stateProvider, $urlRouterProvider) {
+angular.module('admin.router', ['ui.router']).config(function ($stateProvider, $urlRouterProvider) {
 	$stateProvider.state('main	', {
 		url: '/',
 		parent: 'account',
@@ -37,16 +37,16 @@ angular.module('admin.router', [ 'ui.router' ]).config(function($stateProvider, 
 		templateUrl: '../apps/views/admin/progdi.html'
 	});
 
-	$stateProvider.state('admin-pejabat-pemeriksa', {
-		url: '/pejabat-pemeriksa',
+	$stateProvider.state('admin-dosen', {
+		url: '/dosen',
 		parent: 'admin',
-		templateUrl: '../apps/views/admin/pejabat-pemeriksa.html'
+		templateUrl: '../apps/views/admin/dosen.html'
 	});
 
-	$stateProvider.state('admin-tambah-pejabat', {
-		url: '/tambah-pejabat',
+	$stateProvider.state('admin-unsur', {
+		url: '/unsur',
 		parent: 'admin',
-		templateUrl: '../apps/views/admin/tambah-pejabat.html'
+		templateUrl: '../apps/views/admin/unsur.html'
 	});
 
 	$stateProvider.state('admin-sub-unsur', {
@@ -59,5 +59,11 @@ angular.module('admin.router', [ 'ui.router' ]).config(function($stateProvider, 
 		url: '/tambah-sub-unsur',
 		parent: 'admin',
 		templateUrl: '../apps/views/admin/tambah-sub-unsur.html'
+	});
+
+	$stateProvider.state('admin-jabatan-fungsional', {
+		url: '/jabatan-fungsional',
+		parent: 'admin',
+		templateUrl: '../apps/views/admin/jabatan-fungsional.html'
 	});
 });

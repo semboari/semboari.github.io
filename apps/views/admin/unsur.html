@@ -1,0 +1,113 @@
+<div class="row">
+    <div class="col-md-6 mt-3">
+        <h4 style="display: inline;">Tahun Peraturan</h4>
+        <button class="btn btn-success fa-pull-right" data-toggle="modal" data-target="#tahun" type="submit"><i
+                class="fas fa-plus"></i></button>
+        <div class="tabel table-responsive mt-3">
+            <table class="table table-bordered table-hover">
+                <thead class="bg-primary text-light">
+                    <tr class="text-center">
+                        <th>Tahun</th>
+                        <th>Opsi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr class="text-center">
+                        <td>2019</td>
+                        <td>
+                            <button class="btn btn-primary"><span class="fas fa-edit"></span></button>
+                            <button class="btn btn-danger"><span class="fas fa-eraser"></span></button>
+                        </td>
+                    </tr>
+                    <tr class="text-center">
+                        <td>2018</td>
+                        <td>
+                            <button class="btn btn-primary"><span class="fas fa-edit"></span></button>
+                            <button class="btn btn-danger"><span class="fas fa-eraser"></span></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="col-md-6 mt-3">
+        <h4 style="display: inline;">Data Unsur</h4>
+        <button class="btn btn-success fa-pull-right" data-toggle="modal" data-target="#unsur" type="submit"><i
+                class="fas fa-plus"></i></button>
+        <div class="tabel table-responsive mt-3">
+            <table class="table table-bordered table-hover">
+                <thead class="bg-primary text-light">
+                    <tr>
+                        <th>Unsur</th>
+                        <th class="text-center">Opsi</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Pelaksana Pendidikan</td>
+                        <td class="text-center">
+                            <button class="btn btn-primary"><span class="fas fa-edit"></span></button>
+                            <button class="btn btn-danger"><span class="fas fa-eraser"></span></button>
+                        </td class="text-center">
+                    </tr>
+                    <tr>
+                        <td>Penelitian</td>
+                        <td class="text-center">
+                            <button class="btn btn-primary"><span class="fas fa-edit"></span></button>
+                            <button class="btn btn-danger"><span class="fas fa-eraser"></span></button>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>
+
+
+<!-- modal  tambah tahun-->
+<div class="modal fade" id="tahun" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Tahun Peraturan Rubrik</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-input">
+                    <input type="text" placeholder="Example 2018" required class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> <span class="fas fa-close"></span>
+                    Close</button>
+                <button type="button" class="btn btn-danger"> <span class="fas fa-save"></span> Save</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- modal  tambah unsur-->
+<div class="modal fade" id="unsur" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Unsur</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="form-input">
+                    <input type="text" placeholder="Example Pelaksana Pendidikan" required class="form-control">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> <span class="fas fa-close"></span>
+                    Close</button>
+                <button type="button" class="btn btn-danger"> <span class="fas fa-save"></span> Save</button>
+            </div>
+        </div>
+    </div>
+</div>
