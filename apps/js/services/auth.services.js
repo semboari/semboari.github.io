@@ -38,9 +38,12 @@ function AuthService($http, $q, StorageService, $state, helperServices, message)
 	function getHeader() {
 		try {
 			if (userIsLogin()) {
+				var token = getToken();
+				if (!token) throw new Error('Not Found Token');
+
 				return {
 					'Content-Type': 'application/json',
-					Authorization: 'Bearer ' + getToken()
+					Authorization: 'Bearer ' + token
 				};
 			}
 			throw new Error('Not Found Token');

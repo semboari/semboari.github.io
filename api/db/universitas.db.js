@@ -17,6 +17,21 @@ UniversitasDb.get = async () => {
 	});
 };
 
+UniversitasDb.getById = async (Id) => {
+	return new Promise((resolve, reject) => {
+		pool.query(
+			`SELECT *
+		  FROM
+		  universitas where iduniversitas=?`,
+			[ Id ],
+			(err, result) => {
+				if (err) return reject(err);
+				resolve(result[0]);
+			}
+		);
+	});
+};
+
 UniversitasDb.post = async (univ) => {
 	return new Promise((resolve, reject) => {
 		try {

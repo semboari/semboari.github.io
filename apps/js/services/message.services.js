@@ -1,6 +1,6 @@
 angular.module('message.service', []).factory('message', MessageServices);
 
-function MessageServices(swangular, $q) {
+function MessageServices(swangular, $q, $state) {
 	return { info: info, error: error, warning: warning, dialog: dialog };
 
 	function info(params) {
@@ -13,9 +13,15 @@ function MessageServices(swangular, $q) {
 
 	function error(params) {
 		var title = 'Error';
+		var text = 'Terjadi Kesalahan';
 		if (params.status) {
 			switch (params.status) {
 				case 401:
+					title = 'Hak Akses';
+					text = 'Anda Tidak Memiliki Akses';
+					$state.go('login');
+					break;
+				case 402:
 					title = 'Hak Akses';
 					break;
 				case 402:
@@ -27,7 +33,6 @@ function MessageServices(swangular, $q) {
 			}
 		}
 
-		var text = 'Terjadi Kesalahan';
 		if (params.data) text = params.data.message;
 
 		swangular.swal({

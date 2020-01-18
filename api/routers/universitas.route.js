@@ -14,6 +14,16 @@ router.get('/', [ authJwt.verifyToken ], async (req, res) => {
 	}
 });
 
+router.get('/:Id', [ authJwt.verifyToken ], async (req, res) => {
+	try {
+		var id = req.params.Id;
+		contextDb.Universitas.getById(id).then((result) => {
+			res.status(200).json(result);
+		});
+	} catch (error) {
+		res.status(400).json({ message: err.message });
+	}
+});
 router.post('/', [ authJwt.verifyToken, permit('admin') ], async (req, res) => {
 	try {
 		var data = req.body;

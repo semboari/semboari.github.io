@@ -1,5 +1,5 @@
 
-@controller=programstudi
+@controller=jabatanfungsional
 @host=http://localhost:5500/api/{{controller}}
 @token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTc5MTgwODc4LCJleHAiOjE1NzkyNjcyNzh9.vWlOrUzpxA7eQ-GPmgkRXK-Gpxh-6-qoGfkqQtA7nnM
 
@@ -12,22 +12,21 @@ Authorization: bearer {{token}}
 
 
 ####
-GET {{host}}/1 HTTP/1.1
+GET {{host}}/3 HTTP/1.1
 Content-Type: application/json
 Authorization: bearer {{token}}
 ####
-####
-GET {{host}}/byparentid/1 HTTP/1.1
-Content-Type: application/json
-Authorization: bearer {{token}}
-####
+
 POST {{host}} HTTP/1.1
 Content-Type: application/json
 Authorization: bearer {{token}}
 
 {
-    "idfakultas":1,
-    "namaprogramstudi":"USTJ"
+   "jabatan":"Lektor", 
+   "ak":2.5,
+    "pangkat":"Penata Muda",
+     "golongan":"IIA", 
+     "ruang":"A"
 }
 
 
@@ -38,10 +37,14 @@ Content-Type: application/json
 Authorization: bearer {{token}}
 
 {
-  "idfakultas": 1,
-  "namaprogramstudi": "Teknik Informasi",
-  "idprogramstudi": 2
+   "jabatan": "Lektor",
+  "ak": 2.5,
+  "pangkat": "Penata Muda",
+  "golongan": "IIB",
+  "ruang": "B",
+  "idjabatan": 3
 }
+
 
 
 ####

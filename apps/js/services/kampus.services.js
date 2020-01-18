@@ -24,7 +24,7 @@ function UniversitasService($http, $q, helperServices, AuthService, message) {
 					defer.resolve(datas);
 				},
 				(err) => {
-					message.error('err.message');
+					message.error(err);
 				}
 			);
 		}
@@ -121,14 +121,20 @@ function UniversitasService($http, $q, helperServices, AuthService, message) {
 		getById: getById,
 		put: put,
 		delete: deleteItem
-
 	};
-};
-
+}
 
 function FakultasService($http, $q, helperServices, AuthService, message) {
 	var instance = false;
 	var datas = [];
+	return {
+		get: get,
+		getByParent: getByParent,
+		post: post,
+		getById: getById,
+		put: put,
+		delete: deleteItem
+	};
 
 	function get() {
 		var defer = $q.defer();
@@ -146,7 +152,7 @@ function FakultasService($http, $q, helperServices, AuthService, message) {
 					defer.resolve(datas);
 				},
 				(err) => {
-					message.error('err.message');
+					message.error(err);
 				}
 			);
 		}
@@ -175,24 +181,6 @@ function FakultasService($http, $q, helperServices, AuthService, message) {
 				}
 			);
 		}
-		return defer.promise;
-	}
-
-	function getByPerentId(id) {
-		var defer = $q.defer();
-		$http({
-			url: helperServices.url + '/api/fakultas/getbyparentid' + id,
-			method: 'get',
-			headers: AuthService.getHeader()
-		}).then(
-			(x) => {
-				defer.resolve(x.data);
-			},
-			(err) => {
-				message.error('err.message');
-				defer.reject(err.message);
-			}
-		);
 		return defer.promise;
 	}
 
@@ -243,8 +231,6 @@ function FakultasService($http, $q, helperServices, AuthService, message) {
 			headers: AuthService.getHeader()
 		}).then(
 			(response) => {
-				var index = datas.indexOf(data);
-				datas.splice(index, 1);
 				defer.resolve(response.data);
 			},
 			(err) => {
@@ -254,23 +240,33 @@ function FakultasService($http, $q, helperServices, AuthService, message) {
 
 		return defer.promise;
 	}
-	return {
-		get: get,
-		post: post,
-		getById: getById,
-		put: put,
-		delete: deleteItem,
-		getByPerentId: getByPerentId
-	};
+
+	function getByParent(id) {
+		var defer = $q.defer();
+		$http({
+			url: helperServices.url + '/api/fakultas/byparentid/' + id,
+			method: 'GET',
+			headers: AuthService.getHeader()
+		}).then(
+			(x) => {
+				defer.resolve(x.data);
+			},
+			(err) => {
+				message.error(err.message);
+				defer.reject(err.message);
+			}
+		);
+		return defer.promise;
+	}
 }
 
-function ProgdiService($http, $q, helperServices, message) {
+function ProgdiService($http, $q, helperServices, message, AuthService) {
 	var instance = false;
-
+	var datas = [];
 	function get(fakultasId) {
 		var defer = $q.defer();
 		$http({
-			url: helperServices.url + '/Progdi?fakultasId=' + fakultasId,
+			url: helperServices.url + '/api/programstudi',
 			method: 'get',
 			headers: AuthService.getHeader()
 		}).then(
@@ -290,7 +286,7 @@ function ProgdiService($http, $q, helperServices, message) {
 	function getById(id) {
 		var defer = $q.defer();
 		$http({
-			url: helperServices.url + '/Progdi/' + id,
+			url: helperServices.url + '/api/programstudi/' + id,
 			method: 'get',
 			headers: AuthService.getHeader()
 		}).then(
@@ -305,13 +301,29 @@ function ProgdiService($http, $q, helperServices, message) {
 		);
 		return defer.promise;
 	}
-
+	function getByParent(id) {
+		var defer = $q.defer();
+		$http({
+			url: helperServices.url + '/api/programstudi/byparentid/' + id,
+			method: 'GET',
+			headers: AuthService.getHeader()
+		}).then(
+			(x) => {
+				defer.resolve(x.data);
+			},
+			(err) => {
+				message.error(err.message);
+				defer.reject(err.message);
+			}
+		);
+		return defer.promise;
+	}
 	function post(data) {
 		var defer = $q.defer();
 		$http({
-			url: helperServices.url + 'Progdi',
+			url: helperServices.url + '/api/programstudi',
 			method: 'post',
-			data: datas,
+			data: data,
 			headers: AuthService.getHeader()
 		}).then(
 			(response) => {
@@ -329,9 +341,9 @@ function ProgdiService($http, $q, helperServices, message) {
 	function put(data) {
 		var defer = $q.defer();
 		$http({
-			url: helperServices.url + '/Progdi/' + data.id,
+			url: helperServices.url + '/api/programstudi',
 			method: 'put',
-			data: datas,
+			data: data,
 			headers: AuthService.getHeader()
 		}).then(
 			(response) => {
@@ -347,13 +359,11 @@ function ProgdiService($http, $q, helperServices, message) {
 	function deleteItem(data) {
 		var defer = $q.defer();
 		$http({
-			url: helperServices.url + '/Progdi/' + data.id,
+			url: helperServices.url + '/api/programstudi/' + data.idprogramstudi,
 			method: 'delete',
 			headers: AuthService.getHeader()
 		}).then(
 			(response) => {
-				var index = data.indexOf(data);
-				datas.splice(index, 1);
 				defer.resolve(response.data);
 			},
 			(err) => {
@@ -369,6 +379,7 @@ function ProgdiService($http, $q, helperServices, message) {
 		post: post,
 		getById: getById,
 		put: put,
+		getByParent: getByParent,
 		delete: deleteItem
 	};
 }

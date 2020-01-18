@@ -1,14 +1,14 @@
 const pool = require('./dbconnection');
 const rx = require('rxjs');
 const helper = require('../helper');
-const FakultasDb = {};
+const JabatanFuntionalDB = {};
 
-FakultasDb.get = async () => {
+JabatanFuntionalDB.get = async () => {
 	return new Promise((resolve, reject) => {
 		pool.query(
 			`SELECT *
 		  FROM
-			fakultas `,
+			jabatanfungsional`,
 			(err, result) => {
 				if (err) return reject(err);
 				resolve(result);
@@ -17,28 +17,13 @@ FakultasDb.get = async () => {
 	});
 };
 
-FakultasDb.getById = async (id) => {
+JabatanFuntionalDB.getById = async (Id) => {
 	return new Promise((resolve, reject) => {
 		pool.query(
 			`SELECT *
 		  FROM
-			fakultas where idfakultas=?`,
-			[ id ],
-			(err, result) => {
-				if (err) return reject(err);
-				resolve(result[0]);
-			}
-		);
-	});
-};
-
-FakultasDb.getByParentId = async (id) => {
-	return new Promise((resolve, reject) => {
-		pool.query(
-			`SELECT *
-		  FROM
-			fakultas where iduniversitas=?`,
-			[ id ],
+			jabatanfungsional where idjabatan=? `,
+			[ Id ],
 			(err, result) => {
 				if (err) return reject(err);
 				resolve(result);
@@ -47,17 +32,17 @@ FakultasDb.getByParentId = async (id) => {
 	});
 };
 
-FakultasDb.post = async (params) => {
+JabatanFuntionalDB.post = async (data) => {
 	return new Promise((resolve, reject) => {
 		try {
 			pool.query(
-				'insert into fakultas (iduniversitas,namafakultas) values(?,?)',
-				[ params.iduniversitas, params.namafakultas ],
+				'insert into jabatanfungsional  (jabatan, ak, pangkat, golongan, ruang) values(?,?,?,?,?)',
+				[ data.jabatan, data.ak, data.pangkat, data.golongan, data.ruang ],
 				(err, result) => {
 					if (err) throw Error();
 
-					params.idfakultas = result.insertId;
-					resolve(params);
+					data.idjabatan = result.insertId;
+					resolve(data);
 				}
 			);
 		} catch (error) {
@@ -66,12 +51,12 @@ FakultasDb.post = async (params) => {
 	});
 };
 
-FakultasDb.put = async (data) => {
+JabatanFuntionalDB.put = async (data) => {
 	return new Promise((resolve, reject) => {
 		try {
 			pool.query(
-				'update fakultas set namafakultas=? where idfakultas=? ',
-				[ data.namafakultas, data.idfakultas ],
+				'update jabatanfungsional set jabatan=?, ak=?, pangkat=?, golongan=?, ruang=? where idjabatan=? ',
+				[ data.jabatan, data.ak, data.pangkat, data.golongan, data.ruang, data.idjabatan ],
 				(err, result) => {
 					if (err) {
 						reject(err);
@@ -86,13 +71,14 @@ FakultasDb.put = async (data) => {
 	});
 };
 
-FakultasDb.delete = (id) => {
+JabatanFuntionalDB.delete = (id) => {
 	return new Promise((resolve, reject) => {
 		try {
-			pool.query('delete from fakultas where idfakultas=? ', [ id ], (err, result) => {
+			pool.query('delete from jabatanfungsional where idjabatan=? ', [ id ], (err, result) => {
 				if (err) {
 					reject(err);
 				}
+
 				resolve(true);
 			});
 		} catch (error) {
@@ -101,4 +87,4 @@ FakultasDb.delete = (id) => {
 	});
 };
 
-module.exports = FakultasDb;
+module.exports = JabatanFuntionalDB;
