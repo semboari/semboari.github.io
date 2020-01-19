@@ -4,9 +4,9 @@ const contextDb = require('../db');
 const authJwt = require('../auth/verifyToken');
 const permit = require('../auth/permission');
 
-router.get('/', async (req, res) => {
+router.get('/', [ authJwt.verifyToken ], async (req, res) => {
 	try {
-		contextDb.Fakultas.get().then(
+		contextDb.Dosen.get().then(
 			(result) => {
 				res.status(200).json(result);
 			},
@@ -22,7 +22,7 @@ router.get('/', async (req, res) => {
 router.get('/:Id', [ authJwt.verifyToken ], async (req, res) => {
 	try {
 		var id = req.params.Id;
-		contextDb.Fakultas.getById(id).then(
+		contextDb.Dosen.getById(id).then(
 			(result) => {
 				res.status(200).json(result);
 			},
@@ -34,10 +34,12 @@ router.get('/:Id', [ authJwt.verifyToken ], async (req, res) => {
 		res.status(400).json({ message: err.message });
 	}
 });
-router.get('/byparentid/:Id', async (req, res) => {
+
+router.get('/changerole/:Id/:role', [ authJwt.verifyToken ], async (req, res) => {
 	try {
 		var id = req.params.Id;
-		contextDb.Fakultas.getByParentId(id).then(
+		var role = req.params.role;
+		contextDb.Dosen.ChangeRole(id, role).then(
 			(result) => {
 				res.status(200).json(result);
 			},
@@ -54,7 +56,7 @@ router.post('/', [ authJwt.verifyToken, permit('admin') ], async (req, res) => {
 	try {
 		var data = req.body;
 		if (data) {
-			contextDb.Fakultas.post(data).then(
+			contextDb.Dosen.post(data).then(
 				(result) => {
 					if (result) {
 						res.status(200).json(result);
@@ -76,7 +78,7 @@ router.put('/', [ authJwt.verifyToken, permit('admin') ], async (req, res) => {
 	try {
 		var data = req.body;
 		if (data) {
-			contextDb.Fakultas.put(data).then(
+			contextDb.Dosen.put(data).then(
 				(result) => {
 					if (result) {
 						res.status(200).json(result);
@@ -85,7 +87,7 @@ router.put('/', [ authJwt.verifyToken, permit('admin') ], async (req, res) => {
 					}
 				},
 				(err) => {
-					res.status(400).json(err);
+					throw Error(err);
 				}
 			);
 		} else res.status(400).json({ message: 'Data Tidak Tersimpan' });
@@ -98,7 +100,7 @@ router.delete('/:Id', [ authJwt.verifyToken, permit('admin') ], async (req, res)
 	try {
 		var id = req.params.Id;
 		if (id) {
-			contextDb.Fakultas.delete(id).then(
+			contextDb.Dosen.delete(id).then(
 				(result) => {
 					if (result) {
 						res.status(200).json(result);

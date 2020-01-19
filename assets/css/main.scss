@@ -19,3 +19,23 @@
     transform: rotate(360deg);
   }
 }
+
+.autoComplete {
+  ul {
+    width: 95%;
+    li {
+      margin: 3px;
+    }
+
+    li:hover {
+      background-color: #c7e1fb;
+    }
+  }
+
+  .dropdown-menu {
+    padding: 3px;
+  }
+  .red {
+    color: red;
+  }
+}

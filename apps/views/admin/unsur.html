@@ -12,18 +12,13 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr class="text-center">
-                        <td>2019</td>
+                    <tr class="text-center" ng-repeat="item in Peraturan">
+                        <td>{{item.tahun}}</td>
                         <td>
-                            <button class="btn btn-primary"><span class="fas fa-edit"></span></button>
-                            <button class="btn btn-danger"><span class="fas fa-eraser"></span></button>
-                        </td>
-                    </tr>
-                    <tr class="text-center">
-                        <td>2018</td>
-                        <td>
-                            <button class="btn btn-primary"><span class="fas fa-edit"></span></button>
-                            <button class="btn btn-danger"><span class="fas fa-eraser"></span></button>
+                            <button data-toggle="modal" data-target="#tahun" ng-click="SelectItemPeraturan(item)"
+                                class="btn btn-primary"><span class="fas fa-edit"></span></button>
+                            <button ng-click="deletePeraturan(item)" class="btn btn-danger"><span
+                                    class="fas fa-eraser"></span></button>
                         </td>
                     </tr>
                 </tbody>
@@ -43,20 +38,16 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>Pelaksana Pendidikan</td>
-                        <td class="text-center">
-                            <button class="btn btn-primary"><span class="fas fa-edit"></span></button>
-                            <button class="btn btn-danger"><span class="fas fa-eraser"></span></button>
-                        </td class="text-center">
-                    </tr>
-                    <tr>
-                        <td>Penelitian</td>
-                        <td class="text-center">
-                            <button class="btn btn-primary"><span class="fas fa-edit"></span></button>
-                            <button class="btn btn-danger"><span class="fas fa-eraser"></span></button>
+                    <tr ng-repeat="item in Unsur">
+                        <td>{{item.nama}}</td>
+                        <td>
+                            <button data-toggle="modal" data-target="#unsur" ng-click="SelectItemUnsur(item)"
+                                class="btn btn-primary"><span class="fas fa-edit"></span></button>
+                            <button ng-click="deleteUnsur(item)" class="btn btn-danger"><span
+                                    class="fas fa-eraser"></span></button>
                         </td>
                     </tr>
+
                 </tbody>
             </table>
         </div>
@@ -67,47 +58,55 @@
 <!-- modal  tambah tahun-->
 <div class="modal fade" id="tahun" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Tahun Peraturan Rubrik</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-input">
-                    <input type="text" placeholder="Example 2018" required class="form-control">
+        <form ng-submit="SavePeraturan(modelPeraturan)">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Tahun Peraturan Rubrik</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-input">
+                        <input ng-model="modelPeraturan.tahun" type="text" placeholder="Example 2018" required
+                            class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"> <span
+                            class="fas fa-close"></span>
+                        Close</button>
+                    <button type="submit" class="btn btn-danger"> <span class="fas fa-save"></span> Save</button>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"> <span class="fas fa-close"></span>
-                    Close</button>
-                <button type="button" class="btn btn-danger"> <span class="fas fa-save"></span> Save</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>
 
 <!-- modal  tambah unsur-->
 <div class="modal fade" id="unsur" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Data Unsur</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <div class="form-input">
-                    <input type="text" placeholder="Example Pelaksana Pendidikan" required class="form-control">
+        <form ng-submit="SaveUnsur(modelUnsur)">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Data Unsur</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-input">
+                        <input ng-model="modelUnsur.nama" type="text" placeholder="Example Pelaksana Pendidikan"
+                            required class="form-control">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"> <span
+                            class="fas fa-close"></span>
+                        Close</button>
+                    <button type="submit" class="btn btn-danger"> <span class="fas fa-save"></span> Save</button>
                 </div>
             </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"> <span class="fas fa-close"></span>
-                    Close</button>
-                <button type="button" class="btn btn-danger"> <span class="fas fa-save"></span> Save</button>
-            </div>
-        </div>
+        </form>
     </div>
 </div>

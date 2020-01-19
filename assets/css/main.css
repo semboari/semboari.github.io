@@ -36,4 +36,24 @@
             transform: rotate(360deg);
   }
 }
+
+.autoComplete ul {
+  width: 95%;
+}
+
+.autoComplete ul li {
+  margin: 3px;
+}
+
+.autoComplete ul li:hover {
+  background-color: #c7e1fb;
+}
+
+.autoComplete .dropdown-menu {
+  padding: 3px;
+}
+
+.autoComplete .red {
+  color: red;
+}
 /*# sourceMappingURL=main.css.map */

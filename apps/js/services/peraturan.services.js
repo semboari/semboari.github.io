@@ -1,37 +1,17 @@
-angular.module('dosen.service', []).factory('DosenService', DosenService);
+angular.module('peraturan.service', []).factory('PeraturanService', PeraturanService);
 
-function DosenService($http, $q, helperServices, AuthService, message) {
+function PeraturanService($http, $q, helperServices, AuthService, message) {
 	var instance = false;
 	var datas = [];
-	var controller = '/api/dosen/';
+	var controller = '/api/peraturan/';
 	return {
 		get: get,
 		getByParent: getByParent,
 		post: post,
 		getById: getById,
 		put: put,
-		changeRole: ChangeRole,
 		delete: deleteItem
 	};
-
-	function ChangeRole(data) {
-		var defer = $q.defer();
-		$http({
-			url: helperServices.url + controller + 'changerole/' + data.iduser + '/' + data.newrole,
-			method: 'get',
-			headers: AuthService.getHeader()
-		}).then(
-			(x) => {
-				datas = x.data;
-				defer.resolve(datas);
-			},
-			(err) => {
-				message.error(err);
-			}
-		);
-
-		return defer.promise;
-	}
 
 	function get() {
 		var defer = $q.defer();

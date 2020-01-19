@@ -10,7 +10,7 @@ UnsurDB.get = async () => {
 		  FROM
 			unsur `,
 			(err, result) => {
-				if (err) return reject(err);
+				if (err) reject(err);
 				resolve(result);
 			}
 		);
@@ -25,7 +25,7 @@ UnsurDB.getById = async (Id) => {
 			unsur where idunsur=?`,
 			[ Id ],
 			(err, result) => {
-				if (err) return reject(err);
+				if (err) reject(err);
 				resolve(result[0]);
 			}
 		);
@@ -36,7 +36,7 @@ UnsurDB.post = async (params) => {
 	return new Promise((resolve, reject) => {
 		try {
 			pool.query('insert into unsur (nama) values(?)', [ params.nama ], (err, result) => {
-				if (err) throw Error();
+				if (err) reject(err);
 
 				params.idunsur = result.insertId;
 				resolve(params);

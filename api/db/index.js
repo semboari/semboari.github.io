@@ -7,7 +7,9 @@ const dbContext = {
 	Unsur: require('./unsur.db'),
 	SubUnsur: require('./subunsur.db'),
 	Peraturan: require('./peraturan.db'),
-	JabatanFuntional: require('./jabatanfungsional.db')
+	JabatanFuntional: require('./jabatanfungsional.db'),
+	Dosen: require('./dosen.db'),
+	Penilaian: require('./penilaian.db')
 };
 
 module.exports = dbContext;

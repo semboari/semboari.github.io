@@ -2,12 +2,11 @@ angular
 	.module('app', [
 		'swangular',
 		'message.service',
-
 		'app.services',
 		'app.routers',
 		'app.controllers',
-
-		'app.conponent'
+		'app.conponent',
+		'ui.bootstrap'
 	])
 	.controller('homeController', homeController);
 

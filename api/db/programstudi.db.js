@@ -10,7 +10,7 @@ ProgdiDb.get = async () => {
 		  FROM
 			programstudi `,
 			(err, result) => {
-				if (err) return reject(err);
+				if (err) reject(err);
 				resolve(result);
 			}
 		);
@@ -25,7 +25,7 @@ ProgdiDb.getById = async (id) => {
 			programstudi where idprogramstudi=?`,
 			[ id ],
 			(err, result) => {
-				if (err) return reject(err);
+				if (err) reject(err);
 				resolve(result[0]);
 			}
 		);
@@ -49,7 +49,7 @@ ProgdiDb.getByParentId = async (id) => {
 		  universitas.iduniversitas where fakultas.idfakultas=?`,
 			[ id ],
 			(err, result) => {
-				if (err) return reject(err);
+				if (err) reject(err);
 				resolve(result);
 			}
 		);

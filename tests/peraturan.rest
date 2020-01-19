@@ -1,8 +1,7 @@
 
 @controller=peraturan
 @host=http://localhost:5500/api/{{controller}}
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NCwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTc5MTgwODc4LCJleHAiOjE1NzkyNjcyNzh9.vWlOrUzpxA7eQ-GPmgkRXK-Gpxh-6-qoGfkqQtA7nnM
-
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTc5MzM5NTcxLCJleHAiOjE1Nzk0MjU5NzF9.KPzcw7plSgxBp5hfeihwaMe6ycagWjJbYT7KbtZe93E
 
 ####
 GET {{host}} HTTP/1.1

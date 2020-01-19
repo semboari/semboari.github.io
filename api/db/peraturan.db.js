@@ -10,7 +10,7 @@ PeraturanDB.get = async () => {
 		  FROM
 			peraturan `,
 			(err, result) => {
-				if (err) return reject(err);
+				if (err) reject(err);
 				resolve(result);
 			}
 		);
@@ -25,7 +25,7 @@ PeraturanDB.getById = async (Id) => {
 			peraturan where idperaturan=?`,
 			[ Id ],
 			(err, result) => {
-				if (err) return reject(err);
+				if (err) reject(err);
 				resolve(result[0]);
 			}
 		);

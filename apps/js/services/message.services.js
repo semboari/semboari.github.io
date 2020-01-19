@@ -21,11 +21,18 @@ function MessageServices(swangular, $q, $state) {
 					text = 'Anda Tidak Memiliki Akses';
 					$state.go('login');
 					break;
-				case 402:
+				case 403:
 					title = 'Hak Akses';
+					text = 'Anda Tidak Memiliki Akses';
+					$state.go('login');
+					break;
+				case 409:
+					title = 'Hak Akses';
+					text = 'Anda Telah/////// Memiliki Akses';
+					$state.go('login');
 					break;
 				case 402:
-					title = 'LINK';
+					title = 'Hak Akses';
 					break;
 				default:
 					if (params.status > 0) title = params.status;

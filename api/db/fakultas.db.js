@@ -54,7 +54,7 @@ FakultasDb.post = async (params) => {
 				'insert into fakultas (iduniversitas,namafakultas) values(?,?)',
 				[ params.iduniversitas, params.namafakultas ],
 				(err, result) => {
-					if (err) throw Error();
+					if (err) reject(err);
 
 					params.idfakultas = result.insertId;
 					resolve(params);

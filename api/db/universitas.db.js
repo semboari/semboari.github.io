@@ -10,7 +10,7 @@ UniversitasDb.get = async () => {
 		  FROM
 			universitas `,
 			(err, result) => {
-				if (err) return reject(err);
+				if (err) reject(err);
 				resolve(result);
 			}
 		);
@@ -25,7 +25,7 @@ UniversitasDb.getById = async (Id) => {
 		  universitas where iduniversitas=?`,
 			[ Id ],
 			(err, result) => {
-				if (err) return reject(err);
+				if (err) reject(err);
 				resolve(result[0]);
 			}
 		);
@@ -39,7 +39,7 @@ UniversitasDb.post = async (univ) => {
 				'insert into universitas (namauniversitas) values(?)',
 				[ univ.namauniversitas ],
 				(err, result) => {
-					if (err) throw Error();
+					if (err) reject(err);
 
 					univ.iduniversitas = result.insertId;
 					resolve(univ);

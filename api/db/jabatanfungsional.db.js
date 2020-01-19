@@ -10,7 +10,7 @@ JabatanFuntionalDB.get = async () => {
 		  FROM
 			jabatanfungsional`,
 			(err, result) => {
-				if (err) return reject(err);
+				if (err) reject(err);
 				resolve(result);
 			}
 		);
@@ -25,7 +25,7 @@ JabatanFuntionalDB.getById = async (Id) => {
 			jabatanfungsional where idjabatan=? `,
 			[ Id ],
 			(err, result) => {
-				if (err) return reject(err);
+				if (err) reject(err);
 				resolve(result);
 			}
 		);

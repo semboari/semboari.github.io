@@ -8,18 +8,24 @@ UserDb.login = async (user) => {
 		pool.getConnection((err, connection) => {
 			connection.beginTransaction((err) => {
 				try {
-					if (err) throw err;
+					if (err) reject(err);
 					connection.query('select * from users', (err, result) => {
 						if (err) {
-							throw err;
+							reject(err);
 						}
 
 						if (result.length <= 0) {
-							var sql = 'insert into role (name) values ? ';
-							var values = [ [ 'admin' ], [ 'dosen' ], [ 'kaprodi' ], [ 'pemeriksa' ], [ 'rektor' ] ];
+							var sql = 'insert into role (name,deskripsi) values ? ';
+							var values = [
+								[ 'admin', 'Administrator' ],
+								[ 'dosen', 'Dosen' ],
+								[ 'kaprodi', 'Kaprodi' ],
+								[ 'pemeriksa', 'Pemeriksa Penelitian' ],
+								[ 'rektor', 'Rektor' ]
+							];
 							connection.query(sql, [ values ], (err, result) => {
 								if (err) {
-									throw err;
+									reject(err);
 								}
 								var password = bcrypt.hashSync(user.password, 8);
 								connection.query(
@@ -27,7 +33,7 @@ UserDb.login = async (user) => {
 									[ user.username, password, user.username ],
 									(err, result) => {
 										if (err) {
-											throw err;
+											reject(err);
 										}
 
 										if (result.insertId > 0) {
@@ -37,7 +43,7 @@ UserDb.login = async (user) => {
 												'select * from role where name=?',
 												[ 'admin' ],
 												(err, roleResult) => {
-													if (err) throw err;
+													if (err) reject(err);
 
 													var data = roleResult[0];
 
@@ -45,11 +51,11 @@ UserDb.login = async (user) => {
 														'insert into userinrole(idusers,idrole) values(?,?)',
 														[ user.idUser, data.idrole ],
 														(err, result) => {
-															if (err) throw err;
+															if (err) reject(err);
 															connection.commit(function(err) {
 																if (err) {
 																	return connection.rollback(function() {
-																		throw err;
+																		reject(err);
 																	});
 																}
 																return resolve(result[0]);
@@ -74,12 +80,12 @@ UserDb.login = async (user) => {
 								[ user.username, user.username ],
 								(err, result) => {
 									if (err) {
-										throw err;
+										reject(err);
 									}
 									connection.commit(function(err) {
 										if (err) {
 											return connection.rollback(function() {
-												throw err;
+												reject(err);
 											});
 										}
 										return resolve(result);
@@ -100,52 +106,57 @@ UserDb.login = async (user) => {
 };
 
 UserDb.registerDosen = async (dosen) => {
-	return new Promise((resolve, reject) => {
+	return new Promise((resolve, reject, next) => {
 		pool.getConnection((err, connection) => {
 			try {
 				connection.beginTransaction((err) => {
-					if (err) throw err;
+					if (err) reject(err);
 					connection.query('select * from role where name=?', [ 'dosen' ], (err, roleResult) => {
-						if (err) throw err;
+						if (err) reject(err);
 						var role = roleResult[0];
 						connection.query(
-							'insert into users (username, password, email)',
-							[ dosen.email, user.password, dosen.email ],
+							'insert into users (username, password, email) values(?,?,?)',
+							[ dosen.nidn, dosen.password, dosen.email ],
 							(err, userResult) => {
-								if (err) throw err;
+								if (err) throw reject(err);
+								else dosen.iduser = userResult.insertId;
 								connection.query(
-									'insert into userinrole(iduser, idrole)',
-									[ userResult.insertId, role.idrole ],
+									'insert into userinrole(idusers, idrole) values (?,?)',
+									[ dosen.iduser, role.idrole ],
 									(err, result) => {
-										if (err) throw err;
-										connection.query(
-											`insert into dosen(nidn, tanggallahir, tempatlahir, jeniskelamin, pendidikanterakhir,
-												 jabatanakademik, masakerja, idprogramstudi) values (?,?,?,?,?,?,?,?)`,
-											[
-												dosen.nidn,
-												dosen.tanggallahir,
-												dosen.tempatlahir,
-												dosen.jeniskelamin,
-												dosen.pendidikanterakhir,
-												dosen.jabatanakademik,
-												dosen.masakerja,
-												dosen.idprogramstudi
-											],
-											(err, result) => {
-												if (err) throw err;
-
-												dosen.iddosen = result.insertId;
-												dosen.role = 'dosen';
-												connection.commit(function(err) {
-													if (err) {
-														return connection.rollback(function() {
-															throw err;
+										if (err) reject(err);
+										else
+											dosen.iduser = connection.query(
+												`insert into dosen(iduser,idjabatan, nidn, tanggallahir, tempatlahir, jeniskelamin, pendidikanterakhir,
+												 jabatanakademik, masakerja, idprogramstudi) values (?,?,?,?,?,?,?,?,?,?)`,
+												[
+													dosen.iduser,
+													dosen.idjabatan,
+													dosen.nidn,
+													dosen.tanggallahir,
+													dosen.tempatlahir,
+													dosen.jeniskelamin,
+													dosen.pendidikanterakhir,
+													dosen.jabatanakademik,
+													dosen.masakerja,
+													dosen.idprogramstudi
+												],
+												(err, result) => {
+													if (err) reject(err);
+													else {
+														dosen.iddosen = result.insertId;
+														dosen.role = 'dosen';
+														connection.commit(function(err) {
+															if (err) {
+																return connection.rollback(function() {
+																	reject(err);
+																});
+															}
+															resolve(dosen);
 														});
 													}
-													resolve(dosen);
-												});
-											}
-										);
+												}
+											);
 									}
 								);
 							}
@@ -164,7 +175,7 @@ UserDb.registerDosen = async (dosen) => {
 
 UserDb.profile = async (userId) => {
 	return new Promise((resolve, reject) => {
-		pool.query('select * from dosen where userid =?', [ idDosen ], (err, result) => {
+		pool.query('select * from dosen where iduser =?', [ userId ], (err, result) => {
 			if (err) {
 				return reject(err);
 			}

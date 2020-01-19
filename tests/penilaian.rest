@@ -1,0 +1,68 @@
+
+@controller=penilaian
+@host=http://localhost:5500/api/{{controller}}
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsInJvbGVzIjpbImRvc2VuIiwicGVtZXJpa3NhIl0sImlhdCI6MTU3OTQzMjk4MiwiZXhwIjoxNTc5NTE5MzgyfQ.MnAMKXy3MulzW-wh793xqedkzCk4CVqRsHFkvz5qHE0
+
+###
+
+POST   http://localhost:5500/api/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "username":"123456789545",
+    "password": "dosen"
+}
+
+####
+####
+GET {{host}}/1 HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}
+####
+
+
+####
+GET {{host}}/getbyid/3 HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}
+
+
+
+####
+
+POST {{host}} HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}
+
+{
+   "iddosen": 1,
+    "idsubunsur": 1,
+    "uraiankegiatan": "apakek",
+    "satuanhasil": "sks",
+    "jumlahkegiatan": 1,
+    "keterangan": "apa juga kek"
+    }
+
+
+
+####
+
+PUT {{host}} HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}
+
+{
+  "iddosen": 1,
+  "idsubunsur": 1,
+  "uraiankegiatan": "apakek",
+  "satuanhasil": "sks",
+  "jumlahkegiatan": 1,
+  "keterangan": "udate",
+  "idpenilaian": 1
+}
+
+####
+
+DELETE {{host}}/1 HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}

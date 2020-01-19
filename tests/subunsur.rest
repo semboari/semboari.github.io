@@ -1,16 +1,16 @@
 
-@controller=unsur
+@controller=subunsur
 @host=http://localhost:5500/api/{{controller}}
 @token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTc5MzM5NTcxLCJleHAiOjE1Nzk0MjU5NzF9.KPzcw7plSgxBp5hfeihwaMe6ycagWjJbYT7KbtZe93E
 ####
-GET {{host}} HTTP/1.1
+GET {{host}}/3 HTTP/1.1
 Content-Type: application/json
 Authorization: bearer {{token}}
 ####
 
 
 ####
-GET {{host}}/1 HTTP/1.1
+GET {{host}}/getbyid/3 HTTP/1.1
 Content-Type: application/json
 Authorization: bearer {{token}}
 ####
@@ -20,7 +20,15 @@ Content-Type: application/json
 Authorization: bearer {{token}}
 
 {
-    "nama":"Pendidikan"
+    "idunsur":3,
+    "jenisunsur":"Pendidikan",
+    "namasubunsur":"Pendidikan",
+    "satuanhasil":"Pendidikan",
+    "ak":0.5,
+    "skspersmt":"Pendidikan",
+    "pelaksanaankegiatan":"Pendidikan",
+    "idtahunaturan":1,
+    "idjabatan":3
 }
 
 
@@ -31,8 +39,16 @@ Content-Type: application/json
 Authorization: bearer {{token}}
 
 {
-   "idunsur": 1,
-    "nama": "Penunjang"
+    "idunsur": 3,
+  "jenisunsur": "Umum",
+  "namasubunsur": "Pendidikan & Mengajar",
+  "satuanhasil": "sks",
+  "ak": 0.5,
+  "skspersmt": "Pendidikan",
+  "pelaksanaankegiatan": "Pendidikan",
+  "idtahunaturan": 1,
+  "idjabatan": 3,
+  "idsubunsur": 1
 }
 
 

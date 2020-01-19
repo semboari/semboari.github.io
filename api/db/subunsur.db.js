@@ -3,14 +3,33 @@ const rx = require('rxjs');
 const helper = require('../helper');
 const subunsurDB = {};
 
-subunsurDB.get = async () => {
+subunsurDB.get = async (Id) => {
 	return new Promise((resolve, reject) => {
 		pool.query(
-			`SELECT *
+			`SELECT
+			subunsur.idsubunsur,
+			subunsur.idunsur,
+			subunsur.jenisunsur,
+			subunsur.namasubunsur,
+			subunsur.satuanhasil,
+			subunsur.ak,
+			subunsur.skspersmt,
+			subunsur.pelaksanaankegiatan,
+			subunsur.idtahunaturan,
+			subunsur.idjabatan,
+			unsur.nama as namaunsur,
+			peraturan.tahun,
+			jabatanfungsional.jabatan
 		  FROM
-			subunsur `,
+			subunsur
+			LEFT JOIN unsur ON subunsur.idunsur = unsur.idunsur
+			LEFT JOIN peraturan ON subunsur.idtahunaturan =
+		  peraturan.idperaturan
+			LEFT JOIN jabatanfungsional ON subunsur.idjabatan =
+		  jabatanfungsional.idjabatan where idtahunaturan=? `,
+			[ Id ],
 			(err, result) => {
-				if (err) return reject(err);
+				if (err) reject(err);
 				resolve(result);
 			}
 		);
@@ -20,12 +39,30 @@ subunsurDB.get = async () => {
 subunsurDB.getById = async (Id) => {
 	return new Promise((resolve, reject) => {
 		pool.query(
-			`SELECT *
+			`SELECT
+			subunsur.idsubunsur,
+			subunsur.idunsur,
+			subunsur.jenisunsur,
+			subunsur.namasubunsur,
+			subunsur.satuanhasil,
+			subunsur.ak,
+			subunsur.skspersmt,
+			subunsur.pelaksanaankegiatan,
+			subunsur.idtahunaturan,
+			subunsur.idjabatan,
+			unsur.nama as namaunsur,
+			peraturan.tahun,
+			jabatanfungsional.jabatan
 		  FROM
-			subunsur where idsubunsur=?`,
+			subunsur
+			LEFT JOIN unsur ON subunsur.idunsur = unsur.idunsur
+			LEFT JOIN peraturan ON subunsur.idtahunaturan =
+		  peraturan.idperaturan
+			LEFT JOIN jabatanfungsional ON subunsur.idjabatan =
+		  jabatanfungsional.idjabatan where idsubunsur=?`,
 			[ Id ],
 			(err, result) => {
-				if (err) return reject(err);
+				if (err) reject(err);
 				resolve(result[0]);
 			}
 		);
@@ -36,16 +73,16 @@ subunsurDB.post = async (params) => {
 	return new Promise((resolve, reject) => {
 		try {
 			pool.query(
-				`insert into subunsur (idunsur, jenisunsur, namaSubUnsur, satuanhasil,ak,
-                     skspersemester, pelaksanaankegiatan,idtahunaturan, idjabatan) 
+				`insert into subunsur (idunsur, jenisunsur, namasubunsur, satuanhasil,ak,
+					skspersmt, pelaksanaankegiatan,idtahunaturan, idjabatan) 
                 values(?,?,?,?,?,?,?,?,?)`,
 				[
 					params.idunsur,
 					params.jenisunsur,
-					params.namaSubUnsur,
+					params.namasubunsur,
 					params.satuanhasil,
 					params.ak,
-					params.skspersemester,
+					params.skspersmt,
 					params.pelaksanaankegiatan,
 					params.idtahunaturan,
 					params.idjabatan
@@ -67,15 +104,15 @@ subunsurDB.put = async (params) => {
 	return new Promise((resolve, reject) => {
 		try {
 			pool.query(
-				`update subunsur set idunsur=?, jenisunsur=?, namaSubUnsur=?, satuanhasil=?,ak=?,
-                    skspersemester=?, pelaksanaankegiatan=?,idtahunaturan=?, idjabatan where idsubunsur=? where idsubunsur=?`,
+				`update subunsur set idunsur=?, jenisunsur=?, namasubunsur=?, satuanhasil=?,ak=?,
+					skspersmt=?, pelaksanaankegiatan=?,idtahunaturan=?, idjabatan=? where idsubunsur=?`,
 				[
 					params.idunsur,
 					params.jenisunsur,
-					params.namaSubUnsur,
+					params.namasubunsur,
 					params.satuanhasil,
 					params.ak,
-					params.skspersemester,
+					params.skspersmt,
 					params.pelaksanaankegiatan,
 					params.idtahunaturan,
 					params.idjabatan,

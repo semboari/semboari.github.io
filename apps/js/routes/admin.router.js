@@ -1,4 +1,4 @@
-angular.module('admin.router', ['ui.router']).config(function ($stateProvider, $urlRouterProvider) {
+angular.module('admin.router', [ 'ui.router' ]).config(function($stateProvider, $urlRouterProvider) {
 	$stateProvider.state('main	', {
 		url: '/',
 		parent: 'account',
@@ -7,6 +7,7 @@ angular.module('admin.router', ['ui.router']).config(function ($stateProvider, $
 	});
 	$stateProvider.state('admin', {
 		url: '/admin',
+		controller: 'adminController',
 		templateUrl: '../apps/views/admin/menu-admin.html'
 	});
 
@@ -40,18 +41,21 @@ angular.module('admin.router', ['ui.router']).config(function ($stateProvider, $
 	$stateProvider.state('admin-dosen', {
 		url: '/dosen',
 		parent: 'admin',
+		controller: 'DosenController',
 		templateUrl: '../apps/views/admin/dosen.html'
 	});
 
 	$stateProvider.state('admin-unsur', {
 		url: '/unsur',
 		parent: 'admin',
+		controller: 'peraturanAndUnsurController',
 		templateUrl: '../apps/views/admin/unsur.html'
 	});
 
 	$stateProvider.state('admin-sub-unsur', {
 		url: '/sub-unsur',
 		parent: 'admin',
+		controller: 'subUnsurController',
 		templateUrl: '../apps/views/admin/sub-unsur.html'
 	});
 
@@ -64,6 +68,7 @@ angular.module('admin.router', ['ui.router']).config(function ($stateProvider, $
 	$stateProvider.state('admin-jabatan-fungsional', {
 		url: '/jabatan-fungsional',
 		parent: 'admin',
+		controller: 'jabatanController',
 		templateUrl: '../apps/views/admin/jabatan-fungsional.html'
 	});
 });

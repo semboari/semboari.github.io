@@ -1,46 +1,25 @@
-angular.module('dosen.service', []).factory('DosenService', DosenService);
+angular.module('subunsur.service', []).factory('SubUnsurService', SubUnsurService);
 
-function DosenService($http, $q, helperServices, AuthService, message) {
+function SubUnsurService($http, $q, helperServices, AuthService, message) {
 	var instance = false;
 	var datas = [];
-	var controller = '/api/dosen/';
+	var controller = '/api/subunsur/';
 	return {
 		get: get,
-		getByParent: getByParent,
-		post: post,
 		getById: getById,
+		post: post,
 		put: put,
-		changeRole: ChangeRole,
 		delete: deleteItem
 	};
 
-	function ChangeRole(data) {
-		var defer = $q.defer();
-		$http({
-			url: helperServices.url + controller + 'changerole/' + data.iduser + '/' + data.newrole,
-			method: 'get',
-			headers: AuthService.getHeader()
-		}).then(
-			(x) => {
-				datas = x.data;
-				defer.resolve(datas);
-			},
-			(err) => {
-				message.error(err);
-			}
-		);
-
-		return defer.promise;
-	}
-
-	function get() {
+	function get(id) {
 		var defer = $q.defer();
 		var a = AuthService.getHeader();
 		if (instance) {
 			defer.resolve(data);
 		} else {
 			$http({
-				url: helperServices.url + controller,
+				url: helperServices.url + controller + id,
 				method: 'get',
 				headers: AuthService.getHeader()
 			}).then(
@@ -123,7 +102,7 @@ function DosenService($http, $q, helperServices, AuthService, message) {
 	function deleteItem(data) {
 		var defer = $q.defer();
 		$http({
-			url: helperServices.url + controller + data.idperaturan,
+			url: helperServices.url + controller + data.idfakultas,
 			method: 'delete',
 			headers: AuthService.getHeader()
 		}).then(
@@ -135,24 +114,6 @@ function DosenService($http, $q, helperServices, AuthService, message) {
 			}
 		);
 
-		return defer.promise;
-	}
-
-	function getByParent(id) {
-		var defer = $q.defer();
-		$http({
-			url: helperServices.url + controller + 'byparentid/' + id,
-			method: 'GET',
-			headers: AuthService.getHeader()
-		}).then(
-			(x) => {
-				defer.resolve(x.data);
-			},
-			(err) => {
-				message.error(err.message);
-				defer.reject(err.message);
-			}
-		);
 		return defer.promise;
 	}
 }
