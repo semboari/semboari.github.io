@@ -69,6 +69,112 @@ DosenDb.get = () => {
 	});
 };
 
+DosenDb.getByProgdiId = (idprogdi) => {
+	return new Promise((resolve, reject) => {
+		pool.query(
+			`SELECT
+			dosen.iddosen,
+			dosen.iduser,
+			dosen.idprogramstudi,
+			dosen.nidn,
+			dosen.tanggallahir,
+			dosen.tempatlahir,
+			dosen.jeniskelamin,
+			dosen.pendidikanterakhir,
+			dosen.jabatanakademik,
+			dosen.masakerja,
+			dosen.idjabatan,
+			dosen.namadosen,
+			programstudi.namaprogramstudi,
+			fakultas.namafakultas,
+			universitas.namauniversitas,
+			fakultas.idfakultas,
+			universitas.iduniversitas,
+			users.email,
+			role.idrole,
+			role.name AS rolename,
+			role.deskripsi,
+			jabatanfungsional.jabatan,
+			jabatanfungsional.pangkat,
+			jabatanfungsional.golongan,
+			jabatanfungsional.ruang
+		  FROM
+			dosen
+			LEFT JOIN programstudi ON dosen.idprogramstudi =
+		  programstudi.idprogramstudi
+			LEFT JOIN fakultas ON programstudi.idfakultas = fakultas.idfakultas
+			LEFT JOIN universitas ON fakultas.iduniversitas =
+		  universitas.iduniversitas
+			LEFT JOIN users ON dosen.iduser = users.idusers
+			LEFT JOIN userinrole ON users.idusers = userinrole.idusers
+			LEFT JOIN role ON userinrole.idrole = role.idrole
+			LEFT JOIN jabatanfungsional ON dosen.idjabatan =
+		  jabatanfungsional.idjabatan where dosen.idprogramstudi=?
+		  group by iddosen
+		  `,
+			[ idprogdi ],
+			(err, result) => {
+				if (err) reject(err);
+				else {
+					resolve(result);
+				}
+			}
+		);
+	});
+};
+
+DosenDb.getByUniversitasId = (iduniversitas) => {
+	return new Promise((resolve, reject) => {
+		pool.query(
+			`SELECT
+			dosen.iddosen,
+			dosen.iduser,
+			dosen.idprogramstudi,
+			dosen.nidn,
+			dosen.tanggallahir,
+			dosen.tempatlahir,
+			dosen.jeniskelamin,
+			dosen.pendidikanterakhir,
+			dosen.jabatanakademik,
+			dosen.masakerja,
+			dosen.idjabatan,
+			dosen.namadosen,
+			programstudi.namaprogramstudi,
+			fakultas.namafakultas,
+			universitas.namauniversitas,
+			fakultas.idfakultas,
+			universitas.iduniversitas,
+			users.email,
+			role.idrole,
+			role.name AS rolename,
+			role.deskripsi,
+			jabatanfungsional.jabatan,
+			jabatanfungsional.pangkat,
+			jabatanfungsional.golongan,
+			jabatanfungsional.ruang
+		  FROM
+			dosen
+			LEFT JOIN programstudi ON dosen.idprogramstudi =
+		  programstudi.idprogramstudi
+			LEFT JOIN fakultas ON programstudi.idfakultas = fakultas.idfakultas
+			LEFT JOIN universitas ON fakultas.iduniversitas =
+		  universitas.iduniversitas
+			LEFT JOIN users ON dosen.iduser = users.idusers
+			LEFT JOIN userinrole ON users.idusers = userinrole.idusers
+			LEFT JOIN role ON userinrole.idrole = role.idrole
+			LEFT JOIN jabatanfungsional ON dosen.idjabatan =
+		  jabatanfungsional.idjabatan where universitas.iduniversitas=? 	
+		  group by iddosen
+		  `,
+			[ iduniversitas ],
+			(err, result) => {
+				if (err) reject(err);
+				else resolve(result);
+			}
+		);
+	});
+};
+
 DosenDb.put = (data) => {
 	return new Promise((resolve, reject) => {
 		pool.query(

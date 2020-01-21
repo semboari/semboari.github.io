@@ -6,6 +6,8 @@ function DosenService($http, $q, helperServices, AuthService, message) {
 	var controller = '/api/dosen/';
 	return {
 		get: get,
+		getByProgdiId: getByProgdiId,
+		getByUniversitasId: getByUniversitasId,
 		getByParent: getByParent,
 		post: post,
 		getById: getById,
@@ -78,6 +80,41 @@ function DosenService($http, $q, helperServices, AuthService, message) {
 				}
 			);
 		}
+		return defer.promise;
+	}
+
+	function getByProgdiId(id) {
+		var defer = $q.defer();
+		$http({
+			url: helperServices.url + controller + '/byprogdiid/' + id,
+			method: 'get',
+			headers: AuthService.getHeader()
+		}).then(
+			(x) => {
+				defer.resolve(x.data);
+			},
+			(err) => {
+				message.error(err);
+			}
+		);
+
+		return defer.promise;
+	}
+	function getByUniversitasId(id) {
+		var defer = $q.defer();
+		$http({
+			url: helperServices.url + controller + '/byuniversitasid/' + id,
+			method: 'get',
+			headers: AuthService.getHeader()
+		}).then(
+			(x) => {
+				defer.resolve(x.data);
+			},
+			(err) => {
+				message.error(err);
+			}
+		);
+
 		return defer.promise;
 	}
 

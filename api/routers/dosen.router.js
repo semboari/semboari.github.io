@@ -35,6 +35,38 @@ router.get('/:Id', [ authJwt.verifyToken ], async (req, res) => {
 	}
 });
 
+router.get('/byuniversitasid/:Id', [ authJwt.verifyToken ], async (req, res) => {
+	try {
+		var id = req.params.Id;
+		contextDb.Dosen.getByUniversitasId(id).then(
+			(result) => {
+				res.status(200).json(result);
+			},
+			(err) => {
+				res.status(400).json(err);
+			}
+		);
+	} catch (error) {
+		res.status(400).json({ message: err.message });
+	}
+});
+
+router.get('/byprogdiid/:Id', [ authJwt.verifyToken ], async (req, res) => {
+	try {
+		var id = req.params.Id;
+		contextDb.Dosen.getByProgdiId(id).then(
+			(result) => {
+				res.status(200).json(result);
+			},
+			(err) => {
+				res.status(400).json(err);
+			}
+		);
+	} catch (error) {
+		res.status(400).json({ message: err.message });
+	}
+});
+
 router.get('/changerole/:Id/:role', [ authJwt.verifyToken ], async (req, res) => {
 	try {
 		var id = req.params.Id;

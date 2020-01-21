@@ -1,6 +1,6 @@
 .rotate {
   animation-name: Rotate;
-  animation-duration: 30s;
+  animation-duration: 0.2s;
   animation-iteration-count: infinite;
   animation-timing-function: linear;
   overflow: hidden;
@@ -38,4 +38,38 @@
   .red {
     color: red;
   }
+}
+
+//angular-datatable
+
+.dataTables_length {
+  margin: 0 !important ;
+}
+
+.dataTables_info,
+#myTable_length,
+#myTable_filter {
+  text-align: right;
+  margin: 3px;
+  label {
+    margin: 0px;
+    input {
+      margin: 0px;
+      margin-left: 5px;
+      margin-right: 0px;
+      padding: 5px;
+    }
+    select {
+      margin: 0px;
+      margin-left: 3px;
+      margin-right: 3px;
+      padding: 5px;
+    }
+  }
+}
+
+.dataTables_filter input[type="search"] {
+  border: 1px solid #e4e4e4;
+  border-radius: 15px !important;
+  margin-left: 20px !important;
 }

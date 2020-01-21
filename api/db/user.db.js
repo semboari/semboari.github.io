@@ -6,101 +6,106 @@ const UserDb = {};
 UserDb.login = async (user) => {
 	return new Promise((resolve, reject) => {
 		pool.getConnection((err, connection) => {
-			connection.beginTransaction((err) => {
-				try {
-					if (err) reject(err);
-					connection.query('select * from users', (err, result) => {
-						if (err) {
-							reject(err);
-						}
-
-						if (result.length <= 0) {
-							var sql = 'insert into role (name,deskripsi) values ? ';
-							var values = [
-								[ 'admin', 'Administrator' ],
-								[ 'dosen', 'Dosen' ],
-								[ 'kaprodi', 'Kaprodi' ],
-								[ 'pemeriksa', 'Pemeriksa Penelitian' ],
-								[ 'rektor', 'Rektor' ]
-							];
-							connection.query(sql, [ values ], (err, result) => {
+			if (err) {
+				reject(err);
+			} else
+				connection.beginTransaction((err) => {
+					try {
+						if (err) reject(err);
+						else
+							connection.query('select * from users', (err, result) => {
 								if (err) {
 									reject(err);
-								}
-								var password = bcrypt.hashSync(user.password, 8);
-								connection.query(
-									'insert into users (username,password,email) values(?,?,?)',
-									[ user.username, password, user.username ],
-									(err, result) => {
-										if (err) {
-											reject(err);
-										}
-
-										if (result.insertId > 0) {
-											user.idUser = result.insertId;
-
+								} else {
+									if (result.length <= 0) {
+										var sql = 'insert into role (name,deskripsi) values ? ';
+										var values = [
+											[ 'admin', 'Administrator' ],
+											[ 'dosen', 'Dosen' ],
+											[ 'kaprodi', 'Kaprodi' ],
+											[ 'pemeriksa', 'Pemeriksa Penelitian' ],
+											[ 'rektor', 'Rektor' ]
+										];
+										connection.query(sql, [ values ], (err, result) => {
+											if (err) {
+												reject(err);
+											}
+											var password = bcrypt.hashSync(user.password, 8);
 											connection.query(
-												'select * from role where name=?',
-												[ 'admin' ],
-												(err, roleResult) => {
-													if (err) reject(err);
+												'insert into users (username,password,email) values(?,?,?)',
+												[ user.username, password, user.username ],
+												(err, result) => {
+													if (err) {
+														reject(err);
+													}
 
-													var data = roleResult[0];
+													if (result.insertId > 0) {
+														user.idUser = result.insertId;
 
-													connection.query(
-														'insert into userinrole(idusers,idrole) values(?,?)',
-														[ user.idUser, data.idrole ],
-														(err, result) => {
-															if (err) reject(err);
-															connection.commit(function(err) {
-																if (err) {
-																	return connection.rollback(function() {
-																		reject(err);
-																	});
-																}
-																return resolve(result[0]);
-															});
-														}
-													);
+														connection.query(
+															'select * from role where name=?',
+															[ 'admin' ],
+															(err, roleResult) => {
+																if (err) reject(err);
+
+																var data = roleResult[0];
+
+																connection.query(
+																	'insert into userinrole(idusers,idrole) values(?,?)',
+																	[ user.idUser, data.idrole ],
+																	(err, result) => {
+																		if (err) reject(err);
+																		connection.commit(function(err) {
+																			if (err) {
+																				return connection.rollback(function() {
+																					reject(err);
+																				});
+																			}
+																			return resolve(result[0]);
+																		});
+																	}
+																);
+															}
+														);
+													}
+													return reject('Data Tidak Tersimpan');
 												}
 											);
-										}
-										return reject('Data Tidak Tersimpan');
+										});
+									} else {
+										pool.query(
+											`SELECT users.idusers, users.username, users.password, users.email,
+									role.name as role
+								  FROM
+									users LEFT JOIN
+									userinrole ON users.idusers = userinrole.idusers LEFT JOIN
+									role ON userinrole.idrole = role.idrole where users.username=? or users.email=?`,
+											[ user.username, user.username ],
+											(err, result) => {
+												if (err) {
+													reject(err);
+												} else {
+													connection.commit(function(err) {
+														if (err) {
+															return connection.rollback(function() {
+																reject(err);
+															});
+														}
+														return resolve(result);
+													});
+												}
+											}
+										);
 									}
-								);
-							});
-						} else {
-							pool.query(
-								`SELECT users.idusers, users.username, users.password, users.email,
-								role.name as role
-							  FROM
-								users LEFT JOIN
-								userinrole ON users.idusers = userinrole.idusers LEFT JOIN
-								role ON userinrole.idrole = role.idrole where users.username=? or users.email=?`,
-								[ user.username, user.username ],
-								(err, result) => {
-									if (err) {
-										reject(err);
-									}
-									connection.commit(function(err) {
-										if (err) {
-											return connection.rollback(function() {
-												reject(err);
-											});
-										}
-										return resolve(result);
-									});
 								}
-							);
-						}
-					});
-				} catch (error) {
-					connection.rollback(function() {
-						connection.release();
-						reject(error);
-					});
-				}
-			});
+							});
+					} catch (error) {
+						connection.rollback(function() {
+							connection.release();
+							reject(error);
+						});
+					}
+				});
 		});
 	});
 };
@@ -175,12 +180,53 @@ UserDb.registerDosen = async (dosen) => {
 
 UserDb.profile = async (userId) => {
 	return new Promise((resolve, reject) => {
-		pool.query('select * from dosen where iduser =?', [ userId ], (err, result) => {
-			if (err) {
-				return reject(err);
+		pool.query(
+			`SELECT
+		dosen.iddosen,
+		dosen.iduser,
+		dosen.idprogramstudi,
+		dosen.nidn,
+		dosen.tanggallahir,
+		dosen.tempatlahir,
+		dosen.jeniskelamin,
+		dosen.pendidikanterakhir,
+		dosen.jabatanakademik,
+		dosen.masakerja,
+		dosen.idjabatan,
+		dosen.namadosen,
+		programstudi.namaprogramstudi,
+		fakultas.namafakultas,
+		universitas.namauniversitas,
+		fakultas.idfakultas,
+		universitas.iduniversitas,
+		users.email,
+		role.idrole,
+		role.name AS rolename,
+		role.deskripsi,
+		jabatanfungsional.jabatan,
+		jabatanfungsional.pangkat,
+		jabatanfungsional.golongan,
+		jabatanfungsional.ruang
+	  FROM
+		dosen
+		LEFT JOIN programstudi ON dosen.idprogramstudi =
+	  programstudi.idprogramstudi
+		LEFT JOIN fakultas ON programstudi.idfakultas = fakultas.idfakultas
+		LEFT JOIN universitas ON fakultas.iduniversitas =
+	  universitas.iduniversitas
+		LEFT JOIN users ON dosen.iduser = users.idusers
+		LEFT JOIN userinrole ON users.idusers = userinrole.idusers
+		LEFT JOIN role ON userinrole.idrole = role.idrole
+		LEFT JOIN jabatanfungsional ON dosen.idjabatan =
+	  jabatanfungsional.idjabatan where iduser =?`,
+			[ userId ],
+			(err, result) => {
+				if (err) {
+					return reject(err);
+				}
+				return resolve(result[0]);
 			}
-			return resolve(result[0]);
-		});
+		);
 	});
 };
 

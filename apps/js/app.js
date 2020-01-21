@@ -6,6 +6,8 @@ angular
 		'app.routers',
 		'app.controllers',
 		'app.conponent',
+		'datatables',
+		'datatables.bootstrap',
 		'ui.bootstrap'
 	])
 	.controller('homeController', homeController);

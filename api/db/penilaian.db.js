@@ -19,8 +19,11 @@ PenilaianDB.get = async (id) => {
 			subunsur.jenisunsur,
 			unsur.nama AS namaunsur,
 			peraturan.tahun,
-			subunsur.ak * penilaian.jumlahkegiatan as akview,
-			subunsur.satuanhasil AS satuanhasil1
+			subunsur.ak * penilaian.jumlahkegiatan AS akview,
+			subunsur.satuanhasil AS satuanhasil1,
+			penilaian.acckaprodi,
+			penilaian.accrektor,
+			penilaian.accpenelitian
 		  FROM
 			penilaian
 			LEFT JOIN subunsur ON penilaian.idsubunsur = subunsur.idsubunsur
@@ -52,6 +55,9 @@ PenilaianDB.getById = async (Id) => {
 			subunsur.jenisunsur,
 			unsur.nama AS namaunsur,
 			peraturan.tahun,
+			penilaian.acckaprodi,
+			penilaian.accrektor,
+			penilaian.accpenelitian,			
 			subunsur.ak * penilaian.jumlahkegiatan as akview,
 			subunsur.satuanhasil AS satuanhasil1
 		  FROM
@@ -103,7 +109,8 @@ PenilaianDB.put = async (params) => {
 		try {
 			pool.query(
 				`update penilaian set iddosen=?, idsubunsur=?, uraiankegiatan=?,
-				 satuanhasil=?, jumlahkegiatan=?,tanggal=?, keterangan=? where idpenilaian=?`,
+				 satuanhasil=?, jumlahkegiatan=?,tanggal=?, keterangan=?,
+				 acckaprodi=?, accrektor=?, accpenelitian=? where idpenilaian=?`,
 				[
 					params.iddosen,
 					params.idsubunsur,
@@ -112,6 +119,9 @@ PenilaianDB.put = async (params) => {
 					params.jumlahkegiatan,
 					params.tanggal,
 					params.keterangan,
+					params.acckaprodi,
+					params.accrektor,
+					params.accpenelitian,
 					params.idpenilaian
 				],
 				(err, result) => {

@@ -1,8 +1,8 @@
 .rotate {
   -webkit-animation-name: Rotate;
           animation-name: Rotate;
-  -webkit-animation-duration: 30s;
-          animation-duration: 30s;
+  -webkit-animation-duration: 0.2s;
+          animation-duration: 0.2s;
   -webkit-animation-iteration-count: infinite;
           animation-iteration-count: infinite;
   -webkit-animation-timing-function: linear;
@@ -55,5 +55,46 @@
 
 .autoComplete .red {
   color: red;
+}
+
+.dataTables_length {
+  margin: 0 !important;
+}
+
+.dataTables_info,
+#myTable_length,
+#myTable_filter {
+  text-align: right;
+  margin: 3px;
+}
+
+.dataTables_info label,
+#myTable_length label,
+#myTable_filter label {
+  margin: 0px;
+}
+
+.dataTables_info label input,
+#myTable_length label input,
+#myTable_filter label input {
+  margin: 0px;
+  margin-left: 5px;
+  margin-right: 0px;
+  padding: 5px;
+}
+
+.dataTables_info label select,
+#myTable_length label select,
+#myTable_filter label select {
+  margin: 0px;
+  margin-left: 3px;
+  margin-right: 3px;
+  padding: 5px;
+}
+
+.dataTables_filter input[type="search"] {
+  border: 1px solid #e4e4e4;
+  border-radius: 15px !important;
+  margin-left: 20px !important;
 }
 /*# sourceMappingURL=main.css.map */

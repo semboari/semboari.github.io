@@ -71,15 +71,16 @@ body {
 .garis-biru {
 	width: 400px;
 	height: 400px;
-	background: #1200FF;
+	background: radial-gradient(circle, rgba(0, 121, 255, 1) 55%, rgba(194, 154, 6, 1) 100%);
 	border-radius: 100%;
+
 	margin-left: 90px;
 }
 
 .garis-kuning {
 	width: 370px;
 	height: 370px;
-	background: #FFE401;
+	background: radial-gradient(circle, rgba(251, 236, 58, 1) 0%, rgba(177, 131, 20, 1) 100%);
 	border-radius: 100%;
 	position: relative;
 	top: 15px;
