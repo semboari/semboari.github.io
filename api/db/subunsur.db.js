@@ -9,17 +9,15 @@ subunsurDB.get = async (Id) => {
 			`SELECT
 			subunsur.idsubunsur,
 			subunsur.idunsur,
-			subunsur.jenisunsur,
 			subunsur.namasubunsur,
 			subunsur.satuanhasil,
 			subunsur.ak,
 			subunsur.skspersmt,
-			subunsur.pelaksanaankegiatan,
 			subunsur.idtahunaturan,
 			subunsur.idjabatan,
 			unsur.nama as namaunsur,
 			peraturan.tahun,
-			jabatanfungsional.jabatan
+			jabatanfungsional.jabatan as namajabatan
 		  FROM
 			subunsur
 			LEFT JOIN unsur ON subunsur.idunsur = unsur.idunsur
@@ -42,17 +40,15 @@ subunsurDB.getById = async (Id) => {
 			`SELECT
 			subunsur.idsubunsur,
 			subunsur.idunsur,
-			subunsur.jenisunsur,
 			subunsur.namasubunsur,
 			subunsur.satuanhasil,
 			subunsur.ak,
 			subunsur.skspersmt,
-			subunsur.pelaksanaankegiatan,
 			subunsur.idtahunaturan,
 			subunsur.idjabatan,
 			unsur.nama as namaunsur,
 			peraturan.tahun,
-			jabatanfungsional.jabatan
+			jabatanfungsional.jabatan as namajabatan
 		  FROM
 			subunsur
 			LEFT JOIN unsur ON subunsur.idunsur = unsur.idunsur
@@ -63,7 +59,7 @@ subunsurDB.getById = async (Id) => {
 			[ Id ],
 			(err, result) => {
 				if (err) reject(err);
-				resolve(result[0]);
+				else resolve(result[0]);
 			}
 		);
 	});
@@ -88,10 +84,11 @@ subunsurDB.post = async (params) => {
 					params.idjabatan
 				],
 				(err, result) => {
-					if (err) throw Error();
-
-					params.idsubunsur = result.insertId;
-					resolve(params);
+					if (err) reject(err);
+					else {
+						params.idsubunsur = result.insertId;
+						resolve(params);
+					}
 				}
 			);
 		} catch (error) {
@@ -121,9 +118,7 @@ subunsurDB.put = async (params) => {
 				(err, result) => {
 					if (err) {
 						reject(err);
-					}
-
-					resolve(params);
+					} else resolve(params);
 				}
 			);
 		} catch (error) {
@@ -138,9 +133,7 @@ subunsurDB.delete = (id) => {
 			pool.query('delete from subunsur where idsubunsur=? ', [ id ], (err, result) => {
 				if (err) {
 					reject(err);
-				}
-
-				resolve(true);
+				} else resolve(true);
 			});
 		} catch (error) {
 			reject(error);

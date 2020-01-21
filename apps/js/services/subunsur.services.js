@@ -102,7 +102,7 @@ function SubUnsurService($http, $q, helperServices, AuthService, message) {
 	function deleteItem(data) {
 		var defer = $q.defer();
 		$http({
-			url: helperServices.url + controller + data.idfakultas,
+			url: helperServices.url + controller + data.idsubunsur,
 			method: 'delete',
 			headers: AuthService.getHeader()
 		}).then(

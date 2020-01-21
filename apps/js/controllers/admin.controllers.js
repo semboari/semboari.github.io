@@ -248,11 +248,14 @@ function peraturanAndUnsurController($scope, PeraturanService, UnsurService, mes
 		);
 	};
 }
-function subUnsurController($scope, SubUnsurService, PeraturanService, UnsurService, message) {
+function subUnsurController($scope, SubUnsurService, JabatanService, PeraturanService, UnsurService, message) {
 	UnsurService.get().then((x) => {
 		$scope.Unsurs = x;
 		PeraturanService.get().then((x) => {
 			$scope.Peraturans = x;
+			JabatanService.get().then((x) => {
+				$scope.Jabatans = x;
+			});
 		});
 	});
 
@@ -262,6 +265,50 @@ function subUnsurController($scope, SubUnsurService, PeraturanService, UnsurServ
 				$scope.Datas = x;
 			});
 		}
+	};
+
+	$scope.SelectItem = function(item) {
+		$scope.model = angular.copy(item);
+		$scope.model.unsur = $scope.Unsurs.find((x) => x.idunsur == item.idunsur);
+		$scope.model.jabatan = $scope.Jabatans.find((x) => x.idjabatan == item.idjabatan);
+	};
+
+	$scope.save = function(data) {
+		if ($scope.Peraturan) {
+			data.idtahunaturan = $scope.Peraturan.idperaturan;
+		}
+		data.tahun = $scope.Peraturan.tahun;
+		data.namaunsur = data.unsur.namaunsur;
+		data.jabatan = data.jabatan;
+		data.idunsur = data.unsur.idunsur;
+		data.idjabatan = data.jabatan.idjabatan;
+		data.namajabatan = data.jabatan.jabatan;
+
+		if (data.idsubunsur === undefined) {
+			SubUnsurService.post(data).then((x) => {
+				message.info('data berhasil ditambah');
+				$('#subunsur').modal('hide');
+			});
+		} else {
+			SubUnsurService.put(data).then((x) => {
+				message.info('data berhasil disimpan');
+				$('#subunsur').modal('hide');
+			});
+		}
+	};
+
+	$scope.delete = function(params) {
+		message.dialog('Yakin Hapus Data Jabatan ?').then(
+			(x) => {
+				SubUnsurService.delete(params).then((result) => {
+					var index = $scope.Datas.indexOf(params);
+					$scope.Datas.splice(index, 1);
+					message.info('Data Berhasil dihapus !');
+					$scope.model = {};
+				});
+			},
+			(err) => {}
+		);
 	};
 }
 
