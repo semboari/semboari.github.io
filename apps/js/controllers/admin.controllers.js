@@ -278,7 +278,7 @@ function subUnsurController($scope, SubUnsurService, JabatanService, PeraturanSe
 			data.idtahunaturan = $scope.Peraturan.idperaturan;
 		}
 		data.tahun = $scope.Peraturan.tahun;
-		data.namaunsur = data.unsur.namaunsur;
+		data.namaunsur = data.unsur.nama;
 		data.jabatan = data.jabatan;
 		data.idunsur = data.unsur.idunsur;
 		data.idjabatan = data.jabatan.idjabatan;
@@ -291,6 +291,15 @@ function subUnsurController($scope, SubUnsurService, JabatanService, PeraturanSe
 			});
 		} else {
 			SubUnsurService.put(data).then((x) => {
+				var item = $scope.Datas.find((z) => z.idsubunsur == x.idsubunsur);
+				if (item) {
+					item.namaunsur = x.namaunsur;
+					item.namasubunsur = x.namasubunsur;
+					item.satuanhasil = x.satuanhasil;
+					item.ak = x.ak;
+					item.namajabatan = x.namajabatan;
+				}
+
 				message.info('data berhasil disimpan');
 				$('#subunsur').modal('hide');
 			});

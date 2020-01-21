@@ -69,17 +69,15 @@ subunsurDB.post = async (params) => {
 	return new Promise((resolve, reject) => {
 		try {
 			pool.query(
-				`insert into subunsur (idunsur, jenisunsur, namasubunsur, satuanhasil,ak,
-					skspersmt, pelaksanaankegiatan,idtahunaturan, idjabatan) 
-                values(?,?,?,?,?,?,?,?,?)`,
+				`insert into subunsur (idunsur, namasubunsur, satuanhasil,ak,
+					skspersmt, idtahunaturan, idjabatan) 
+                values(?,?,?,?,?,?,?)`,
 				[
 					params.idunsur,
-					params.jenisunsur,
 					params.namasubunsur,
 					params.satuanhasil,
 					params.ak,
 					params.skspersmt,
-					params.pelaksanaankegiatan,
 					params.idtahunaturan,
 					params.idjabatan
 				],
@@ -101,16 +99,14 @@ subunsurDB.put = async (params) => {
 	return new Promise((resolve, reject) => {
 		try {
 			pool.query(
-				`update subunsur set idunsur=?, jenisunsur=?, namasubunsur=?, satuanhasil=?,ak=?,
-					skspersmt=?, pelaksanaankegiatan=?,idtahunaturan=?, idjabatan=? where idsubunsur=?`,
+				`update subunsur set idunsur=?,  namasubunsur=?, satuanhasil=?,ak=?,
+					skspersmt=?, idtahunaturan=?, idjabatan=? where idsubunsur=?`,
 				[
 					params.idunsur,
-					params.jenisunsur,
 					params.namasubunsur,
 					params.satuanhasil,
 					params.ak,
 					params.skspersmt,
-					params.pelaksanaankegiatan,
 					params.idtahunaturan,
 					params.idjabatan,
 					params.idsubunsur

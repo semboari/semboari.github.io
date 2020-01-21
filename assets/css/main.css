@@ -1,6 +1,4 @@
 .rotate {
-  -webkit-animation-name: Rotate;
-          animation-name: Rotate;
   -webkit-animation-duration: 0.2s;
           animation-duration: 0.2s;
   -webkit-animation-iteration-count: infinite;
