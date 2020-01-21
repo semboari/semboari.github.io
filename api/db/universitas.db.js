@@ -32,6 +32,50 @@ UniversitasDb.getById = async (Id) => {
 	});
 };
 
+UniversitasDb.getRektorByUniversitasId = async (Id) => {
+	return new Promise((resolve, reject) => {
+		pool.query(
+			`SELECT
+			universitas.namauniversitas,
+			fakultas.namafakultas,
+			programstudi.namaprogramstudi,
+			dosen.iddosen,
+			dosen.iduser,
+			dosen.idprogramstudi,
+			dosen.nidn,
+			dosen.tanggallahir,
+			dosen.tempatlahir,
+			dosen.jeniskelamin,
+			dosen.pendidikanterakhir,
+			dosen.jabatanakademik,
+			dosen.masakerja,
+			dosen.idjabatan,
+			dosen.namadosen,
+			role.name,
+			role.deskripsi,
+			universitas.iduniversitas,
+			fakultas.idfakultas
+		   FROM
+			universitas
+			LEFT JOIN fakultas ON universitas.iduniversitas =
+		   fakultas.iduniversitas
+			LEFT JOIN programstudi ON fakultas.idfakultas =
+		   programstudi.idfakultas
+			LEFT JOIN dosen ON programstudi.idprogramstudi =
+		   dosen.idprogramstudi
+			LEFT JOIN userinrole ON dosen.iduser = userinrole.idusers
+		   LEFT JOIN role ON userinrole.idrole = role.idrole
+		   where universitas.iduniversitas=? and name='rektor' 
+		   group by iddosen`,
+			[ Id ],
+			(err, result) => {
+				if (err) reject(err);
+				resolve(result[0]);
+			}
+		);
+	});
+};
+
 UniversitasDb.post = async (univ) => {
 	return new Promise((resolve, reject) => {
 		try {

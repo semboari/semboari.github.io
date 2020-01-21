@@ -1,8 +1,7 @@
 
 @controller=penilaian
 @host=http://localhost:5500/api/{{controller}}
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsInJvbGVzIjpbImRvc2VuIiwicGVtZXJpa3NhIl0sImlhdCI6MTU3OTQzMjk4MiwiZXhwIjoxNTc5NTE5MzgyfQ.MnAMKXy3MulzW-wh793xqedkzCk4CVqRsHFkvz5qHE0
-
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTc5NjI0NDEzLCJleHAiOjE1Nzk3MTA4MTN9.kJv0dUb8PIMGjN0DjXX-sMHeZJBN0PbheaoLEPxj4jI
 ###
 
 POST   http://localhost:5500/api/auth/login HTTP/1.1
@@ -23,6 +22,16 @@ Authorization: bearer {{token}}
 
 ####
 GET {{host}}/getbyid/3 HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}
+
+
+
+####
+
+
+####
+GET {{host}}/rekapitulasi/1 HTTP/1.1
 Content-Type: application/json
 Authorization: bearer {{token}}
 

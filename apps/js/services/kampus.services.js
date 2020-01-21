@@ -56,6 +56,24 @@ function UniversitasService($http, $q, helperServices, AuthService, message) {
 		return defer.promise;
 	}
 
+	function getRektor(id) {
+		var defer = $q.defer();
+		$http({
+			url: helperServices.url + '/api/universitas/rektor/' + id,
+			method: 'get',
+			headers: AuthService.getHeader()
+		}).then(
+			(x) => {
+				defer.resolve(x.data);
+			},
+			(err) => {
+				message.error('err.message');
+				defer.reject(err.message);
+			}
+		);
+		return defer.promise;
+	}
+
 	function post(data) {
 		var defer = $q.defer();
 		$http({
@@ -119,6 +137,7 @@ function UniversitasService($http, $q, helperServices, AuthService, message) {
 		get: get,
 		post: post,
 		getById: getById,
+		getRektor: getRektor,
 		put: put,
 		delete: deleteItem
 	};
@@ -301,6 +320,26 @@ function ProgdiService($http, $q, helperServices, message, AuthService) {
 		);
 		return defer.promise;
 	}
+
+	function getKaprodi(id) {
+		var defer = $q.defer();
+		$http({
+			url: helperServices.url + '/api/programstudi/kaprodi/' + id,
+			method: 'get',
+			headers: AuthService.getHeader()
+		}).then(
+			(x) => {
+				datas = x.datas;
+				defer.resolve(x.data);
+			},
+			(err) => {
+				message.error('err.message');
+				defer.reject(err);
+			}
+		);
+		return defer.promise;
+	}
+
 	function getByParent(id) {
 		var defer = $q.defer();
 		$http({
@@ -378,6 +417,7 @@ function ProgdiService($http, $q, helperServices, message, AuthService) {
 		get: get,
 		post: post,
 		getById: getById,
+		getKaprodi: getKaprodi,
 		put: put,
 		getByParent: getByParent,
 		delete: deleteItem

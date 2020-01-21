@@ -56,6 +56,49 @@ ProgdiDb.getByParentId = async (id) => {
 	});
 };
 
+ProgdiDb.getKaprodiByProdiId = async (id) => {
+	return new Promise((resolve, reject) => {
+		pool.query(
+			`SELECT
+			programstudi.idprogramstudi,
+			programstudi.namaprogramstudi,
+			dosen.iddosen,
+			dosen.iduser,
+			dosen.idprogramstudi AS idprogramstudi1,
+			dosen.nidn,
+			dosen.tanggallahir,
+			dosen.tempatlahir,
+			dosen.jeniskelamin,
+			dosen.pendidikanterakhir,
+			dosen.jabatanakademik,
+			dosen.masakerja,
+			dosen.idjabatan,
+			dosen.namadosen,
+			role.name,
+			jabatanfungsional.jabatan,
+			jabatanfungsional.pangkat,
+			jabatanfungsional.golongan,
+			jabatanfungsional.ruang
+		  FROM
+			programstudi
+			LEFT JOIN dosen ON programstudi.idprogramstudi =
+		  dosen.idprogramstudi
+			LEFT JOIN users ON dosen.iduser = users.idusers
+			LEFT JOIN userinrole ON users.idusers = userinrole.idusers
+			LEFT JOIN role ON userinrole.idrole = role.idrole
+			LEFT JOIN jabatanfungsional ON dosen.idjabatan =
+		  jabatanfungsional.idjabatan
+			  where programstudi.idprogramstudi=? and name='kaprodi' 
+			  group by iddosen`,
+			[ id ],
+			(err, result) => {
+				if (err) reject(err);
+				resolve(result[0]);
+			}
+		);
+	});
+};
+
 ProgdiDb.post = async (params) => {
 	return new Promise((resolve, reject) => {
 		try {

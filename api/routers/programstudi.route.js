@@ -50,6 +50,23 @@ router.get('/byparentid/:Id', async (req, res) => {
 		res.status(400).json({ message: err.message });
 	}
 });
+
+router.get('/kaprodi/:Id', async (req, res) => {
+	try {
+		var id = req.params.Id;
+		contextDb.ProgramStudi.getKaprodiByProdiId(id).then(
+			(result) => {
+				res.status(200).json(result);
+			},
+			(err) => {
+				res.status(400).json(err);
+			}
+		);
+	} catch (error) {
+		res.status(400).json({ message: err.message });
+	}
+});
+
 router.post('/', [ authJwt.verifyToken, permit('admin') ], async (req, res) => {
 	try {
 		var data = req.body;

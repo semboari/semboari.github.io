@@ -6,7 +6,7 @@
         </button>
         <hr class="garis" />
         <div class="table table-responsive"></div>
-        <table class="table table-bordered table-hover" id="myTable">
+        <table class="table table-bordered table-hover" id="myTable" datatable="ng">
             <thead class=" bg-primary">
                 <tr>
                     <th class="text-center">No</th>
@@ -15,9 +15,9 @@
                     <th>Kegiatan</th>
                     <th>Uraian Kegiatan</th>
                     <th>Tanggal</th>
-                    <th>Satuan Hasil</th>
-                    <th>Jumlah Volume Kegiatan</th>
-                    <th>Jumlah AK</th>
+                    <th style="width: 50px;">Satuan Hasil</th>
+                    <th style="width: 50px;">Jumlah Volume Kegiatan</th>
+                    <th style="width: 50px;">Jumlah AK</th>
                     <th>Keterangan</th>
                     <th class="text-center">Opsi</th>
                 </tr>
@@ -29,7 +29,7 @@
                     <td>{{item.namaunsur}}</td>
                     <td>{{item.namasubunsur}}</td>
                     <td>{{item.uraiankegiatan}}</td>
-                    <td>{{item.tanggal}}</td>
+                    <td>{{item.tanggal|date:'dd-MM-yyyy'}}</td>
                     <td>{{item.satuanhasil}}</td>
                     <td>{{item.jumlahkegiatan}}</td>
                     <td>{{item.akview}}</td>
@@ -48,7 +48,6 @@
             </tbody>
         </table>
     </div>
-</div>
 </div>
 
 <!-- Modal tambah kegiatan-->
@@ -155,25 +154,27 @@
                     <p>Yang bertanda tangan dibawah ini</p>
                 </div>
                 <label for="" class="col-5">1.Nama</label>
-                <input type="text" name="" id="" class="form-control col-7" readonly value="Marla S. Pieter">
+                <input type="text" name="" id="" class="form-control col-7" readonly ng-model="Kaprodi.namadosen">
                 <label for="" class="col-5">2.NIDN</label>
-                <input type="text" name="" id="" class="form-control col-7" readonly value="1211088901">
+                <input type="text" name="" id="" class="form-control col-7" readonly ng-model="Kaprodi.nidn">
                 <label for="" class="col-5">3.Pangkat / Golongan</label>
-                <input type="text" name="" id="" class="form-control col-7" readonly value="Lektor / III c">
+                <input type="text" name="" id="" class="form-control col-7" readonly
+                    value="{{Kaprodi.pangkat}} {{Kaprodi.golongan}}/{{Kaprodi.ruang}}">
                 <label for="" class="col-5">4.Jabatan</label>
                 <input type="text" name="" id="" class="form-control col-7" readonly
-                    value="Ketua Program Studi Teknik Informatika S1">
+                    value="Ketua Program Studi {{Kaprodi.namaprogramstudi}}">
             </div>
             <div class="row">
                 <div class="col-md-12">
                     <p>Menyatakan Bahwa</p>
                 </div>
                 <label for="" class="col-5">1.Nama</label>
-                <input type="text" name="" id="" class="form-control col-7" readonly value="Evanita V. Manullang, MT">
+                <input type="text" name="" id="" class="form-control col-7" readonly ng-model="Profile.namadosen">
                 <label for="" class="col-5">2.NIDN</label>
-                <input type="text" name="" id="" class="form-control col-7" readonly value="1211088901">
+                <input type="text" name="" id="" class="form-control col-7" readonly ng-model="Profile.nidn">
                 <label for="" class="col-5">3.Pangkat / Golongan</label>
-                <input type="text" name="" id="" class="form-control col-7" readonly value="-">
+                <input type="text" name="" id="" class="form-control col-7" readonly
+                    value="{{Profile.pangkat}} {{Profile.golongan}}/{{Profile.ruang}}">
                 <label for="" class="col-5">4.Jabatan</label>
                 <input type="text" name="" id="" class="form-control col-7" readonly
                     value="Kepala Laboratorium Fakultas Ilmu Komputer Dan Manajemen">
@@ -187,49 +188,30 @@
         </div>
         <div class="col-md-12 mt-3">
             <div class="table table-responsive">
-                <table border="1" class="table-bordered">
-                    <thead class="text-center">
+                <table class="table table-bordered table-hover" id="myTable">
+                    <thead class=" bg-primary">
                         <tr>
-                            <th>No</th>
-                            <th>Kegiatan</th>
+                            <th class="text-center">No</th>
+                            <th>Uraian Kegiatan</th>
                             <th>Tanggal</th>
-                            <th>Satuan Hasil</th>
-                            <th>Jumlah Volume Kegiatan</th>
-                            <th>Angka Kredit</th>
-                            <th>Jumlah Angka Kredit</th>
+                            <th style="width: 50px;">Satuan Hasil</th>
+                            <th style="width: 50px;">Jumlah Volume Kegiatan</th>
+                            <th style="width: 50px;">Angka Kredit</th>
+                            <th style="width: 50px;">Jumlah AK</th>
                             <th>Keterangan</th>
                         </tr>
                     </thead>
                     <tbody>
+                        <tr ng-repeat="item in datas">
+                            <td class="text-center">{{$index+1}}</td>
+                            <td>{{item.uraiankegiatan}}</td>
+                            <td>{{item.tanggal|date:'dd-MM-yyyy'}}</td>
+                            <td>{{item.satuanhasil}}</td>
+                            <td>{{item.jumlahkegiatan}}</td>
+                            <td>{{item.ak}}</td>
+                            <td>{{item.akview}}</td>
+                            <td>{{item.keterangan}}</td>
 
-                        <tr class="text-center">
-                            <td>1</td>
-                            <td>2</td>
-                            <td>3</td>
-                            <td>4</td>
-                            <td>5</td>
-                            <td>6</td>
-                            <td>7</td>
-                            <td>7</td>
-                            <td>8</td>
-                        </tr>
-                        <tr>
-                            <td>1</td>
-                            <td>Mengikuti Pendidikan Program Pasca Sarjana</td>
-                            <td>Magister Teknik Fakultas Teknik Elektro UNHAS</td>
-                            <td>Juli 2011 - September 2013</td>
-                            <td>Makassar</td>
-                            <td>150</td>
-                            <td>Copy Ijasah & Transkrip Nilai</td>
-                        </tr>
-                        <tr>
-                            <td>2</td>
-                            <td>Melaksanakan Perkulahan Semeseter : </td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
-                            <td></td>
                         </tr>
                     </tbody>
                 </table>

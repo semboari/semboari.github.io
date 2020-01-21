@@ -34,6 +34,23 @@ router.get('/:Id', [ authJwt.verifyToken ], async (req, res) => {
 		res.status(400).json(err);
 	}
 });
+
+router.get('/rektor/:Id', [ authJwt.verifyToken ], async (req, res) => {
+	try {
+		var id = req.params.Id;
+		contextDb.Universitas.getRektorByUniversitasId(id).then(
+			(result) => {
+				res.status(200).json(result);
+			},
+			(err) => {
+				res.status(400).json(err);
+			}
+		);
+	} catch (error) {
+		res.status(400).json(err);
+	}
+});
+
 router.post('/', [ authJwt.verifyToken, permit('admin') ], async (req, res) => {
 	try {
 		var data = req.body;
