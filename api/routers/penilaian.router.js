@@ -20,6 +20,22 @@ router.get('/:Id', [ authJwt.verifyToken ], async (req, res) => {
 	}
 });
 
+router.get('/rekapitulasi/:Id', [ authJwt.verifyToken ], async (req, res) => {
+	try {
+		var id = req.params.Id;
+		contextDb.Penilaian.rekapitulasi(id).then(
+			(result) => {
+				res.status(200).json(result);
+			},
+			(err) => {
+				res.status(400).json(err);
+			}
+		);
+	} catch (error) {
+		res.status(400).json(err);
+	}
+});
+
 router.get('/byid/:Id', [ authJwt.verifyToken ], async (req, res) => {
 	try {
 		var id = req.params.Id;

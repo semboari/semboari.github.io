@@ -18,7 +18,7 @@ PenilaianDB.get = async (id) => {
 			subunsur.namasubunsur,
 			subunsur.jenisunsur,
 			unsur.nama AS namaunsur,
-			peraturan.tahun,
+			peraturan.tahun, subunsur.ak,
 			subunsur.ak * penilaian.jumlahkegiatan AS akview,
 			subunsur.satuanhasil AS satuanhasil1,
 			penilaian.acckaprodi,
@@ -57,7 +57,7 @@ PenilaianDB.getById = async (Id) => {
 			peraturan.tahun,
 			penilaian.acckaprodi,
 			penilaian.accrektor,
-			penilaian.accpenelitian,			
+			penilaian.accpenelitian, subunsur.ak,			
 			subunsur.ak * penilaian.jumlahkegiatan as akview,
 			subunsur.satuanhasil AS satuanhasil1
 		  FROM
@@ -144,6 +144,80 @@ PenilaianDB.delete = (id) => {
 					reject(err);
 				} else resolve(true);
 			});
+		} catch (error) {
+			reject(error);
+		}
+	});
+};
+
+PenilaianDB.rekapitulasi = (id) => {
+	return new Promise((resolve, reject) => {
+		try {
+			pool.query(
+				`SELECT
+				penilaian.keterangan,
+				penilaian.jumlahkegiatan,
+				penilaian.satuanhasil,
+				penilaian.uraiankegiatan,
+				penilaian.iddosen,
+				penilaian.idsubunsur,
+				penilaian.idpenilaian,
+				penilaian.tanggal,
+				subunsur.namasubunsur,
+				subunsur.jenisunsur,
+				unsur.idunsur,
+				unsur.nama AS namaunsur,
+				peraturan.tahun, subunsur.ak,
+				subunsur.ak * penilaian.jumlahkegiatan AS akview,
+				subunsur.satuanhasil AS satuanhasil1,
+				penilaian.acckaprodi,
+				penilaian.accrektor,
+				penilaian.accpenelitian
+			  FROM
+				penilaian
+				LEFT JOIN subunsur ON penilaian.idsubunsur = subunsur.idsubunsur
+				LEFT JOIN unsur ON subunsur.idunsur = unsur.idunsur
+				LEFT JOIN peraturan ON subunsur.idtahunaturan =
+			  peraturan.idperaturan where iddosen=? `,
+				[ id ],
+				(err, result) => {
+					if (err) reject(err);
+					else {
+						var datas = rx.of(result).pipe((data) => helper.GroupBy(result, (item) => item.idunsur));
+						var dataUnsur = Object.values(datas);
+						var results = [];
+						dataUnsur.forEach((unsur) => {
+							var Unsur = {
+								subunsur: [],
+								idunsur: unsur[0].idunsur,
+								namaunsur: unsur[0].namaunsur
+							};
+
+							var dataSubUnsur = Object.values(
+								rx.of(unsur).pipe((data) => helper.GroupBy(unsur, (item) => item.idsubunsur))
+							);
+							dataSubUnsur.forEach((sub) => {
+								var subUnsur = {
+									namasubunsur: sub[0].namasubunsur,
+									idsubunsur: sub[0].idsubunsur
+								};
+								var datasubunsur = sub.map((prog) => prog);
+								subUnsur.totalsubunsur = datasubunsur.reduce((total, item) => {
+									return total + item.akview;
+								}, 0);
+
+								Unsur.subunsur.push(subUnsur);
+								Unsur.total = Unsur.subunsur.reduce((total, item) => {
+									return total + item.totalsubunsur;
+								}, 0);
+							});
+							results.push(Unsur);
+						});
+
+						resolve(results);
+					}
+				}
+			);
 		} catch (error) {
 			reject(error);
 		}

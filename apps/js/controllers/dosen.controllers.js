@@ -8,8 +8,30 @@ angular
 function DosenController($scope, AuthService, PenilaianService) {
 	AuthService.Init([ 'dosen' ]);
 }
-function HomeController($scope) {}
-function PengusulanController($scope, AuthService, PenilaianService, PeraturanService, UnsurService, SubUnsurService) {
+function HomeController($scope, AuthService, PenilaianService) {
+	$scope.datas = [];
+	$scope.tanggal = new Date();
+	AuthService.profile().then((x) => {
+		var iddosen = x.iddosen;
+		$scope.Profile = x;
+		PenilaianService.get(iddosen).then((x) => {
+			$scope.datas = x;
+
+			$scope.total = $scope.datas.reduce((total, item) => {
+				return total + item.akview;
+			}, 0);
+		});
+	});
+}
+function PengusulanController(
+	$scope,
+	AuthService,
+	PenilaianService,
+	PeraturanService,
+	UnsurService,
+	ProgdiService,
+	SubUnsurService
+) {
 	$scope.datas = [];
 	AuthService.profile().then((x) => {
 		var iddosen = x.iddosen;
@@ -23,6 +45,9 @@ function PengusulanController($scope, AuthService, PenilaianService, PeraturanSe
 					$scope.Unsurs = x;
 					SubUnsurService.get($scope.Peraturan.idperaturan).then((x) => {
 						$scope.SubUnsurs = x;
+						ProgdiService.getKaprodi($scope.Profile.idprogramstudi).then((x) => {
+							$scope.Kaprodi = x;
+						});
 					});
 				});
 			});
