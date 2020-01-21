@@ -73,3 +73,15 @@
   border-radius: 15px !important;
   margin-left: 20px !important;
 }
+.print {
+  display: none;
+}
+
+@media print {
+  .non-print {
+    display: none;
+  }
+  .print {
+    display: block;
+  }
+}
