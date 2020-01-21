@@ -13,12 +13,12 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr ng-repeat="item in Dosens">
                     <td class="text-center">{{$index+1}}</td>
-                    <td>0025038001</td>
-                    <td>Reinhard Semboari, S.Kom</td>
+                    <td>{{item.nidn}}</td>
+                    <td>{{item.namadosen}}</td>
                     <td class="text-center">
-                        <button ui-sref="rektor-berkas-pengusulan" class="btn btn-outline-info"><span
+                        <button ui-sref="rektor-berkas-pengusulan({Id:item})" class="btn btn-outline-info"><span
                                 class="fas fa-eye"></span class="fas fa-file"></button>
                     </td>
                 </tr>

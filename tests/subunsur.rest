@@ -1,0 +1,60 @@
+
+@controller=subunsur
+@host=http://localhost:5500/api/{{controller}}
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTc5MzM5NTcxLCJleHAiOjE1Nzk0MjU5NzF9.KPzcw7plSgxBp5hfeihwaMe6ycagWjJbYT7KbtZe93E
+####
+GET {{host}}/3 HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}
+####
+
+
+####
+GET {{host}}/getbyid/3 HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}
+####
+
+POST {{host}} HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}
+
+{
+    "idunsur":3,
+    "jenisunsur":"Pendidikan",
+    "namasubunsur":"Pendidikan",
+    "satuanhasil":"Pendidikan",
+    "ak":0.5,
+    "skspersmt":"Pendidikan",
+    "pelaksanaankegiatan":"Pendidikan",
+    "idtahunaturan":1,
+    "idjabatan":3
+}
+
+
+####
+
+PUT {{host}} HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}
+
+{
+    "idunsur": 3,
+  "jenisunsur": "Umum",
+  "namasubunsur": "Pendidikan & Mengajar",
+  "satuanhasil": "sks",
+  "ak": 0.5,
+  "skspersmt": "Pendidikan",
+  "pelaksanaankegiatan": "Pendidikan",
+  "idtahunaturan": 1,
+  "idjabatan": 3,
+  "idsubunsur": 1
+}
+
+
+
+####
+
+DELETE {{host}}/1 HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}

@@ -54,14 +54,14 @@ router.post('/registerdosen', async (req, res) => {
 	try {
 		const user = req.body;
 		user.password = bcrypt.hashSync(req.body.password, 8);
-		contextDb.Users.registerAdmin(user).then(
+		contextDb.Users.registerDosen(user).then(
 			(data) => {
 				if (data) {
 					res.status(200).json(data);
 				} else throw new Error('Registrasi Gagal');
 			},
 			(err) => {
-				throw new Error(err.message);
+				res.status(409).json(err);
 			}
 		);
 	} catch (error) {
@@ -69,18 +69,19 @@ router.post('/registerdosen', async (req, res) => {
 	}
 });
 
-router.get('/profile', [ authJwt.verifyToken ], async (req, res) => {
+router.get('/profile/:Id', [ authJwt.verifyToken ], async (req, res) => {
 	try {
-		contextDb.Users.profile().then(
+		var id = req.params.Id;
+		contextDb.Users.profile(id).then(
 			(response) => {
 				res.status(200).json(response);
 			},
 			(err) => {
-				res.status(400).json({ message: error.message });
+				res.status(400).json(err);
 			}
 		);
 	} catch (error) {
-		res.status(400).json({ message: error.message });
+		res.status(400).json(error);
 	}
 });
 

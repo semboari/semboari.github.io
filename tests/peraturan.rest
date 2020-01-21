@@ -1,0 +1,44 @@
+
+@controller=peraturan
+@host=http://localhost:5500/api/{{controller}}
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTc5MzM5NTcxLCJleHAiOjE1Nzk0MjU5NzF9.KPzcw7plSgxBp5hfeihwaMe6ycagWjJbYT7KbtZe93E
+
+####
+GET {{host}} HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}
+####
+
+
+####
+GET {{host}}/1 HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}
+####
+
+POST {{host}} HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}
+
+{
+    "tahun":"No 23 2020"
+}
+
+
+####
+
+PUT {{host}} HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}
+
+{
+  "idperaturan": 1,
+  "tahun": "No 23 1999"
+}
+
+
+####
+
+DELETE {{host}}/2 HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}

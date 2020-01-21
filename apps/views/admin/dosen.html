@@ -3,14 +3,18 @@
         <h2 class="mt-1" style="display: inline;">Data Dosen</h2>
         <hr class="garis">
         <div class="row pl-3 mb-2">
-            <select name="" id="" class="form-control col-3">
-                <option>-- Select Universitas --</option>
+            <select ng-change="SelectUniversitas(univ)" class="form-control col-3" ng-model="univ"
+                ng-options="option.namauniversitas for option in Universitas track by option.iduniversitas">
+                <option>--Universitas--</option>
             </select>
-            <select name="" id="" class="form-control col-3">
-                <option>-- Select Fakutlas --</option>
+            <select ng-change="SelectFakultas(fak)" class="form-control col-3" ng-model="fak"
+                ng-options="option.namafakultas for option in Fakultas track by option.idfakultas">
+                <option>--Pilih Program Studi--</option>
             </select>
-            <select name="" id="" class="form-control col-3">
-                <option>-- Select Program studi --</option>
+            <select class="form-control col-3"
+                ng-options="option.namaprogramstudi for option in ProgramStudis track by option.idprogramstudi"
+                ng-model="progdi">
+                <option>--Pilih Program Studi--</option>
             </select>
             <button class="btn btn-outline-primary ml-2"><span class="fas fa-search"></span></button>
         </div>
@@ -28,37 +32,30 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
+                    <tr ng-if="univ"
+                        ng-repeat="item in Datas|filter:{iduniversitas:univ.iduniversitas, idfakultas:fak.idfakultas,idprogramstudi:progdi.idprogramstudi}">
                         <td class="text-center">{{$index+1}}</td>
-                        <td>8566739</td>
-                        <td>Sofiah Elinan</td>
-                        <td>SofialElinan@gmail.com</td>
-                        <td>Dosen</td>
+                        <td>{{item.nidn}}</td>
+                        <td>{{item.namadosen}}</td>
+                        <td>{{item.email}}</td>
+                        <td ng-if="item.roles.length>1"><span ng-repeat="role in item.roles">
+                                <div ng-if="role.rolename!='dosen'"> {{role.deskripsi}}</div>
+                            </span></td>
+                        <td ng-if="item.roles.length==1">
+                            <span>
+                                <div> {{item.roles[0].deskripsi}}</div>
+                            </span></td>
                         <td class="text-center">
-                            <button class="btn btn-outline-success" data-toggle="modal" data-target="#dosen"><span
-                                    class="fas fa-pencil-alt"></span></button>
-                            <button class="btn btn-outline-info" data-toggle="modal" data-target="#detiledosen"><span
-                                    class="fas fa-eye"></span></button>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="text-center">{{$index+1}}</td>
-                        <td>8566739</td>
-                        <td>Kurniawan</td>
-                        <td>SofialElinan@gmail.com</td>
-                        <td>Rektor</td>
-                        <td class="text-center">
-                            <button class="btn btn-outline-success" data-toggle="modal" data-target="#dosen"><span
-                                    class="fas fa-pencil-alt"></span></button>
-                            <button class="btn btn-outline-info" data-toggle="modal" data-target="#detiledosen"><span
-                                    class="fas fa-eye"></span></button>
+                            <button ng-click="SelectDosen(item)" class="btn btn-outline-success" data-toggle="modal"
+                                data-target="#dosen"><span class="fas fa-pencil-alt"></span></button>
+                            <button ng-click="SelectDosen(item)" class="btn btn-outline-info" data-toggle="modal"
+                                data-target="#detiledosen"><span class="fas fa-eye"></span></button>
                         </td>
                     </tr>
                 </tbody>
             </table>
         </div>
     </div>
-
 </div>
 
 <!-- Modal detail  dosen-->
@@ -78,73 +75,67 @@
                         <h5>NIDN</h5>
                     </div>
                     <div class="col-8">
-                        <h5>: 3456789</h5>
+                        <h5>: {{model.nidn}}</h5>
                     </div>
                     <div class="col-4">
                         <h5>Nama</h5>
                     </div>
                     <div class="col-8">
-                        <h5>: Reinhard semboari</h5>
+                        <h5>: {{model.namadosen}}</h5>
                     </div>
                     <div class="col-4">
                         <h5>Email</h5>
                     </div>
                     <div class="col-8">
-                        <h5>: Reinhardsemboari471@gmail.com</h5>
+                        <h5>: {{model.email}}</h5>
                     </div>
                     <div class="col-4">
                         <h5>Perguruan Tinggi</h5>
                     </div>
                     <div class="col-8">
-                        <h5>: Universitas Sains DAn Teknologi Jayapura</h5>
+                        <h5>: {{model.namauniversitas}}</h5>
                     </div>
                     <div class="col-4">
                         <h5>Fakultas</h5>
                     </div>
                     <div class="col-8">
-                        <h5>: Ilmu Komputer Dan Menejemen</h5>
+                        <h5>: {{model.namafakultas}}</h5>
                     </div>
                     <div class="col-4">
                         <h5>Program Studi</h5>
                     </div>
                     <div class="col-8">
-                        <h5>: Teknik Informatika</h5>
+                        <h5>: {{model.namafakultas}}</h5>
                     </div>
                     <div class="col-4">
-                        <h5>Tanggal Lahir</h5>
+                        <h5>Tempta, Tanggal Lahir</h5>
                     </div>
                     <div class="col-8">
-                        <h5>: 03, November 1996</h5>
-                    </div>
-                    <div class="col-4">
-                        <h5>Tempat Lahir</h5>
-                    </div>
-                    <div class="col-8">
-                        <h5>: Serui</h5>
+                        <h5>: {{model.tempatlahir}}, {{item.tanggallahir|date:'dd-MM-yyyy'}}</h5>
                     </div>
                     <div class="col-4">
                         <h5>Jenis Kelamin</h5>
                     </div>
                     <div class="col-8">
-                        <h5>: Pria</h5>
+                        <h5>: {{model.jeniskelamin}}</h5>
                     </div>
                     <div class="col-4">
                         <h5>Pendidikan Terakhir</h5>
                     </div>
                     <div class="col-8">
-                        <h5>: S1</h5>
+                        <h5>: {{model.pendidikanterakhir}}</h5>
                     </div>
                     <div class="col-4">
                         <h5>Jabatan Akademik</h5>
                     </div>
                     <div class="col-8">
-                        <h5>: Lektor</h5>
+                        <h5>: {{model.jabatan}}</h5>
                     </div>
                     <div class="col-4">
                         <h5>Masa Kerja</h5>
                     </div>
                     <div class="col-8">
-                        <h5>: 5 Tahum</h5>
+                        <h5>: {{model.masakerja}}</h5>
                     </div>
 
                 </div>
@@ -169,24 +160,26 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <div class="modal-body">
-                <form action="" class="form-group">
+
+            <form ng-submit="ChangeRole(model)" class="form-group">
+                <div class="modal-body">
                     <div class="form-group">
-                        <select name="" id="" class="form-control">
+                        <select ng-model="model.newrole" class="form-control">
                             <option value="">-- Select Status Pemeriksa --</option>
-                            <option value="">Rektor</option>
-                            <option value="">Kaprodi</option>
-                            <option value="">Pemeriska Penelitian</option>
-                            <option value="">Dosen</option>
+                            <option value="rektor">Rektor</option>
+                            <option value="kaprodi">Kaprodi</option>
+                            <option value="pemeriksa">Pemeriska Penelitian</option>
+                            <option value="dosen">Dosen</option>
                         </select>
                     </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal"> <span class="fas fa-close"></span>
-                    Close</button>
-                <button type="button" class="btn btn-danger"> <span class="fas fa-save"></span> Save</button>
-            </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"> <span
+                            class="fas fa-close"></span>
+                        Close</button>
+                    <button type="submit" class="btn btn-danger"> <span class="fas fa-save"></span> Save</button>
+                </div>
+            </form>
         </div>
     </div>
 </div>

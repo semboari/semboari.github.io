@@ -1,23 +1,23 @@
 const pool = require('./dbconnection');
 const rx = require('rxjs');
 const helper = require('../helper');
-const UniversitasDb = {};
+const ProgdiDb = {};
 
-UniversitasDb.get = async () => {
+ProgdiDb.get = async () => {
 	return new Promise((resolve, reject) => {
 		pool.query(
 			`SELECT *
 		  FROM
 			programstudi `,
 			(err, result) => {
-				if (err) return reject(err);
+				if (err) reject(err);
 				resolve(result);
 			}
 		);
 	});
 };
 
-UniversitasDb.getById = async (id) => {
+ProgdiDb.getById = async (id) => {
 	return new Promise((resolve, reject) => {
 		pool.query(
 			`SELECT *
@@ -25,29 +25,38 @@ UniversitasDb.getById = async (id) => {
 			programstudi where idprogramstudi=?`,
 			[ id ],
 			(err, result) => {
-				if (err) return reject(err);
+				if (err) reject(err);
 				resolve(result[0]);
 			}
 		);
 	});
 };
 
-UniversitasDb.getByParentId = async (id) => {
+ProgdiDb.getByParentId = async (id) => {
 	return new Promise((resolve, reject) => {
 		pool.query(
-			`SELECT *
+			`SELECT
+			programstudi.idprogramstudi,
+			programstudi.idfakultas,
+			programstudi.namaprogramstudi,
+			fakultas.namafakultas,
+			fakultas.iduniversitas,
+			universitas.namauniversitas
 		  FROM
-			programstudi where idfakultas=?`,
+			programstudi
+			LEFT JOIN fakultas ON programstudi.idfakultas = fakultas.idfakultas
+			LEFT JOIN universitas ON fakultas.iduniversitas =
+		  universitas.iduniversitas where fakultas.idfakultas=?`,
 			[ id ],
 			(err, result) => {
-				if (err) return reject(err);
+				if (err) reject(err);
 				resolve(result);
 			}
 		);
 	});
 };
 
-UniversitasDb.post = async (params) => {
+ProgdiDb.post = async (params) => {
 	return new Promise((resolve, reject) => {
 		try {
 			pool.query(
@@ -66,7 +75,7 @@ UniversitasDb.post = async (params) => {
 	});
 };
 
-UniversitasDb.put = async (data) => {
+ProgdiDb.put = async (data) => {
 	return new Promise((resolve, reject) => {
 		try {
 			pool.query(
@@ -86,7 +95,7 @@ UniversitasDb.put = async (data) => {
 	});
 };
 
-UniversitasDb.delete = (id) => {
+ProgdiDb.delete = (id) => {
 	return new Promise((resolve, reject) => {
 		try {
 			pool.query('delete from programstudi where idprogramstudi=? ', [ id ], (err, result) => {
@@ -102,4 +111,4 @@ UniversitasDb.delete = (id) => {
 	});
 };
 
-module.exports = UniversitasDb;
+module.exports = ProgdiDb;

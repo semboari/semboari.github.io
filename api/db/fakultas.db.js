@@ -1,9 +1,9 @@
 const pool = require('./dbconnection');
 const rx = require('rxjs');
 const helper = require('../helper');
-const UniversitasDb = {};
+const FakultasDb = {};
 
-UniversitasDb.get = async () => {
+FakultasDb.get = async () => {
 	return new Promise((resolve, reject) => {
 		pool.query(
 			`SELECT *
@@ -17,7 +17,7 @@ UniversitasDb.get = async () => {
 	});
 };
 
-UniversitasDb.getById = async (id) => {
+FakultasDb.getById = async (id) => {
 	return new Promise((resolve, reject) => {
 		pool.query(
 			`SELECT *
@@ -32,7 +32,7 @@ UniversitasDb.getById = async (id) => {
 	});
 };
 
-UniversitasDb.getByParentId = async (id) => {
+FakultasDb.getByParentId = async (id) => {
 	return new Promise((resolve, reject) => {
 		pool.query(
 			`SELECT *
@@ -47,14 +47,14 @@ UniversitasDb.getByParentId = async (id) => {
 	});
 };
 
-UniversitasDb.post = async (params) => {
+FakultasDb.post = async (params) => {
 	return new Promise((resolve, reject) => {
 		try {
 			pool.query(
 				'insert into fakultas (iduniversitas,namafakultas) values(?,?)',
 				[ params.iduniversitas, params.namafakultas ],
 				(err, result) => {
-					if (err) throw Error();
+					if (err) reject(err);
 
 					params.idfakultas = result.insertId;
 					resolve(params);
@@ -66,7 +66,7 @@ UniversitasDb.post = async (params) => {
 	});
 };
 
-UniversitasDb.put = async (data) => {
+FakultasDb.put = async (data) => {
 	return new Promise((resolve, reject) => {
 		try {
 			pool.query(
@@ -86,14 +86,13 @@ UniversitasDb.put = async (data) => {
 	});
 };
 
-UniversitasDb.delete = (id) => {
+FakultasDb.delete = (id) => {
 	return new Promise((resolve, reject) => {
 		try {
 			pool.query('delete from fakultas where idfakultas=? ', [ id ], (err, result) => {
 				if (err) {
 					reject(err);
 				}
-
 				resolve(true);
 			});
 		} catch (error) {
@@ -102,4 +101,4 @@ UniversitasDb.delete = (id) => {
 	});
 };
 
-module.exports = UniversitasDb;
+module.exports = FakultasDb;

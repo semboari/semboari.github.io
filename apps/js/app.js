@@ -2,12 +2,13 @@ angular
 	.module('app', [
 		'swangular',
 		'message.service',
-
 		'app.services',
 		'app.routers',
 		'app.controllers',
-
-		'app.conponent'
+		'app.conponent',
+		'datatables',
+		'datatables.bootstrap',
+		'ui.bootstrap'
 	])
 	.controller('homeController', homeController);
 

@@ -4,5 +4,10 @@ angular.module('app.services', [
 	'helper.service',
 	'message.service',
 	'storage.service',
-	'kampus.service'
+	'peraturan.service',
+	'kampus.service',
+	'jabatan.service',
+	'unsur.service',
+	'subunsur.service',
+	'penilaian.service'
 ]);

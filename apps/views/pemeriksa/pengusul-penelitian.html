@@ -1,6 +1,6 @@
 <div class="row">
     <div class="col-md-12 mt-3">
-        <h2 class="mt-1" style="display: inline;">Data Pengusulan Unsur Penelitian</h2>
+        <h2 class="mt-1" style="display: inline;">Data Pengusulan</h2>
         <hr class="garis" />
         <div class="table table-responsive"></div>
         <table class="table table-bordered table-hover" id="myTable">
@@ -13,19 +13,46 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr ng-repeat="item in Dosens">
                     <td class="text-center">{{$index+1}}</td>
-                    <td>0025038001</td>
-                    <td>Reinhard Semboari, S.Kom</td>
+                    <td>{{item.nidn}}</td>
+                    <td>{{item.namadosen}}</td>
                     <td class="text-center">
-                        <button ui-sref="pemeriksa-berkas-pengusulan-penelitian" class="btn btn-outline-info"><span
-                                class="fas fa-eye"></span class="fas fa-file"></button>
+                        <button ui-sref="pemeriksa-berkas-pengusulan-penelitian({Id:item})"
+                            class="btn btn-outline-info"><span class="fas fa-eye"></span class="fas fa-file"></button>
                     </td>
                 </tr>
             </tbody>
         </table>
     </div>
 </div>
+</div>
+
+<!-- Modal delete-->
+<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">SIPAK</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p class=" text-uppercase">
+                    Apakah Anda Yakin Ingin Menghapus {{model.Universitas}}?
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                    <span class="fas fa-close"></span> Close
+                </button>
+                <button ng-click="delete(model)" type="button" class="btn btn-danger">
+                    <span class="fas fa-eraser"></span> Delete
+                </button>
+            </div>
+        </div>
+    </div>
 </div>
 
 <!-- Modal logout-->

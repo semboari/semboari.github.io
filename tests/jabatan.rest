@@ -1,0 +1,54 @@
+
+@controller=jabatanfungsional
+@host=http://localhost:5500/api/{{controller}}
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTc5MzM5NTcxLCJleHAiOjE1Nzk0MjU5NzF9.KPzcw7plSgxBp5hfeihwaMe6ycagWjJbYT7KbtZe93E
+
+
+####
+GET {{host}} HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}
+####
+
+
+####
+GET {{host}}/3 HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}
+####
+
+POST {{host}} HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}
+
+{
+   "jabatan":"Lektor", 
+   "ak":2.5,
+    "pangkat":"Penata Muda",
+     "golongan":"IIA", 
+     "ruang":"A"
+}
+
+
+####
+
+PUT {{host}} HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}
+
+{
+   "jabatan": "Lektor",
+  "ak": 2.5,
+  "pangkat": "Penata Muda",
+  "golongan": "IIB",
+  "ruang": "B",
+  "idjabatan": 3
+}
+
+
+
+####
+
+DELETE {{host}}/1 HTTP/1.1
+Content-Type: application/json
+Authorization: bearer {{token}}

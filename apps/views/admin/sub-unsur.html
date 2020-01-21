@@ -7,21 +7,8 @@
             </div>
             <div class="col-md-4">
                 <form class="input-group">
-                    <select name="" id="" class="form-control">
-                        <option value="">-- Pilih Tahun Peraturan Rubrik --</option>
-                        <option value="">2019</option>
-                        <option value="">2019</option>
-                    </select>
-                </form>
-            </div>
-            <div class="col-md-4">
-                <form class="input-group">
-                    <select name="" id="" class="form-control">
-                        <option value="">-- Pilih Unsur --</option>
-                        <option value="">Pelaksana Pendidikan</option>
-                        <option value="">Penelitian</option>
-                        <option value="">Pengabdian</option>
-                    </select>
+                    <select ng-change="SelectPeraturan()" ng-model="Peraturan" class="form-control"
+                        ng-options="option.tahun for option in Peraturans track by option.idperaturan"></select>
                 </form>
             </div>
             <div class="col-md-4">
@@ -44,14 +31,14 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr ng-repeat="item in Datas">
                                 <td class="text-center">{{$index+1}}</td>
-                                <td>2019</td>
-                                <td>Kegiatan Pendidikan Dan Pengajaran</td>
-                                <td>Asisten Ahli Untuk Beban Mengajar 10 SKS Pertama</td>
-                                <td>1 smt</td>
-                                <td>0,5</td>
-                                <td>Terlaksana</td>
+                                <td>{{item.tahun}}</td>
+                                <td>{{item.namaunsur}}</td>
+                                <td>{{item.namasubunsur}}</td>
+                                <td>{{item.satuanhasil}}</td>
+                                <td>{{item.ak}}</td>
+                                <td>{{item.pelaksanaankegiatan}}</td>
                                 <td class="text-center">
                                     <button class="btn btn-outline-success"><span class="fas fa-edit"></span></button>
                                     <button class="btn btn-outline-danger" data-toggle="modal"
@@ -91,8 +78,9 @@
                             </div>
                             <div class="form-group">
                                 <label for="sub-unsur">Sub Unsur</label>
-                                <textarea name="" id="" cols="30" rows="5" class="form-control"
-                                    placeholder="example Asisten ahli untuk 10 SKS Pertama" required></textarea>
+                                <textarea ng-options="item.tahun for item in Peraturans" cols="30" rows="5"
+                                    class="form-control" placeholder="example Asisten ahli untuk 10 SKS Pertama"
+                                    required></textarea>
                             </div>
                         </div>
 

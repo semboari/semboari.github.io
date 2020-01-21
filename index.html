@@ -11,13 +11,20 @@
   <link href="https://fonts.googleapis.com/css?family=Barlow&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="/node_modules/@fortawesome/fontawesome-free/css/all.css" />
   <link rel="stylesheet" href="/node_modules/sweetalert2/dist/sweetalert2.css" />
+  <link href="./node_modules/angular-datatables/dist/css/angular-datatables.css" rel="stylesheet">
+
   <link rel="stylesheet" href="./assets/css/main.css" />
+
 </head>
 
 <body ng-app="app">
   <ui-view></ui-view>
 </body>
+
+<script src="/node_modules/jquery/dist/jquery.js"></script>
 <script src="/node_modules/angular/angular.js"></script>
+<script src="/node_modules/datatables.net/js/jquery.dataTables.js"></script>
+<script src="/node_modules//angular-datatables/dist/angular-datatables.js"></script>
 <script src="/node_modules/angular-route/angular-route.js"></script>
 <script src="/node_modules/@uirouter/angularjs/release/angular-ui-router.js"></script>
 <script src="/node_modules/angular-local-storage/dist/angular-local-storage.js"></script>
@@ -34,6 +41,10 @@
 <script src="/apps/js/controllers/app.controllers.js"></script>
 <script src="/apps/js/controllers/auth.controllers.js"></script>
 <script src="/apps/js/controllers/admin.controllers.js"></script>
+<script src="/apps/js/controllers/dosen.controllers.js"></script>
+<script src="/apps/js/controllers/rektor.controllers.js"></script>
+<script src="/apps/js/controllers/kaprodi.controllers.js"></script>
+<script src="/apps/js/controllers/peneliti.controllers.js"></script>
 
 <script src="/apps/js/services/app.services.js"></script>
 <script src="/apps/js/services/dosen.service.js"></script>
@@ -42,13 +53,21 @@
 <script src="/apps/js/services/storage.services.js"></script>
 <script src="/apps/js/services/helper.services.js"></script>
 <script src="./apps/js/services/kampus.services.js"></script>
+<script src="./apps/js/services/jabatan.services.js"></script>
+<script src="./apps/js/services/penilaian.services.js"></script>
+
+<script src="./apps/js/services/peraturan.services.js"></script>
+<script src="./apps/js/services/unsur.services.js"></script>
+<script src="./apps/js/services/subunsur.services.js"></script>
 
 <script src="/apps/js/component.js"></script>
 <script src="/node_modules/sweetalert2/dist/sweetalert2.js"></script>
 <script src="/node_modules/swangular/swangular.js"></script>
-<script src="/node_modules/jquery/dist/jquery.min.js"></script>
-<script src="/node_modules/popper.js/dist/popper.min.js"></script>
+<script src="/node_modules/jquery/dist/jquery.js"></script>
+<script src="/node_modules/popper.js/dist/popper.js"></script>
 
 <script type="text/javascript" src="./assets/js/bootstrap.min.js"></script>
+<script src="/node_modules/angular-datatables/dist/plugins/bootstrap/angular-datatables.bootstrap.js"></script>
+<script type="text/javascript" src="./apps/js/angular-ui-bootstrap.js"></script>
 
 </html>

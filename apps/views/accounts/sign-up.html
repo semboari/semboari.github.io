@@ -1,53 +1,57 @@
 <h3>SIGN UP</h3>
 <hr>
-<form class="form-group">
+<form ng-submit="registrasi(model)" class="form-group">
 	<table class="table table-hover">
 		<tr>
 			<td><label class="control-label">Universitas</label></td>
 			<td>
-				<select class="form-control" name="" id="">
-					<option value="">-- Piih Universitas --</option>
-					<option value="">Universitas Cendrawasih</option>
-				</select>
+				<select ng-change="SelectUniversitas(univ)" class="form-control" ng-model="univ"
+					ng-options="option.namauniversitas for option in Universitas track by option.iduniversitas"
+					ng-model="model.iduniversitas"></select>
+
 			</td>
 		</tr>
 		<tr>
 			<td><label class="control-label">Fakultas</label></td>
 			<td>
-				<select class="form-control" name="" id="">
-					<option value="">-- Pilih Fakultas --</option>
-					<option value="">Matematika Dan IPA</option>
-				</select>
+				<select ng-change="SelectFakultas(fak)" class="form-control" ng-model="fak"
+					ng-options="option.namafakultas for option in Fakultas track by option.idfakultas"
+					ng-model="model.idfakultas"></select>
 			</td>
 		</tr>
 		<tr>
 			<td><label class="control-label">Prodi</label></td>
 			<td>
-				<select class="form-control" name="" id="">
-					<option value="">-- Pilih Prodi --</option>
-					<option value="">Sistem Informasi</option>
-				</select>
+				<select class="form-control"
+					ng-options="option.namaprogramstudi for option in ProgramStudis track by option.idprogramstudi"
+					ng-model="ProgramStudi"></select>
 			</td>
 		</tr>
 		<tr>
 			<td><label class="control-label">NIDN</label></td>
-			<td><input class="form-control" type="number" name="" placeholder="Masukan NIDN Anda" required=""></td>
+			<td><input ng-model="model.nidn" class="form-control" type="number" placeholder="Masukan NIDN Anda"
+					required=""></td>
 		</tr>
 		<tr>
 			<td><label class="control-label">Nama</label></td>
-			<td><input class="form-control" type="text" name="" placeholder="Masukan Nama Anda" required=""></td>
+			<td><input ng-model="model.namadosen" class="form-control" type="text" placeholder="Masukan Nama Anda"
+					required=""></td>
 		</tr>
 		<tr>
 			<td><label class="control-label">Email</label></td>
-			<td><input class="form-control" type="email" name="" placeholder="Masukan Email Anda" required=""></td>
+			<td><input ng-model="model.email" class="form-control" type="email" placeholder="Masukan Email Anda"
+					required=""></td>
 		</tr>
 		<tr>
 			<td><label class="control-label">TTL</label></td>
-			<td><input class="form-control" type="text" name="" placeholder="Masukan TTL Anda" required=""></td>
+			<td><input ng-model="model.tanggallahir" class="form-control" type="text" placeholder="Masukan TTL Anda"
+					required=""></td>
+			<td><input ng-model="model.tempatlahir" class="form-control" type="text" placeholder="Masukan TTL Anda"
+					required=""></td>
 		</tr>
 		<tr>
 			<td><label class="control-label">Gender</label></td>
-			<td><select class="form-control">
+			<td><select class="form-control" ng-model="model.jeniskelamin">
 					<option> -- Pilih Gender -- </option>
 					<option value="Pria">Pria</option>
 					<option value="Wanita">Wanita</option>
@@ -55,38 +59,39 @@
 		</tr>
 		<tr>
 			<td><label class="control-label">Pendidikan Terakhir</label></td>
-			<td><input class="form-control" type="text" name="" placeholder="Masukan Pendidikan Terakhir Anda"
-					required=""></td>
+			<td><input ng-model="model.pendidikanterakhir" class="form-control" type="text"
+					placeholder="Masukan Pendidikan Terakhir Anda" required=""></td>
 		</tr>
 		<tr>
 			<td><label class="control-label">No Seri Karpeg</label></td>
-			<td><input class="form-control" type="text" name="" placeholder="Masukan No Seri Karpeg Anda" required="">
-			</td>
-		</tr>
-		<tr>
-			<td><label class="control-label">Pangkat Golongan</label></td>
-			<td><input class="form-control" type="text" name="" placeholder="Masukan Pangkat Golongan Anda" required="">
+			<td><input ng-model="model.noserikarpeg" class="form-control" type="text"
+					placeholder="Masukan No Seri Karpeg Anda" required="">
 			</td>
 		</tr>
 		<tr>
 			<td><label class="control-label">Jabatan Akademik</label></td>
-			<td><input class="form-control" type="text" name="" placeholder="Masukan Jabatan Akademik Anda" required="">
+			<td>
+				<select class="form-control" ng-model="Jabatan"
+					ng-options="option.jabatan for option in Jabatans track by option.idjabatan"></select>
 			</td>
 		</tr>
 		<tr>
 			<td><label class="control-label">Masa Kerja</label></td>
-			<td><input class="form-control" type="text" name="" placeholder="Masukan Masa Kerja Anda" required=""></td>
+			<td><input ng-model="model.masakerja" class="form-control" type="text" placeholder="Masukan Masa Kerja Anda"
+					required=""></td>
 		</tr>
 		<tr>
 			<td><label class="control-label">Password</label></td>
-			<td><input class="form-control" type="password" name="" placeholder="Masukan Password Anda" required="">
+			<td><input ng-model="model.password" class="form-control" type="password"
+					placeholder="Masukan Password Anda" required="">
 			</td>
 		</tr>
 		<tr>
 			<td><label class="control-label">Konfirmasi Password</label></td>
-			<td><input class="form-control" type="password" name="" placeholder="Masukan Konfirmasi Password Anda"
-					required=""></td>
+			<td><input ng-model="model.confirm" class="form-control" type="password"
+					placeholder="Masukan Konfirmasi Password Anda" required="">
+			</td>
 		</tr>
 	</table>
-	<button class="btn btn-primary" name="" id="">Registrasi</button>
+	<button type="submit" class="btn btn-primary" id="">Registrasi</button>
 </form>

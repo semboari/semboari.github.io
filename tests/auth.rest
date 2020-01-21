@@ -5,3 +5,19 @@ Content-Type: application/json
     "username":"admin@gmail.com",
     "password": "admin"
 }
+
+####
+
+POST   http://localhost:5500/api/auth/registerdosen HTTP/1.1
+Content-Type: application/json
+
+{
+    "idprogramstudi":1,
+    "idjabatan":3,
+    "nidn":123456789545,
+    "namadosen":"Budi Sanjaya",
+    "jabatanakademik":"Dekan",
+    "jeniskelamin":"Wanita",
+    "email":"budi@gmail.com",
+    "password": "dosen"
+}

@@ -4,7 +4,12 @@ const dbContext = {
 	Universitas: require('./universitas.db'),
 	Fakultas: require('./fakultas.db'),
 	ProgramStudi: require('./programstudi.db'),
-	Unsur: require('./user.db')
+	Unsur: require('./unsur.db'),
+	SubUnsur: require('./subunsur.db'),
+	Peraturan: require('./peraturan.db'),
+	JabatanFuntional: require('./jabatanfungsional.db'),
+	Dosen: require('./dosen.db'),
+	Penilaian: require('./penilaian.db')
 };
 
 module.exports = dbContext;

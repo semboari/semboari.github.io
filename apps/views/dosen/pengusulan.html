@@ -23,19 +23,19 @@
                 </tr>
             </thead>
             <tbody>
-                <tr>
+                <tr ng-repeat="item in datas">
                     <td class="text-center">{{$index+1}}</td>
-                    <td>2019</td>
-                    <td>Pelaksana Pendidikan</td>
-                    <td>Melaksanakan Pengajarang Selama 2 Semeseter SKS=12</td>
-                    <td>Melaksanakan Pengajarang Selama 2 Semeseter SKS=12</td>
-                    <td>2018/2019</td>
-                    <td>2 smt</td>
-                    <td>2</td>
-                    <td>2</td>
-                    <td>Ijazah Dan Transkip Nilai</td>
+                    <td>{{item.tahun}}</td>
+                    <td>{{item.namaunsur}}</td>
+                    <td>{{item.namasubunsur}}</td>
+                    <td>{{item.uraiankegiatan}}</td>
+                    <td>{{item.tanggal}}</td>
+                    <td>{{item.satuanhasil}}</td>
+                    <td>{{item.jumlahkegiatan}}</td>
+                    <td>{{item.akview}}</td>
+                    <td>{{item.keterangan}}</td>
                     <td class="text-center">
-                        <button ng-click="SelectedItem(item)" data-toggle="modal" data-target="#universitas"
+                        <button ng-click="SelectItem(item)" data-toggle="modal" data-target="#kegiatan"
                             class="btn btn-outline-success">
                             <span class="fas fa-edit"></span>
                         </button>
@@ -63,115 +63,71 @@
                 </button>
             </div>
             <div class="modal-body">
-                <form action="">
+                <form ng-submit="save(model)">
                     <div class="row">
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="" class="control-label">Tahun Peraturan</label>
-                                <input type="text" id="" class="form-control" readonly value="2019">
+                                <label class="control-label">Tahun Peraturan</label>
+                                <input ng-model="Peraturan.tahun" type="text" class="form-control" readonly>
                             </div>
                             <div class="form-group">
-                                <label for="" class="control-label">Unsur</label>
-                                <input type="text" id="" class="form-control" placeholder="Example Pelaksana Pendidikan"
-                                    required>
+                                <label class="control-label">Unsur</label>
+                                <select class="form-control" ng-model="Unsur"
+                                    ng-options="option.nama for option in Unsurs track by option.idunsur"></select>
+
+                            </div>
+                            <div class="form-group autoComplete">
+                                <textarea ng-class="{red:error}" type="text" placeholder="Cari Kegiatan"
+                                    ng-change="changeSubUnsur()" ng-model="model.namasubunsur"
+                                    typeahead-on-select="selectTypeAhead(model,$item)"
+                                    typeahead="state.namasubunsur for state in SubUnsurs | 
+                                    filter:{idunsur:Unsur.idunsur, idjabatan:Profile.idjabatan, namasubunsur:$viewValue} | limitTo:8" class="form-control"></textarea>
                             </div>
                             <div class="form-group">
-                                <label for="" class="control-label">Sub Unsur</label>
-                                <textarea name="" class="form-control" id="" cols="30" rows="5"
-                                    placeholder="Example Melaksanan Proses Pengajaran Selama 2 SMT"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label for="" class="control-label">Uraian Kegiatan</label>
-                                <textarea name="" class="form-control" id="" cols="30" rows="3"
+                                <label class="control-label">Uraian Kegiatan</label>
+                                <textarea ng-model="model.uraiankegiatan" class="form-control" cols="30" rows="3"
                                     placeholder="Example Melaksanan Proses Pengajaran Selama 2 SMT"></textarea>
                             </div>
                         </div>
                         <div class="col-lg-6">
                             <div class="form-group">
-                                <label for="" class="control-label">Tanggal</label>
-                                <input type="date" id="" required class="form-control">
+                                <label class="control-label">Tanggal</label>
+                                <input type="date" ng-model="model.tanggal" required class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="" class="control-label">Satuan Hasil</label>
-                                <textarea name="" id="" cols="30" rows="3" class="form-control"
+                                <label class="control-label">Satuan Hasil</label>
+                                <textarea ng-model="model.satuanhasil" cols="30" rows="3" class="form-control"
                                     placeholder="Example Lektor 10 SKS pertama = 1"></textarea>
                             </div>
 
                             <div class="form-group">
-                                <label for="" class="control-label">Jumlah Volume Kegiatan</label>
-                                <input type="number" class="form-control" placeholder="example 1" required>
+                                <label class="control-label">Jumlah Volume Kegiatan</label>
+                                <input ng-change="changeAk(model)" type="number" ng-model="model.jumlahkegiatan"
+                                    class="form-control" placeholder="example 1" required>
                             </div>
                             <div class="form-group">
-                                <label for="" class="control-label">Angka Kredit</label>
-                                <input type="text" readonly class="form-control">
+                                <label class="control-label">Angka Kredit</label>
+                                <input type="text" ng-model="model.akview" readonly class="form-control">
                             </div>
                             <div class="form-group">
-                                <label for="" class="control-label">Keterangan</label>
-                                <input type="text" class="form-control" required
+                                <label class="control-label">Keterangan</label>
+                                <input type="text" ng-model="model.keterangan" class="form-control" required
                                     placeholder="Example No SK 7887865654436">
                             </div>
                         </div>
                     </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">
+                            <span class="fas fa-close"></span> Close
+                        </button>
+                        <button type="submit" class="btn btn-primary">
+                            <span class="fas fa-save"></span> Save
+                        </button>
+                    </div>
                 </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    <span class="fas fa-close"></span> Close
-                </button>
-                <button ng-click="delete(model)" type="button" class="btn btn-primary">
-                    <span class="fas fa-save"></span> Save
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Modal delete-->
-<div class="modal fade" id="delete" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">SIPAK</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
             </div>
-            <div class="modal-body">
-                <p class=" text-uppercase">
-                    Apakah Anda Yakin Ingin Menghapus {{model.Universitas}}?
-                </p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    <span class="fas fa-close"></span> Close
-                </button>
-                <button ng-click="delete(model)" type="button" class="btn btn-danger">
-                    <span class="fas fa-eraser"></span> Delete
-                </button>
-            </div>
-        </div>
-    </div>
-</div>
 
-<!-- Modal logout-->
-<div class="modal fade" id="logout" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Logout</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <p class=" text-uppercase">Apakah Anda Yakin Ingin Keluar ?</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">
-                    Close
-                </button>
-                <button type="button" class="btn btn-primary">Ok</button>
-            </div>
         </div>
     </div>
 </div>

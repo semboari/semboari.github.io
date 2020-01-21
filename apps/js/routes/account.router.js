@@ -14,6 +14,7 @@ angular.module('account.router', [ 'ui.router' ]).config(function($stateProvider
 		.state('register', {
 			url: '/register',
 			parent: 'account',
+			controller: 'RegisterController',
 			templateUrl: '../apps/views/accounts/sign-up.html'
 		})
 		.state('home', {
