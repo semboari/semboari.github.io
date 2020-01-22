@@ -3,6 +3,7 @@ angular.module('account.router', [ 'ui.router' ]).config(function($stateProvider
 	$stateProvider
 		.state('account', {
 			url: '/account',
+			controller: 'AccountController',
 			templateUrl: '../apps/views/accounts/account.html'
 		})
 		.state('login', {

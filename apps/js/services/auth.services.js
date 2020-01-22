@@ -15,7 +15,8 @@ function AuthService($http, $q, StorageService, $state, helperServices, message)
 		url: service.url,
 		registerdosen: registerdosen,
 		profile: profile,
-		Init: Init
+		Init: Init,
+		changepassword: changepassword
 	};
 
 	function Init(roles) {
@@ -24,6 +25,27 @@ function AuthService($http, $q, StorageService, $state, helperServices, message)
 		} else {
 			$state.go('login');
 		}
+	}
+
+	function changepassword(data) {
+		var def = $q.defer();
+		var user = StorageService.getObject('user');
+		user.password = data.oldpassword;
+		user.newpassword = data.newpassword;
+		$http({
+			method: 'post',
+			url: helperServices.url + '/api/auth/changepassword',
+			headers: getHeader(),
+			data: user
+		}).then(
+			(res) => {
+				message.info('Password Berhasil Diubah');
+			},
+			(err) => {
+				def.reject(err);
+			}
+		);
+		return def.promise;
 	}
 
 	function profile() {

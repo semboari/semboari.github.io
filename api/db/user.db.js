@@ -110,6 +110,19 @@ UserDb.login = async (user) => {
 	});
 };
 
+UserDb.changepassword = async (user) => {
+	return new Promise((resolve, reject, nex) => {
+		pool.query(
+			'update users set password=? where idusers=?',
+			[ user.newpassword, user.iduseers ],
+			(err, result) => {
+				if (err) return reject(err);
+				resolve(true);
+			}
+		);
+	});
+};
+
 UserDb.registerDosen = async (dosen) => {
 	return new Promise((resolve, reject, next) => {
 		pool.getConnection((err, connection) => {

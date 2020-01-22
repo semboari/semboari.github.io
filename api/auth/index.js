@@ -50,6 +50,33 @@ router.post('/login', async (req, res) => {
 	}
 });
 
+router.post('/changepassword', async (req, res) => {
+	try {
+		const user = req.body;
+		contextDb.Users.login(user).then(
+			(data) => {
+				if (!data || data.length <= 0) {
+					res.status(401).json({ message: 'Anda Tidak Memiliki User Akses' });
+				} else {
+					var item = data[0];
+					if (!bcrypt.compareSync(user.password, item.password))
+						res.status(401).json({ message: 'Password Lama Anda Salah' });
+					else {
+						contextDb.Users.changepassword(user).then((x) => {
+							res.status(200).json(x);
+						});
+					}
+				}
+			},
+			(err) => {
+				res.status(401).json({ message: 'Anda Tidak Memiliki User Akses' });
+			}
+		);
+	} catch (error) {
+		res.status(400).json({ message: error.message });
+	}
+});
+
 router.post('/registerdosen', async (req, res) => {
 	try {
 		const user = req.body;

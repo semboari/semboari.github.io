@@ -13,7 +13,8 @@ function adminController(AuthService) {
 	AuthService.Init([ 'admin' ]);
 }
 
-function universitasController($scope, UniversitasService, message) {
+function universitasController($scope, AuthService, UniversitasService, message) {
+	AuthService.Init([ 'admin' ]);
 	UniversitasService.get().then((result) => {
 		$scope.Datas = result;
 	});
@@ -48,7 +49,8 @@ function universitasController($scope, UniversitasService, message) {
 	};
 }
 
-function fakultasController($scope, UniversitasService, FakultasService, message) {
+function fakultasController($scope, AuthService, UniversitasService, FakultasService, message) {
+	AuthService.Init([ 'admin' ]);
 	$scope.Datas = [];
 	$scope.model = {};
 	UniversitasService.get().then((x) => {
@@ -100,7 +102,8 @@ function fakultasController($scope, UniversitasService, FakultasService, message
 	};
 }
 
-function progdiController($scope, UniversitasService, FakultasService, ProgdiService, message) {
+function progdiController($scope, AuthService, UniversitasService, FakultasService, ProgdiService, message) {
+	AuthService.Init([ 'admin' ]);
 	UniversitasService.get().then((x) => {
 		$scope.Universitas = x;
 	});
@@ -158,7 +161,8 @@ function progdiController($scope, UniversitasService, FakultasService, ProgdiSer
 	};
 }
 
-function peraturanAndUnsurController($scope, PeraturanService, UnsurService, message) {
+function peraturanAndUnsurController($scope, AuthService, PeraturanService, UnsurService, message) {
+	AuthService.Init([ 'admin' ]);
 	$scope.Peraturan = [];
 	$scope.modelPeraturan = {};
 	PeraturanService.get().then((x) => {
@@ -248,7 +252,16 @@ function peraturanAndUnsurController($scope, PeraturanService, UnsurService, mes
 		);
 	};
 }
-function subUnsurController($scope, SubUnsurService, JabatanService, PeraturanService, UnsurService, message) {
+function subUnsurController(
+	$scope,
+	AuthService,
+	SubUnsurService,
+	JabatanService,
+	PeraturanService,
+	UnsurService,
+	message
+) {
+	AuthService.Init([ 'admin' ]);
 	UnsurService.get().then((x) => {
 		$scope.Unsurs = x;
 		PeraturanService.get().then((x) => {
@@ -321,7 +334,8 @@ function subUnsurController($scope, SubUnsurService, JabatanService, PeraturanSe
 	};
 }
 
-function JabatanController($scope, JabatanService, message) {
+function JabatanController($scope, AuthService, JabatanService, message) {
+	AuthService.Init([ 'admin' ]);
 	$scope.Golongans = [ 'I', 'II', 'III', 'IV' ];
 	$scope.Ruangs = [ 'a', 'b', 'c', 'd' ];
 	JabatanService.get().then((result) => {
@@ -365,7 +379,8 @@ function JabatanController($scope, JabatanService, message) {
 	};
 }
 
-function DosenController($scope, DosenService, UniversitasService, FakultasService, ProgdiService) {
+function DosenController($scope, AuthService, DosenService, UniversitasService, FakultasService, ProgdiService) {
+	AuthService.Init([ 'admin' ]);
 	DosenService.get().then((x) => {
 		$scope.Datas = x;
 		UniversitasService.get().then((x) => {

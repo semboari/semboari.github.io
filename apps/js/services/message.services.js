@@ -1,13 +1,24 @@
 angular.module('message.service', []).factory('message', MessageServices);
 
 function MessageServices(swangular, $q, $state) {
-	return { info: info, error: error, warning: warning, dialog: dialog };
+	return { info: info, error: error, warning: warning, dialog: dialog, errorText: errorText };
 
 	function info(params) {
 		swangular.swal({
 			title: 'Sukses',
 			text: params,
 			type: 'info'
+		});
+	}
+
+	function errorText(params) {
+		var title = 'Error';
+		var text = params;
+
+		swangular.swal({
+			title: title,
+			text: text,
+			type: 'error'
 		});
 	}
 
@@ -51,7 +62,7 @@ function MessageServices(swangular, $q, $state) {
 
 	function warning(params) {
 		swangular.swal({
-			title: 'Sukses',
+			title: 'Perhatian',
 			text: params,
 			type: 'warning'
 		});

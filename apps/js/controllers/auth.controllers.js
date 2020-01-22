@@ -1,8 +1,22 @@
 angular
 	.module('auth.controller', [])
+	.controller('AccountController', AccountController)
 	.controller('LoginController', LoginController)
 	.controller('RegisterController', RegisterController);
 
+function AccountController(AuthService, $state, $scope) {
+	if (AuthService.userIsLogin()) {
+		AuthService.profile().then(
+			(x) => {
+				if (x) $state.go(x.rolename + '-home');
+				else $state.go('admin' + '-home');
+			},
+			(err) => {
+				$state.go('login');
+			}
+		);
+	}
+}
 function LoginController($scope, $state, AuthService) {
 	$scope.login = function(user) {
 		AuthService.login(user).then((x) => {
