@@ -1,0 +1,28 @@
+<div class="row">
+    <div class="col-md-12 mt-3">
+        <h2 class="mt-1" style="display: inline;">Data Pengusulan</h2>
+        <hr class="garis" />
+        <div class="table table-responsive"></div>
+        <table class="table table-bordered table-hover" id="myTable">
+            <thead class=" bg-primary">
+                <tr>
+                    <th class="text-center">No</th>
+                    <th>NIDN</th>
+                    <th>Nama Dosen</th>
+                    <th class="text-center">Berkas Pengusulan</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="item in Dosens">
+                    <td class="text-center">{{$index+1}}</td>
+                    <td>{{item.nidn}}</td>
+                    <td>{{item.namadosen}}</td>
+                    <td class="text-center">
+                        <button ui-sref="kaprodi-berkas-pengusulan({Id:item})" class="btn btn-outline-info"><span
+                                class="fas fa-eye"></span class="fas fa-file"></button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
