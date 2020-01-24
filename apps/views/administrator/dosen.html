@@ -1,7 +1,23 @@
 <div class="row">
     <div class="col-md-12 mt-3">
-        <h2 class="mt-1" style="display: inline;">Data Pengusulan</h2>
+        <h2 class="mt-1" style="display: inline;">Data Dosen</h2>
+        <button class="btn btn-outline-primary fa-pull-right" data-toggle="modal" data-target="#addDosen"><span
+                class="fas fa-plus"></span></button>
         <hr class="garis" />
+        <div class="row">
+            <div class="col-md-3">
+                <select name="fakultas" id="" class="form-control">
+                    <option value="">-- Select Fakultas --</option>
+                </select>
+            </div>
+            <div class="col-md-3">
+                <select name="progdi" id="" class="form-control">
+                    <option value="">-- Select Progdi --</option>
+                </select>
+            </div>
+        </div>
+
+
         <div class="table table-responsive"></div>
         <table class="table table-bordered table-hover" id="myTable">
             <thead class=" bg-primary">
@@ -9,20 +25,205 @@
                     <th class="text-center">No</th>
                     <th>NIDN</th>
                     <th>Nama Dosen</th>
-                    <th class="text-center">Berkas Pengusulan</th>
+                    <th>Email</th>
+                    <th class="text-center">Opsi</th>
                 </tr>
             </thead>
             <tbody>
-                <tr ng-repeat="item in Dosens">
-                    <td class="text-center">{{$index+1}}</td>
-                    <td>{{item.nidn}}</td>
-                    <td>{{item.namadosen}}</td>
+                <tr>
+                    <td class="text-center">1</td>
+                    <td>457768988</td>
+                    <td>reinhard semboari</td>
+                    <td>reinsemboari@gmail.com</td>
                     <td class="text-center">
-                        <button ui-sref="kaprodi-berkas-pengusulan({Id:item})" class="btn btn-outline-info"><span
-                                class="fas fa-eye"></span class="fas fa-file"></button>
+                        <button class="btn btn-outline-info" data-toggle="modal" data-target="#detileDosen">
+                            <span class="fas fa-eye"></span>
+                        </button>
+                        <button class="btn btn-outline-success">
+                            <span class="fas fa-edit"></span>
+                        </button>
+                        <button class="btn btn-outline-danger">
+                            <span" class="fas fa-trash"></span">
+                        </button>
                     </td>
                 </tr>
             </tbody>
         </table>
+    </div>
+</div>
+
+<!-- Modal detail  dosen-->
+<div class="modal fade" id="detileDosen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Detile Dosen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-4">
+                        <h5>NIDN</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: {{model.nidn}}</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Nama</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: {{model.namadosen}}</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Email</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: {{model.email}}</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Perguruan Tinggi</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: {{model.namauniversitas}}</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Fakultas</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: {{model.namafakultas}}</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Program Studi</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: {{model.namafakultas}}</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Tempta, Tanggal Lahir</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: {{model.tempatlahir}}, {{item.tanggallahir|date:'dd-MM-yyyy'}}</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Jenis Kelamin</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: {{model.jeniskelamin}}</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Pendidikan Terakhir</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: {{model.pendidikanterakhir}}</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Jabatan Akademik</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: {{model.jabatan}}</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5>Masa Kerja</h5>
+                    </div>
+                    <div class="col-8">
+                        <h5>: {{model.masakerja}}</h5>
+                    </div>
+
+                </div>
+
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal"> <span class="fas fa-close"></span>
+                    Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Modal tambah  dosen-->
+<div class="modal fade" id="addDosen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Dosen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form ng-submit="registrasi(model)" class="form-group">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">NIDN</label>
+                                <input ng-model="model.nidn" class="form-control" type="number"
+                                    placeholder="Example 5678900987" required="">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Nama</label>
+                                <input ng-model="model.namadosen" class="form-control" type="text"
+                                    placeholder="Example Reinhard Semboari" required="">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Email</label>
+                                <input ng-model="model.email" class="form-control" type="email"
+                                    placeholder="Example rein@gmail.com" required="">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">TTL</label>
+                                <input ng-model="model.tanggallahir" class="form-control" type="text"
+                                    placeholder="Example Jayapura 03, November 1990" required="">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Gender</label>
+                                <select class="form-control" ng-model="model.jeniskelamin">
+                                    <option> -- Pilih Gender -- </option>
+                                    <option value="Pria">Pria</option>
+                                    <option value="Wanita">Wanita</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Pendidikan Terakhir</label>
+                                <input ng-model="model.pendidikanterakhir" class="form-control" type="text"
+                                    placeholder="Example S2" required="">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">No Seri Karpeg</label>
+                                <input ng-model="model.noserikarpeg" class="form-control" type="text"
+                                    placeholder="Example 6890897890" required="">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Jabatan Akademik</label>
+                                <input type="text" name="" id="" class="form-control"
+                                    placeholder="Example Ketua Program Studi">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Jabatan Fungsional</label>
+                                <select class="form-control" ng-model="Jabatan"
+                                    ng-options="option.jabatan for option in Jabatans track by option.idjabatan"></select>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Masa Kerja</label>
+                                <input ng-model="model.masakerja" class="form-control" type="text"
+                                    placeholder="Example 5 Tahun" required="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"> <span
+                            class="fas fa-close"></span>
+                        Close</button>
+                    <button type="button" class="btn btn-primary"> <span class="fas fa-save"></span>
+                        Save</button>
+                </div>
+            </form>
+        </div>
     </div>
 </div>
