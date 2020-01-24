@@ -4,5 +4,5 @@ angular.module('app.routers', [
 	'dosen.router',
 	'kaprodi.router',
 	'rektor.router',
-	'pemeriksa.router'
+	'pemeriksa.router', 'administrator.router'
 ]);
