@@ -8,6 +8,16 @@ Content-Type: application/json
 
 ####
 
+
+POST   http://localhost:5500/api/auth/login HTTP/1.1
+Content-Type: application/json
+
+{
+    "username":"ocph23.test@gmail.com",
+    "password": "administrator"
+}
+####
+
 POST   http://localhost:5500/api/auth/registerdosen HTTP/1.1
 Content-Type: application/json
 

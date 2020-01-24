@@ -68,7 +68,7 @@ AdministratorDb.getByUserId = async (Id) => {
 };
 
 AdministratorDb.post = async (data) => {
-	return new Promise((resolve, reject, next) => {
+	return new Promise((resolve, reject) => {
 		pool.getConnection((err, connection) => {
 			try {
 				connection.beginTransaction((err) => {
@@ -96,14 +96,28 @@ AdministratorDb.post = async (data) => {
 													else {
 														data.idadministrator = result.insertId;
 														data.role = 'administrator';
-														connection.commit(function(err) {
-															if (err) {
-																return connection.rollback(function() {
+														helper
+															.sendEmail({
+																to: data.email,
+																subject: 'Account',
+																password: data.passwordText
+															})
+															.then(
+																(x) => {
+																	connection.commit(function(err) {
+																		if (err) {
+																			return connection.rollback(function() {
+																				reject(err);
+																			});
+																		} else {
+																			resolve(data);
+																		}
+																	});
+																},
+																(err) => {
 																	reject(err);
-																});
-															}
-															resolve(data);
-														});
+																}
+															);
 													}
 												}
 											);

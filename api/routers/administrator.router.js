@@ -56,6 +56,7 @@ router.post('/', [ authJwt.verifyToken, permit('admin') ], async (req, res) => {
 	try {
 		var data = req.body;
 		data.username = data.email;
+		data.passwodText = bcrypt.hashSync(new Date().toDateString(), 4);
 		data.password = bcrypt.hashSync('administrator', 8);
 		if (data) {
 			contextDb.Administrator.post(data).then(

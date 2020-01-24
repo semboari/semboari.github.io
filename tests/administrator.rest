@@ -2,6 +2,7 @@
 @controller=administrator
 @host=http://localhost:5500/api/{{controller}}
 @token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6NDYsInJvbGVzIjpbImFkbWluaXN0cmF0b3IiXSwiaWF0IjoxNTc5ODcxNzIxLCJleHAiOjE1Nzk5NTgxMjF9.lMj5ieNDSkiucDEgUqtAc1Nkig4m0n9XbR5SeXQQS7Q
+@token1=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTc5ODgzNDcxLCJleHAiOjE1Nzk5Njk4NzF9.giP6M9tMrkcBjHzjsxVX3opvSgOyQLz417Q5qBeAMrU
 
 POST   http://localhost:5500/api/auth/login HTTP/1.1
 Content-Type: application/json
@@ -27,15 +28,17 @@ Authorization: bearer {{token}}
 GET {{host}}/1 HTTP/1.1
 Content-Type: application/json
 Authorization: bearer {{token}}
+
+
 ####
 
 POST {{host}} HTTP/1.1
 Content-Type: application/json
-Authorization: bearer {{token}}
+Authorization: bearer {{token1}}
 
 {
-    "nama":"Santi",
-    "email":"oncph23.test@gmail.com",
+    "nama":"Ocph ",
+    "email":"ocph23@gmail.com",
     "telepon":"0811481111",
     "iduniversitas":1 
 }
