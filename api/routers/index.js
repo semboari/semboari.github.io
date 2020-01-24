@@ -11,4 +11,5 @@ module.exports = function(app) {
 	app.use('/api/peraturan', require('./peraturan.router'));
 	app.use('/api/dosen', require('./dosen.router'));
 	app.use('/api/penilaian', require('./penilaian.router'));
+	app.use('/api/administrator', require('./administrator.router'));
 };

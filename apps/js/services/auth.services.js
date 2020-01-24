@@ -60,7 +60,7 @@ function AuthService($http, $q, StorageService, $state, helperServices, message)
 			} else
 				$http({
 					method: 'get',
-					url: helperServices.url + '/api/auth/profile/' + result.idusers,
+					url: helperServices.url + '/api/auth/profile',
 					headers: getHeader()
 				}).then(
 					(res) => {
@@ -144,13 +144,12 @@ function AuthService($http, $q, StorageService, $state, helperServices, message)
 
 	function logoff() {
 		StorageService.clear();
-		$state.go('login');
 	}
 
 	function getUserName() {
 		if (userIsLogin) {
 			var result = StorageService.getObject('user');
-			return result.username;
+			if (result) return result.username;
 		}
 	}
 

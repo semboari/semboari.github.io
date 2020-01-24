@@ -55,6 +55,11 @@
   color: red;
 }
 
+#btnchangepassword {
+  margin-top: 10px;
+  width: 155px;
+}
+
 .dataTables_length {
   margin: 0 !important;
 }

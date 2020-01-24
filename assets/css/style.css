@@ -71,7 +71,7 @@ body {
 .garis-biru {
 	width: 400px;
 	height: 400px;
-	background: radial-gradient(circle, rgba(0, 121, 255, 1) 55%, rgba(194, 154, 6, 1) 100%);
+	background: radial-gradient(circle, rgba(0, 121, 255, 1) 55%, rgb(250, 197, 8) 100%);
 	border-radius: 100%;
 
 	margin-left: 90px;

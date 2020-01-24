@@ -9,7 +9,8 @@ const dbContext = {
 	Peraturan: require('./peraturan.db'),
 	JabatanFuntional: require('./jabatanfungsional.db'),
 	Dosen: require('./dosen.db'),
-	Penilaian: require('./penilaian.db')
+	Penilaian: require('./penilaian.db'),
+	Administrator: require('./administrator.db')
 };
 
 module.exports = dbContext;

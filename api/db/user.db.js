@@ -20,7 +20,8 @@ UserDb.login = async (user) => {
 									if (result.length <= 0) {
 										var sql = 'insert into role (name,deskripsi) values ? ';
 										var values = [
-											[ 'admin', 'Administrator' ],
+											[ 'admin', 'Admin' ],
+											[ 'administrator', 'Administrator' ],
 											[ 'dosen', 'Dosen' ],
 											[ 'kaprodi', 'Kaprodi' ],
 											[ 'pemeriksa', 'Pemeriksa Penelitian' ],
@@ -74,7 +75,7 @@ UserDb.login = async (user) => {
 										});
 									} else {
 										pool.query(
-											`SELECT users.idusers, users.username, users.password, users.email,
+											`SELECT users.idusers, users.username, users.password, users.email, users.photo,
 									role.name as role
 								  FROM
 									users LEFT JOIN
@@ -87,11 +88,10 @@ UserDb.login = async (user) => {
 												} else {
 													connection.commit(function(err) {
 														if (err) {
-															return connection.rollback(function() {
+															connection.rollback(function() {
 																reject(err);
 															});
-														}
-														return resolve(result);
+														} else resolve(result);
 													});
 												}
 											}
@@ -112,14 +112,21 @@ UserDb.login = async (user) => {
 
 UserDb.changepassword = async (user) => {
 	return new Promise((resolve, reject, nex) => {
-		pool.query(
-			'update users set password=? where idusers=?',
-			[ user.newpassword, user.iduseers ],
-			(err, result) => {
-				if (err) return reject(err);
-				resolve(true);
-			}
-		);
+		pool.query('update users set password=? where idusers=?', [ user.newpassword, user.idusers ], (err, result) => {
+			if (err) {
+				return reject(err);
+			} else resolve(true);
+		});
+	});
+};
+
+UserDb.changeFoto = async (user) => {
+	return new Promise((resolve, reject, nex) => {
+		pool.query('update users set photo=? where idusers=?', [ user.photo, user.idusers ], (err, result) => {
+			if (err) {
+				return reject(err);
+			} else resolve(true);
+		});
 	});
 };
 
@@ -212,7 +219,7 @@ UserDb.profile = async (userId) => {
 		universitas.namauniversitas,
 		fakultas.idfakultas,
 		universitas.iduniversitas,
-		users.email,
+		users.email,users.photo,
 		role.idrole,
 		role.name AS rolename,
 		role.deskripsi,

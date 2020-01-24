@@ -8,7 +8,7 @@ angular
 function DosenController($scope, AuthService, PenilaianService) {
 	AuthService.Init([ 'dosen' ]);
 }
-function HomeController($scope, AuthService, PenilaianService) {
+function HomeController($scope, AuthService, PenilaianService, message, $http, helperServices) {
 	$scope.datas = [];
 	$scope.tanggal = new Date();
 	AuthService.profile().then((x) => {

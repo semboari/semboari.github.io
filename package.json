@@ -29,7 +29,8 @@
     "popper.js": "^1.16.0",
     "rxjs": "^6.5.3",
     "sequelize": "^4.39.0",
-    "swangular": "^1.4.3"
+    "swangular": "^1.4.3",
+    "uuid": "^3.4.0"
   },
   "bugs": {
     "url": "https://github.com/semboari/desain-ta-rein/issues"
