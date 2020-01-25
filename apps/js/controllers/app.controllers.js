@@ -4,5 +4,6 @@ angular.module('app.controllers', [
 	'dosen.controller',
 	'rektor.controller',
 	'kaprodi.controller',
-	'peneliti.controller'
+	'peneliti.controller',
+	'administrator.controller'
 ]);
