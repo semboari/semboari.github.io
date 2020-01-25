@@ -1,54 +1,63 @@
 <div class="row">
     <div class="col-md-12 mt-3">
-        <h2 class="mt-1" style="display: inline;">Data Dosen</h2>
-        <button class="btn btn-outline-primary fa-pull-right" data-toggle="modal" data-target="#addDosen"><span
-                class="fas fa-plus"></span></button>
-        <hr class="garis" />
-        <div class="row">
-            <div class="col-md-3">
-                <select name="fakultas" id="" class="form-control">
-                    <option value="">-- Select Fakultas --</option>
-                </select>
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title" style="display: inline; font-size: 20px;">Data Dosen</div>
+                <button class="btn btn-outline-primary fa-pull-right" data-toggle="modal" data-target="#addDosen"><span
+                        class="fas fa-plus"></span></button>
             </div>
-            <div class="col-md-3">
-                <select name="progdi" id="" class="form-control">
-                    <option value="">-- Select Progdi --</option>
-                </select>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <select name="fakultas" id="" class="form-control">
+                            <option value="">-- Select Fakultas --</option>
+                        </select>
+                    </div>
+                    <div class="col-md-3">
+                        <select name="progdi" id="" class="form-control">
+                            <option value="">-- Select Progdi --</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="table table-responsive mt-3">
+                    <table class="table table-bordered table-hover" id="myTable">
+                        <thead class=" bg-primary">
+                            <tr>
+                                <th class="text-center">No</th>
+                                <th>NIDN</th>
+                                <th>Nama Dosen</th>
+                                <th>Email</th>
+                                <th class="text-center">Opsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="text-center">1</td>
+                                <td>457768988</td>
+                                <td>reinhard semboari</td>
+                                <td>reinsemboari@gmail.com</td>
+                                <td class="text-center">
+                                    <button class="btn btn-outline-info" data-toggle="modal" data-target="#detileDosen">
+                                        <span class="fas fa-eye"></span>
+                                    </button>
+                                    <button class="btn btn-outline-success">
+                                        <span class="fas fa-edit"></span>
+                                    </button>
+                                    <button class="btn btn-outline-danger">
+                                        <span" class="fas fa-trash"></span">
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
 
 
-        <div class="table table-responsive"></div>
-        <table class="table table-bordered table-hover" id="myTable">
-            <thead class=" bg-primary">
-                <tr>
-                    <th class="text-center">No</th>
-                    <th>NIDN</th>
-                    <th>Nama Dosen</th>
-                    <th>Email</th>
-                    <th class="text-center">Opsi</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <td class="text-center">1</td>
-                    <td>457768988</td>
-                    <td>reinhard semboari</td>
-                    <td>reinsemboari@gmail.com</td>
-                    <td class="text-center">
-                        <button class="btn btn-outline-info" data-toggle="modal" data-target="#detileDosen">
-                            <span class="fas fa-eye"></span>
-                        </button>
-                        <button class="btn btn-outline-success">
-                            <span class="fas fa-edit"></span>
-                        </button>
-                        <button class="btn btn-outline-danger">
-                            <span" class="fas fa-trash"></span">
-                        </button>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+
+
+
     </div>
 </div>
 
