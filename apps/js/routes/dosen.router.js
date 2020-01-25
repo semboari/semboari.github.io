@@ -1,4 +1,4 @@
-angular.module('dosen.router', ['ui.router']).config(function ($stateProvider, $urlRouterProvider) {
+angular.module('dosen.router', [ 'ui.router' ]).config(function($stateProvider, $urlRouterProvider) {
 	$stateProvider.state('dosen', {
 		url: '/dosen',
 		controller: 'dosen.controller',
@@ -29,7 +29,7 @@ angular.module('dosen.router', ['ui.router']).config(function ($stateProvider, $
 	$stateProvider.state('dosen-profile', {
 		url: '/profile',
 		parent: 'dosen',
-		// controller: 'dosen.addpengusulan.controller',
+		controller: 'dosen.profile.controller',
 		templateUrl: '../apps/views/dosen/profile.html'
 	});
 });

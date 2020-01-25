@@ -42,51 +42,21 @@
                         <div class="card-body">
                             <div class="table table-responsive">
                                 <table class="table table-hover table-bordered">
-                                    <tr>
-                                        <td colspan="4" class="bg-dark text-light">Unsur Utama</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">A</td class="text-center">
-                                        <td colspan="3">Pendidikan</td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-center">1</td>
-                                        <td>Pendidikan Formal</td>
-                                        <td>100</td>
-                                    </tr>
-                                    <tr>
-                                        <td></td>
-                                        <td class="text-center">2</td>
-                                        <td>Mengikuti Diklat Prajabatan</td>
-                                        <td>100</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">B</td>
-                                        <td colspan="2">Pelaksanaan Pendidikan</td>
-                                        <td>100</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">C</td>
-                                        <td colspan="2">Pelaksanaan Penelitian</td>
-                                        <td>100</td>
-                                    </tr>
-                                    <tr>
-                                        <td class="text-center">D</td>
-                                        <td colspan="2">Pelaksanaan Pengabdian Kepada Masyarakat</td>
-                                        <td>100</td>
-                                    </tr>
-                                    <tr class="bg-dark text-light">
-                                        <td colspan="4">Unsur Penunjang</td>
-                                    </tr>
-                                    <tr>
-                                        <td colspan="3">Penunjang Tugas Dosen</td>
-                                        <td>100</td>
-                                    </tr>
-                                    <tr class="bg-primary text-light">
-                                        <td colspan="3"><strong>Jumlah Akumulatif Angka Kredit Keseluruhan</strong></td>
-                                        <td>100</td>
-                                    </tr>
+                                    <tbody ng-repeat="item in datas">
+                                        <tr>
+                                            <td class="text-center">{{angkatohuruf($index+1)}}</td class="text-center">
+                                            <td colspan="5">{{item.namaunsur}}</td>
+                                        </tr>
+                                        <tr ng-repeat="data in item.subunsur">
+                                            <td></td>
+                                            <td class="text-center">{{$index+1}}</td class="text-center">
+                                            <td colspan="3">{{data.namasubunsur}}</td>
+                                            <td colspan="3">{{data.totalsubunsur}}</td>
+                                        </tr>
+                                    </tbody>
+
+
+
                                 </table>
                             </div>
                         </div>
@@ -110,13 +80,14 @@
                                         <td>Angka Kredit</td>
                                         <td>Kebutuhan Angka Kredit</td>
                                     </tr>
-                                    <tr>
-                                        <td>Asisten alhi</td>
-                                        <td>Penata Muda</td>
-                                        <td>III</td>
-                                        <td>A</td>
-                                        <td>200</td>
-                                        <td>100</td>
+                                    <tr ng-repeat="item in Jabatans">
+                                        <td>{{item.jabatan}}</td>
+                                        <td>{{item.pangkat}}</td>
+                                        <td>{{item.golongan}}</td>
+                                        <td>{{item.ruang}}</td>
+                                        <td>{{item.ak}}</td>
+                                        <td>{{item.nilai}}</td>
+
                                     </tr>
                                 </table>
                             </div>

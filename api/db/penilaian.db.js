@@ -162,7 +162,6 @@ PenilaianDB.rekapitulasi = (id) => {
 				penilaian.idpenilaian,
 				penilaian.tanggal,
 				subunsur.namasubunsur,
-				subunsur.jenisunsur,
 				unsur.idunsur,
 				unsur.nama AS namaunsur,
 				peraturan.tahun, subunsur.ak,

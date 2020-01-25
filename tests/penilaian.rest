@@ -1,8 +1,7 @@
 
 @controller=penilaian
 @host=http://localhost:5500/api/{{controller}}
-@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MSwicm9sZXMiOlsiYWRtaW4iXSwiaWF0IjoxNTc5NjI0NDEzLCJleHAiOjE1Nzk3MTA4MTN9.kJv0dUb8PIMGjN0DjXX-sMHeZJBN0PbheaoLEPxj4jI
-###
+@token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6MTAsInJvbGVzIjpbImRvc2VuIiwia2Fwcm9kaSJdLCJpYXQiOjE1Nzk5NzkwMjQsImV4cCI6MTU4MDA2NTQyNH0.OEFWh-KupsQgJc93HvcK9FosHCtYaniPoHhGv3zCyx0
 
 POST   http://localhost:5500/api/auth/login HTTP/1.1
 Content-Type: application/json

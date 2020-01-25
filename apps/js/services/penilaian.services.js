@@ -4,7 +4,7 @@ function PenilaianService($http, AuthService, helperServices, $q, message) {
 	var controller = '/api/penilaian/';
 	var datas = [];
 
-	return { get: get, post: post, put: put, delete: deleteItem };
+	return { get: get, post: post, put: put, delete: deleteItem, rekapitulasi: rekapitulasi };
 
 	function get(id) {
 		var defer = $q.defer();
@@ -80,6 +80,24 @@ function PenilaianService($http, AuthService, helperServices, $q, message) {
 			}
 		);
 
+		return defer.promise;
+	}
+
+	function rekapitulasi(id) {
+		var defer = $q.defer();
+		$http({
+			url: helperServices.url + controller + 'rekapitulasi/' + id,
+			method: 'get',
+			headers: AuthService.getHeader()
+		}).then(
+			(x) => {
+				defer.resolve(x);
+			},
+			(err) => {
+				defer.reject(err);
+				message.error(err);
+			}
+		);
 		return defer.promise;
 	}
 }

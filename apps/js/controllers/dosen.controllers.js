@@ -3,25 +3,60 @@ angular
 	.controller('dosen.controller', DosenController)
 	.controller('dosen.home.controller', HomeController)
 	.controller('dosen.pengusulan.controller', PengusulanController)
+	.controller('dosen.profile.controller', ProfileController)
 	.controller('dosen.addpengusulan.controller', AddPengusulanController);
 
 function DosenController($scope, AuthService, PenilaianService) {
 	AuthService.Init([ 'dosen' ]);
 }
-function HomeController($scope, AuthService, PenilaianService, message, $http, helperServices) {
+
+function ProfileController($scope, AuthService) {
+	AuthService.profile().then((x) => {
+		$scope.Profile = x;
+	});
+}
+function HomeController($scope, AuthService, PenilaianService, JabatanService, message, $http, helperServices) {
 	$scope.datas = [];
 	$scope.tanggal = new Date();
 	AuthService.profile().then((x) => {
 		var iddosen = x.iddosen;
 		$scope.Profile = x;
-		PenilaianService.get(iddosen).then((x) => {
-			$scope.datas = x;
 
+		PenilaianService.rekapitulasi($scope.Profile.iddosen).then((x) => {
+			$scope.datas = x.data;
 			$scope.total = $scope.datas.reduce((total, item) => {
-				return total + item.akview;
+				return total + item.total;
 			}, 0);
+
+			JabatanService.get().then((x) => {
+				x.forEach((element) => {
+					element.nilai = element.ak - $scope.total;
+					if (element.nilai <= 0) {
+						element.nilai = 'Cukup';
+					}
+				});
+				$scope.Jabatans = x;
+			});
 		});
 	});
+	$scope.angkatohuruf = function(data) {
+		switch (data) {
+			case 1:
+				return 'A';
+			case 2:
+				return 'B';
+			case 3:
+				return 'C';
+			case 4:
+				return 'D';
+			case 5:
+				return 'E';
+			case 6:
+				return 'F';
+			default:
+				return 'G';
+		}
+	};
 }
 function PengusulanController(
 	$scope,

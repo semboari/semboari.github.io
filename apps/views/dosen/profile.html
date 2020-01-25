@@ -26,7 +26,8 @@
                             <p class="col-md-3">Jenis Kelamin</p>
                             <p class="col-md-9">: {{Profile.jeniskelamin}}</p>
                             <p class="col-md-3">TTL</p>
-                            <p class="col-md-9">: {{Profile.tempat}}, {{Profile.tanggal}}</p>
+                            <p class="col-md-9">: {{Profile.tempatlahir}}, {{Profile.tanggallahir|date:'dd-MM-yyyy'}}
+                            </p>
                             <p class="col-md-3">Pendidikan Terakhir</p>
                             <p class="col-md-9">: {{Profile.pendidikanterakhir}}</p>
                             <p class="col-md-3">Jabatan Fungsional</p>
@@ -35,7 +36,7 @@
                             <p class="col-md-9">: {{Profile.jabatan}}</p>
                             <p class="col-md-3">Universitas</p>
                             <p class="col-md-9">: {{Profile.namauniversitas}}, {{Profile.namafakultas}},
-                                {{Profile.programstudi}}</p>
+                                {{Profile.namaprogramstudi}}</p>
                             <br>
 
                         </div>
