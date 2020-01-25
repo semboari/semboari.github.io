@@ -1,37 +1,43 @@
 <div class="row">
     <div class="col-md-12 mt-3">
-        <h2 class="mt-1" style="display: inline;">Data Universitas</h2>
-        <button class="btn btn-outline-primary fa-pull-right" data-toggle="modal" data-target="#universitas">
-            <span class="fas fa-plus"></span>
-        </button>
-        <hr class="garis" />
-        <div class="table table-responsive">
-            <table class="table table-bordered table-hover" datatable="ng" id="myTable">
-                <thead class=" bg-primary">
-                    <tr>
-                        <th class="text-center">No</th>
-                        <th>Nama Universitas</th>
-                        <th class="text-center">Opsi</th>
-                    </tr>
-                </thead>
-                <tbody ng-repeat="item in Datas">
-                    <tr>
-                        <td class="text-center">{{$index+1}}</td>
-                        <td>{{item.namauniversitas}}</td>
-                        <td class="text-center">
-                            <button ng-click="SelectedItem(item)" data-toggle="modal" data-target="#universitas"
-                                class="btn btn-outline-success">
-                                <span class="fas fa-edit"></span>
-                            </button>
-                            <button ng-click="SelectedItem(item)" class="btn btn-outline-danger" data-toggle="modal"
-                                data-target="#delete">
-                                <span class="fas fa-eraser"></span>
-                            </button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title" style="display: inline; font-size: 30px;">Data Universitas</div>
+                <button class="btn btn-outline-primary fa-pull-right" data-toggle="modal" data-target="#universitas">
+                    <span class="fas fa-plus"></span>
+                </button>
+            </div>
+            <div class="card-body">
+                <div class="table table-responsive">
+                    <table class="table table-bordered table-hover" datatable="ng" id="myTable">
+                        <thead class=" bg-primary">
+                            <tr>
+                                <th class="text-center">No</th>
+                                <th>Nama Universitas</th>
+                                <th class="text-center">Opsi</th>
+                            </tr>
+                        </thead>
+                        <tbody ng-repeat="item in Datas">
+                            <tr>
+                                <td class="text-center">{{$index+1}}</td>
+                                <td>{{item.namauniversitas}}</td>
+                                <td class="text-center">
+                                    <button ng-click="SelectedItem(item)" data-toggle="modal" data-target="#universitas"
+                                        class="btn btn-outline-success">
+                                        <span class="fas fa-edit"></span>
+                                    </button>
+                                    <button ng-click="SelectedItem(item)" class="btn btn-outline-danger"
+                                        data-toggle="modal" data-target="#delete">
+                                        <span class="fas fa-eraser"></span>
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+
     </div>
 </div>
 

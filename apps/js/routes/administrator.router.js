@@ -1,4 +1,4 @@
-angular.module('administrator.router', [ 'ui.router' ]).config(function($stateProvider, $urlRouterProvider) {
+angular.module('administrator.router', ['ui.router']).config(function ($stateProvider, $urlRouterProvider) {
 	$stateProvider
 		.state('administrator', {
 			url: '/administrator',
@@ -12,10 +12,26 @@ angular.module('administrator.router', [ 'ui.router' ]).config(function($statePr
 			templateUrl: '../apps/views/administrator/home.html'
 		})
 		.state('administrator-dosen', {
-			url: '/fakultas',
+			url: '/dosen',
 			parent: 'administrator',
 			controller: 'administrator.dosen.controller',
 			templateUrl: '../apps/views/administrator/dosen.html'
-		});
+		})
+
+		.state('administrator-fakultas', {
+			url: '/fakultas',
+			parent: 'administrator',
+			controller: 'administrator.fakultas.controller',
+			templateUrl: '../apps/views/administrator/fakultas.html'
+		})
+
+		.state('administrator-progdi', {
+			url: '/progdi',
+			parent: 'administrator',
+			controller: 'administrator.progdi.controller',
+			templateUrl: '../apps/views/administrator/progdi.html'
+		})
+
+	;
+
 });
- s

@@ -1,21 +1,20 @@
 <div class="row">
     <div class="col-md-12">
-        <div class="row">
-            <div class="col-md-12">
-                <h3 class="mt-1" style="display: inline-block;">Data Sub Unsur Kegiatan</h3>
-                <hr class="garis">
-            </div>
-            <div class="col-md-4">
-                <form class="input-group">
-                    <select ng-change="SelectPeraturan()" ng-model="Peraturan" class="form-control"
-                        ng-options="option.tahun for option in Peraturans track by option.idperaturan"></select>
-                </form>
-            </div>
-            <div class="col-md-4">
+        <div class="card mt-3">
+            <div class="card-header">
+                <div class="card-title" style="display: inline; font-size: 30px;">Data Sub Unsur Kegiatan</div>
                 <button class="btn btn-success fa-pull-right" data-toggle="modal" data-target="#subunsur"><span
                         class="fas fa-plus"></span></button>
             </div>
-            <div class="col-md-12">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-3">
+                        <form class="input-group">
+                            <select ng-change="SelectPeraturan()" ng-model="Peraturan" class="form-control"
+                                ng-options="option.tahun for option in Peraturans track by option.idperaturan"></select>
+                        </form>
+                    </div>
+                </div>
                 <div class="table table-responsive mt-3">
                     <table class="table table-bordered table-hover" datatable="ng" id="myTable">
                         <thead class=" bg-primary">

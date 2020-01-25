@@ -1,56 +1,70 @@
 <div class="row">
     <div class="col-md-6 mt-3">
-        <h4 style="display: inline;">Tahun Peraturan</h4>
-        <button class="btn btn-success fa-pull-right" data-toggle="modal" data-target="#tahun" type="submit"><i
-                class="fas fa-plus"></i></button>
-        <div class="tabel table-responsive mt-3">
-            <table class="table table-bordered table-hover" datatable="ng">
-                <thead class="bg-primary text-light">
-                    <tr class="text-center">
-                        <th>Tahun</th>
-                        <th>Opsi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr class="text-center" ng-repeat="item in Peraturan">
-                        <td>{{item.tahun}}</td>
-                        <td>
-                            <button data-toggle="modal" data-target="#tahun" ng-click="SelectItemPeraturan(item)"
-                                class="btn btn-primary"><span class="fas fa-edit"></span></button>
-                            <button ng-click="deletePeraturan(item)" class="btn btn-danger"><span
-                                    class="fas fa-eraser"></span></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title" style="display: inline; font-size: 30px;">Data Tahun Peraturan</div>
+                <button class="btn btn-success fa-pull-right" data-toggle="modal" data-target="#tahun" type="submit"><i
+                        class="fas fa-plus"></i></button>
+            </div>
+            <div class="card-body">
+                <div class="tabel table-responsive mt-3">
+                    <table class="table table-bordered table-hover" datatable="ng">
+                        <thead class="bg-primary text-light">
+                            <tr class="text-center">
+                                <th>Tahun</th>
+                                <th>Opsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr class="text-center" ng-repeat="item in Peraturan">
+                                <td>{{item.tahun}}</td>
+                                <td>
+                                    <button data-toggle="modal" data-target="#tahun"
+                                        ng-click="SelectItemPeraturan(item)" class="btn btn-primary"><span
+                                            class="fas fa-edit"></span></button>
+                                    <button ng-click="deletePeraturan(item)" class="btn btn-danger"><span
+                                            class="fas fa-eraser"></span></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-md-6 mt-3">
-        <h4 style="display: inline;">Data Unsur</h4>
-        <button class="btn btn-success fa-pull-right" data-toggle="modal" data-target="#unsur" type="submit"><i
-                class="fas fa-plus"></i></button>
-        <div class="tabel table-responsive mt-3">
-            <table class="table table-bordered table-hover" datatable="ng">
-                <thead class="bg-primary text-light">
-                    <tr>
-                        <th>Unsur</th>
-                        <th class="text-center">Opsi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="item in Unsur">
-                        <td>{{item.nama}}</td>
-                        <td>
-                            <button data-toggle="modal" data-target="#unsur" ng-click="SelectItemUnsur(item)"
-                                class="btn btn-primary"><span class="fas fa-edit"></span></button>
-                            <button ng-click="deleteUnsur(item)" class="btn btn-danger"><span
-                                    class="fas fa-eraser"></span></button>
-                        </td>
-                    </tr>
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title" style="display: inline; font-size: 30px;">Data Unsur</div>
+                <button class="btn btn-success fa-pull-right" data-toggle="modal" data-target="#unsur" type="submit"><i
+                        class="fas fa-plus"></i></button>
+            </div>
+            <div class="card-body">
+                <div class="tabel table-responsive mt-3">
+                    <table class="table table-bordered table-hover" datatable="ng">
+                        <thead class="bg-primary text-light">
+                            <tr>
+                                <th>Unsur</th>
+                                <th class="text-center">Opsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in Unsur">
+                                <td>{{item.nama}}</td>
+                                <td>
+                                    <button data-toggle="modal" data-target="#unsur" ng-click="SelectItemUnsur(item)"
+                                        class="btn btn-primary"><span class="fas fa-edit"></span></button>
+                                    <button ng-click="deleteUnsur(item)" class="btn btn-danger"><span
+                                            class="fas fa-eraser"></span></button>
+                                </td>
+                            </tr>
 
-                </tbody>
-            </table>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
+
     </div>
 </div>
 
@@ -76,7 +90,8 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"> <span
                             class="fas fa-close"></span>
                         Close</button>
-                    <button type="submit" class="btn btn-danger"> <span class="fas fa-save"></span> Save</button>
+                    <button type="submit" class="btn btn-danger"> <span class="fas fa-save"></span>
+                        Save</button>
                 </div>
             </div>
         </form>
@@ -104,7 +119,8 @@
                     <button type="button" class="btn btn-secondary" data-dismiss="modal"> <span
                             class="fas fa-close"></span>
                         Close</button>
-                    <button type="submit" class="btn btn-danger"> <span class="fas fa-save"></span> Save</button>
+                    <button type="submit" class="btn btn-danger"> <span class="fas fa-save"></span>
+                        Save</button>
                 </div>
             </div>
         </form>

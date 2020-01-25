@@ -1,42 +1,46 @@
 <div class="row">
     <div class="col-md-12 mt-3">
-        <h2 class="mt-1" style="display: inline;">Data Jabatan Fungsional</h2>
-        <button data-toggle="modal" ng-click="model={}" data-target="#tambah-modal"
-            class="btn btn-success fa-pull-right"><span class="fas fa-plus"></span></button>
-        <hr class="garis">
-        <div class="table table-responsive">
-            <table class="table table-bordered table-hover" datatable="ng" id="myTable">
-                <thead class=" bg-primary">
-                    <tr>
-                        <th class="text-center">No</th>
-                        <th>Nama</th>
-                        <th>Angka Kredit</th>
-                        <th>Pangkat</th>
-                        <th>Golongan</th>
-                        <th>Ruang</th>
-                        <th class="text-center">Opsi</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr ng-repeat="item in Datas">
-                        <td class="text-center">{{$index+1}}</td>
-                        <td>{{item.jabatan}}</td>
-                        <td>{{item.ak}}</td>
-                        <td>{{item.pangkat}}</td>
-                        <td>{{item.golongan}}</td>
-                        <td>{{item.ruang}}</td>
-                        <td class="text-center">
-                            <button ng-click="SelectItem(item)" data-toggle="modal" data-target="#tambah-modal"
-                                class="btn btn-outline-success"><span class="fas fa-edit"></span></button>
-                            <button ng-click="delete(item)" class="btn btn-outline-danger"><span
-                                    class="fas fa-eraser"></span></button>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+        <div class="card">
+            <div class="card-header">
+                <div class="card-title" style="display: inline; font-size: 30px;">Data Jabatan Fungsional</div>
+                <button data-toggle="modal" ng-click="model={}" data-target="#tambah-modal"
+                    class="btn btn-success fa-pull-right"><span class="fas fa-plus"></span></button>
+            </div>
+            <div class="card-body">
+                <div class="table table-responsive">
+                    <table class="table table-bordered table-hover" datatable="ng" id="myTable">
+                        <thead class=" bg-primary">
+                            <tr>
+                                <th class="text-center">No</th>
+                                <th>Nama</th>
+                                <th>Angka Kredit</th>
+                                <th>Pangkat</th>
+                                <th>Golongan</th>
+                                <th>Ruang</th>
+                                <th class="text-center">Opsi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="item in Datas">
+                                <td class="text-center">{{$index+1}}</td>
+                                <td>{{item.jabatan}}</td>
+                                <td>{{item.ak}}</td>
+                                <td>{{item.pangkat}}</td>
+                                <td>{{item.golongan}}</td>
+                                <td>{{item.ruang}}</td>
+                                <td class="text-center">
+                                    <button ng-click="SelectItem(item)" data-toggle="modal" data-target="#tambah-modal"
+                                        class="btn btn-outline-success"><span class="fas fa-edit"></span></button>
+                                    <button ng-click="delete(item)" class="btn btn-outline-danger"><span
+                                            class="fas fa-eraser"></span></button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
-
 </div>
 
 <!-- Modal tambah jafung-->

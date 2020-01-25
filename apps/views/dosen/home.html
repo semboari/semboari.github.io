@@ -1,53 +1,74 @@
             <div class="row">
                 <div class="col-md-12">
-                    <div class="row">
-                        <div class="col-md-10">
-                            <div class="row mt-3 mb-4">
-                                <div class="col-md-3 ">
-                                    <div class="card bg-success text-light text-center">
-                                        <div class=" card-header">Akumulatih AK Diperoleh</div>
-                                        <div class="card-body">
-                                            <h2>{{total}}</h2>
-                                        </div>
-                                        <div class="card-footer">
-                                            <p>Last Update {{tanggal|date:'dd-MM-yyyy'}}</p>
-                                        </div>
-                                    </div>
+                    <div class="row mt-3">
+                        <div class="col-md-3 ">
+                            <div class="card bg-success text-light text-center">
+                                <div class=" card-header">Akumulatih AK Diperoleh</div>
+                                <div class="card-body">
+                                    <h2>{{total}}</h2>
                                 </div>
-                                <div class="col-md-3 ">
-                                    <div class="card bg-yellow text-light text-center">
-                                        <div class="card-header">Jumlah Perbaiakan Berkas</div>
-                                        <div class="card-body">
-                                            <h2>0</h2>
-                                        </div>
-                                        <div class="card-footer">
-                                            <p>Last Update 2019, 01, 01</p>
-                                        </div>
+                                <div class="card-footer">
+                                    <p>Last Update {{tanggal|date:'dd-MM-yyyy'}}</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-3 ">
+                            <div class="card bg-yellow text-light text-center">
+                                <div class="card-header">Jumlah Perbaiakan Berkas</div>
+                                <div class="card-body">
+                                    <h2>0</h2>
+                                </div>
+                                <div class="card-footer">
+                                    <p>Last Update 2019, 01, 01</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card mt-3">
+                        <div class="card-header bg-info text-light">
+                            <div class="card-title" style="display: inline; font-size: 20px;">Home</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="row">
+                                <div class="col-md-3 text-center img-fluid">
+                                    <fotoprofile></fotoprofile>
+                                    <changepassword></changepassword>
+                                </div>
+                                <div class="col-md-9">
+                                    <h2>Selamat Datang <span>{{Profile.namadosen}}</span><br><span
+                                            style="font-size: 15px;">Anda Menggunakan SIPAK dengan hak akses Sebagai
+                                            Dosen Pada Universitas
+                                            Sains Dan Teknologi
+                                            Jayapura</span>
+                                    </h2>
+                                    <hr style="border-bottom: 1px solid">
+                                    <div class="row">
+                                        <p class="col-md-3">NIDN</p>
+                                        <p class="col-md-9">: 12345678</p>
+                                        <p class="col-md-3">Email</p>
+                                        <p class="col-md-9">: rein@gmail.com</p>
+                                        <p class="col-md-3">Jenis Kelamin</p>
+                                        <p class="col-md-9">: Laki Laki</p>
+                                        <p class="col-md-3">TTL</p>
+                                        <p class="col-md-9">: Jayapura, 03 November 1991</p>
+                                        <p class="col-md-3">Pendidikan Terakhir</p>
+                                        <p class="col-md-9">: S2</p>
+                                        <p class="col-md-3">Jabatan Fungsional</p>
+                                        <p class="col-md-9">: Lektor</p>
+                                        <p class="col-md-3">Jabatan Akademik</p>
+                                        <p class="col-md-9">: Ketua Jurusan</p>
+                                        <p class="col-md-3">Universitas</p>
+                                        <p class="col-md-9">: Universitas Sains Dan Teknologi Jayapura, Fakultas Ilmu
+                                            Komputer Dan Manajemen, Jurusan Sistem Informasi</p>
+                                        <br>
+
                                     </div>
                                 </div>
                             </div>
-
-                            <h2>Selamat Datang <span>{{Profile.namadosen}}</span><br><span style="font-size: 15px;">Anda
-                                    Saat Ini Sedang
-                                    Menggunakan SIPAK dengan hak akses Sebagai Dosen Pada Universitas
-                                    Sains Dan Teknologi
-                                    Jayapura</span>
-                            </h2>
-                            <hr>
-                            <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-                                tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-                                quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-                                consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-                                cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-                                proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</p>
-
-                        </div>
-                        <div class="col-md-2 mt-3">
-                            <fotoprofile></fotoprofile>
-                            <changepassword></changepassword>
                         </div>
                     </div>
-
                 </div>
 
             </div>
