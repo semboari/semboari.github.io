@@ -27,6 +27,7 @@
                                 <th>NIDN</th>
                                 <th>Nama Dosen</th>
                                 <th>Email</th>
+                                <th>Status</th>
                                 <th class="text-center">Opsi</th>
                             </tr>
                         </thead>
@@ -36,9 +37,13 @@
                                 <td>457768988</td>
                                 <td>reinhard semboari</td>
                                 <td>reinsemboari@gmail.com</td>
+                                <td>Dosen</td>
                                 <td class="text-center">
                                     <button class="btn btn-outline-info" data-toggle="modal" data-target="#detileDosen">
                                         <span class="fas fa-eye"></span>
+                                    </button>
+                                    <button class="btn btn-outline-info" data-toggle="modal" data-target="#statusDosen">
+                                        <span class="fas fa-pen"></span>
                                     </button>
                                     <button class="btn btn-outline-success">
                                         <span class="fas fa-edit"></span>
@@ -231,6 +236,41 @@
                         Close</button>
                     <button type="button" class="btn btn-primary"> <span class="fas fa-save"></span>
                         Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Modal dosen-->
+<div class="modal fade" id="statusDosen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Status</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+
+            <form ng-submit="ChangeRole(model)" class="form-group">
+                <div class="modal-body">
+                    <div class="form-group">
+                        <select ng-model="model.newrole" class="form-control">
+                            <option value="">-- Select Status --</option>
+                            <option value="rektor">Rektor</option>
+                            <option value="kaprodi">Kaprodi</option>
+                            <option value="pemeriksa">Pemeriska Penelitian</option>
+                            <option value="dosen">Dosen</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"> <span
+                            class="fas fa-close"></span>
+                        Close</button>
+                    <button type="submit" class="btn btn-danger"> <span class="fas fa-save"></span> Save</button>
                 </div>
             </form>
         </div>
