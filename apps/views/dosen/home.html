@@ -44,14 +44,14 @@
                                 <table class="table table-hover table-bordered">
                                     <tbody ng-repeat="item in datas">
                                         <tr>
-                                            <td class="text-center">{{angkatohuruf($index+1)}}</td class="text-center">
+                                            <td rowspan="{{datas.length+1}}" class="text-center">
+                                                {{angkatohuruf($index+1)}}</td class="text-center">
                                             <td colspan="5">{{item.namaunsur}}</td>
                                         </tr>
                                         <tr ng-repeat="data in item.subunsur">
-                                            <td></td>
                                             <td class="text-center">{{$index+1}}</td class="text-center">
-                                            <td colspan="3">{{data.namasubunsur}}</td>
-                                            <td colspan="3">{{data.totalsubunsur}}</td>
+                                            <td>{{data.namasubunsur}}</td>
+                                            <td>{{data.totalsubunsur}}</td>
                                         </tr>
                                     </tbody>
 
