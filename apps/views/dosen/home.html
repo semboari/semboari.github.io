@@ -1,69 +1,31 @@
             <div class="row">
                 <div class="col-md-12">
-                    <div class="row mt-3">
-                        <div class="col-md-3 ">
-                            <div class="card bg-success text-light text-center">
-                                <div class=" card-header">Akumulatih AK Diperoleh</div>
-                                <div class="card-body">
-                                    <h2>{{total}}</h2>
-                                </div>
-                                <div class="card-footer">
-                                    <p>Last Update {{tanggal|date:'dd-MM-yyyy'}}</p>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3 ">
-                            <div class="card bg-yellow text-light text-center">
-                                <div class="card-header">Jumlah Perbaiakan Berkas</div>
-                                <div class="card-body">
-                                    <h2>0</h2>
-                                </div>
-                                <div class="card-footer">
-                                    <p>Last Update 2019, 01, 01</p>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-md-12">
                     <div class="card mt-3">
                         <div class="card-header bg-info text-light">
                             <div class="card-title" style="display: inline; font-size: 20px;">Home</div>
                         </div>
                         <div class="card-body">
                             <div class="row">
-                                <div class="col-md-3 text-center img-fluid">
-                                    <fotoprofile></fotoprofile>
-                                    <changepassword></changepassword>
+                                <div class="col-md-3 ">
+                                    <div class="card bg-success text-light text-center">
+                                        <div class=" card-header">Akumulatih AK Diperoleh</div>
+                                        <div class="card-body">
+                                            <h2>{{total}}</h2>
+                                        </div>
+                                        <div class="card-footer">
+                                            <p>Last Update {{tanggal|date:'dd-MM-yyyy'}}</p>
+                                        </div>
+                                    </div>
                                 </div>
-                                <div class="col-md-9">
-                                    <h2>Selamat Datang <span>{{Profile.namadosen}}</span><br><span
-                                            style="font-size: 15px;">Anda Menggunakan SIPAK dengan hak akses Sebagai
-                                            Dosen Pada Universitas
-                                            Sains Dan Teknologi
-                                            Jayapura</span>
-                                    </h2>
-                                    <hr style="border-bottom: 1px solid">
-                                    <div class="row">
-                                        <p class="col-md-3">NIDN</p>
-                                        <p class="col-md-9">: 12345678</p>
-                                        <p class="col-md-3">Email</p>
-                                        <p class="col-md-9">: rein@gmail.com</p>
-                                        <p class="col-md-3">Jenis Kelamin</p>
-                                        <p class="col-md-9">: Laki Laki</p>
-                                        <p class="col-md-3">TTL</p>
-                                        <p class="col-md-9">: Jayapura, 03 November 1991</p>
-                                        <p class="col-md-3">Pendidikan Terakhir</p>
-                                        <p class="col-md-9">: S2</p>
-                                        <p class="col-md-3">Jabatan Fungsional</p>
-                                        <p class="col-md-9">: Lektor</p>
-                                        <p class="col-md-3">Jabatan Akademik</p>
-                                        <p class="col-md-9">: Ketua Jurusan</p>
-                                        <p class="col-md-3">Universitas</p>
-                                        <p class="col-md-9">: Universitas Sains Dan Teknologi Jayapura, Fakultas Ilmu
-                                            Komputer Dan Manajemen, Jurusan Sistem Informasi</p>
-                                        <br>
-
+                                <div class="col-md-3 ">
+                                    <div class="card bg-yellow text-light text-center">
+                                        <div class="card-header">Jumlah Perbaiakan Berkas</div>
+                                        <div class="card-body">
+                                            <h2>0</h2>
+                                        </div>
+                                        <div class="card-footer">
+                                            <p>Last Update 2019, 01, 01</p>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -71,4 +33,94 @@
                     </div>
                 </div>
 
+                <div class="col-md-12">
+                    <div class="card mt-3">
+                        <div class="card-header bg-info text-light">
+                            <div class="card-title" style="display: inline; font-size: 20px;">Rekap Akumulatif
+                                Angka Kredit</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table table-responsive">
+                                <table class="table table-hover table-bordered">
+                                    <tr>
+                                        <td colspan="4" class="bg-dark text-light">Unsur Utama</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">A</td class="text-center">
+                                        <td colspan="3">Pendidikan</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="text-center">1</td>
+                                        <td>Pendidikan Formal</td>
+                                        <td>100</td>
+                                    </tr>
+                                    <tr>
+                                        <td></td>
+                                        <td class="text-center">2</td>
+                                        <td>Mengikuti Diklat Prajabatan</td>
+                                        <td>100</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">B</td>
+                                        <td colspan="2">Pelaksanaan Pendidikan</td>
+                                        <td>100</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">C</td>
+                                        <td colspan="2">Pelaksanaan Penelitian</td>
+                                        <td>100</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="text-center">D</td>
+                                        <td colspan="2">Pelaksanaan Pengabdian Kepada Masyarakat</td>
+                                        <td>100</td>
+                                    </tr>
+                                    <tr class="bg-dark text-light">
+                                        <td colspan="4">Unsur Penunjang</td>
+                                    </tr>
+                                    <tr>
+                                        <td colspan="3">Penunjang Tugas Dosen</td>
+                                        <td>100</td>
+                                    </tr>
+                                    <tr class="bg-primary text-light">
+                                        <td colspan="3"><strong>Jumlah Akumulatif Angka Kredit Keseluruhan</strong></td>
+                                        <td>100</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-md-12">
+                    <div class="card mt-3">
+                        <div class="card-header bg-info text-light">
+                            <div class="card-title" style="display: inline; font-size: 20px;">Pre Request Angka Kredit
+                                Sesuai
+                                Jabatan Fungsional Dosen</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="table table-responsive">
+                                <table class="table table-hover table-bordered">
+                                    <tr class="bg-dark text-light">
+                                        <td>Jabatan Fungsional</td>
+                                        <td>Pangkat</td>
+                                        <td>Golongan</td>
+                                        <td>Ruang</td>
+                                        <td>Angka Kredit</td>
+                                        <td>Kebutuhan Angka Kredit</td>
+                                    </tr>
+                                    <tr>
+                                        <td>Asisten alhi</td>
+                                        <td>Penata Muda</td>
+                                        <td>III</td>
+                                        <td>A</td>
+                                        <td>200</td>
+                                        <td>100</td>
+                                    </tr>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div>
