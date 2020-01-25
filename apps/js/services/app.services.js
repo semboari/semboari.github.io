@@ -9,5 +9,6 @@ angular.module('app.services', [
 	'jabatan.service',
 	'unsur.service',
 	'subunsur.service',
-	'penilaian.service'
+	'penilaian.service',
+	'administrator.services'
 ]);

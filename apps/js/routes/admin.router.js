@@ -1,4 +1,4 @@
-angular.module('admin.router', ['ui.router']).config(function ($stateProvider, $urlRouterProvider) {
+angular.module('admin.router', [ 'ui.router' ]).config(function($stateProvider, $urlRouterProvider) {
 	$stateProvider.state('main	', {
 		url: '/',
 		parent: 'account',
@@ -75,7 +75,7 @@ angular.module('admin.router', ['ui.router']).config(function ($stateProvider, $
 	$stateProvider.state('admin-administrator', {
 		url: '/administrator',
 		parent: 'admin',
-		// controller: 'jabatanController',
+		controller: 'admin.administrator.controller',
 		templateUrl: '../apps/views/admin/administrator.html'
 	});
 });

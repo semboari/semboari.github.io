@@ -7,6 +7,7 @@ angular
 	.controller('jabatanController', JabatanController)
 	.controller('subUnsurController', subUnsurController)
 	.controller('DosenController', DosenController)
+	.controller('admin.administrator.controller', AdministratorController)
 	.controller('peraturanAndUnsurController', peraturanAndUnsurController);
 
 function adminController(AuthService) {
@@ -433,5 +434,53 @@ function DosenController($scope, AuthService, DosenService, UniversitasService, 
 
 	$scope.SelectDosen = function(item) {
 		$scope.model = item;
+	};
+}
+
+function AdministratorController(
+	$scope,
+	AuthService,
+	DosenService,
+	UniversitasService,
+	FakultasService,
+	ProgdiService,
+	message,
+	AdministratorService
+) {
+	AdministratorService.get().then((x) => {
+		$scope.datas = x;
+		UniversitasService.get().then((x) => {
+			$scope.Universitases = x;
+		});
+	});
+
+	$scope.save = function(data) {
+		data.iduniversitas = data.Universitas.iduniversitas;
+		if (data.idadministrator === undefined) {
+			AdministratorService.post(data).then((x) => {
+				if (x) {
+					message.info('success');
+				}
+			});
+		} else {
+			AdministratorService.put(data).then((x) => {
+				if (x) {
+					var item = $scope.datas.find((x) => x.idadministrator == data.idadministrator);
+					if (item) {
+						item.nama = x.nama;
+						item.email = x.email;
+						item.namauniversitas = x.namauniversitas;
+						item.iduniversitas = x.iduniversitas;
+						item.telepon = x.telepon;
+						message.info('success');
+					}
+				}
+			});
+		}
+	};
+
+	$scope.SelectedItem = function(data) {
+		$scope.model = angular.copy(data);
+		$scope.model.Universitas = $scope.Universitases.find((x) => x.iduniversitas == data.iduniversitas);
 	};
 }

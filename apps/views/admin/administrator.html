@@ -22,15 +22,15 @@
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            <tr ng-repeat="item in datas">
                                 <td class="text-center">1</td>
-                                <td>Reinhard semboari</td>
-                                <td>082399472787</td>
-                                <td>rein@gmail.com</td>
-                                <td>Universitas Sains Dan Teknologi Jayapura</td>
+                                <td>{{item.nama}}</td>
+                                <td>{{item.telepon}}</td>
+                                <td>{{item.email}}</td>
+                                <td>{{item.namauniversitas}}</td>
                                 <td class="text-center">
-                                    <button ng-click="SelectedItem(item)" data-toggle="modal" data-target="#universitas"
-                                        class="btn btn-outline-success">
+                                    <button ng-click="SelectedItem(item)" data-toggle="modal"
+                                        data-target="#adminUniversitas" class="btn btn-outline-success">
                                         <span class="fas fa-edit"></span>
                                     </button>
                                     <button ng-click="SelectedItem(item)" class="btn btn-outline-danger"
@@ -59,27 +59,28 @@
                     <span aria-hidden="true">&times;</span>
                 </button>
             </div>
-            <form ng-submit="Save(model)">
+            <form ng-submit="save(model)">
                 <div class="modal-body">
                     <div class="form-group">
                         <label for="" class="control-label">Nama</label>
-                        <input type="text" class="form-control" placeholder="Example Reinhard Semboari" required />
+                        <input ng-model="model.nama" type="text" class="form-control"
+                            placeholder="Example Reinhard Semboari" required />
                     </div>
 
                     <div class="form-group">
                         <label for="" class="control-label">No Hp</label>
-                        <input type="number" class="form-control" placeholder="Example 082399472787" required />
+                        <input ng-model="model.telepon" type="text" class="form-control"
+                            placeholder="Example 082399472787" required />
                     </div>
                     <div class="form-group">
                         <label for="" class="control-label">Email</label>
-                        <input type="email" class="form-control" placeholder="Example 082399472787" required />
+                        <input ng-model="model.email" type="email" class="form-control" placeholder="example@gmail.com"
+                            required />
                     </div>
                     <div class="form-group">
                         <label for="" class="control-label">Universitas</label>
-                        <select class="form-control">
-                            <option value="">-- Select Universitas --</option>
-                            <option value="">Universitas Sains Dan Teknologi Jayapura</option>
-                        </select>
+                        <select class="form-control" ng-model="model.Universitas"
+                            ng-options="option.namauniversitas for option in Universitases track by option.iduniversitas"></select>
                     </div>
                 </div>
                 <div class="modal-footer">

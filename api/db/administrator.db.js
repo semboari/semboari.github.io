@@ -8,11 +8,16 @@ AdministratorDb.get = async () => {
 		pool.query(
 			`SELECT
 			administrator.*,
-			universitas.namauniversitas
+			universitas.namauniversitas,
+			users.email,
+			users.photo,
+			users.aktif,
+			administrator.idusers AS idusers1
 		  FROM
 			administrator
 			LEFT JOIN universitas ON administrator.iduniversitas =
-		  universitas.iduniversitas`,
+		  universitas.iduniversitas
+			LEFT JOIN users ON administrator.idusers = users.idusers`,
 			(err, result) => {
 				if (err) reject(err);
 				resolve(result);
