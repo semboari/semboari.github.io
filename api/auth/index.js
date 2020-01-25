@@ -7,6 +7,7 @@ const authJwt = require('./verifyToken.js');
 const config = require('../auth/config');
 const fs = require('fs');
 const uuid = require('uuid');
+const helper = require('../helper');
 
 router.get('/', async (req, res) => {
 	try {
@@ -85,7 +86,8 @@ router.post('/changepassword', async (req, res) => {
 router.post('/registerdosen', async (req, res) => {
 	try {
 		const user = req.body;
-		user.password = bcrypt.hashSync(req.body.password, 8);
+		user.passwordText = helper.makeid(5);
+		user.password = bcrypt.hashSync(user.passwordText, 8);
 		contextDb.Users.registerDosen(user).then(
 			(data) => {
 				if (data) {

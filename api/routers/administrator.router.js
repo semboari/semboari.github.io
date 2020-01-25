@@ -4,6 +4,7 @@ const contextDb = require('../db');
 const authJwt = require('../auth/verifyToken');
 const permit = require('../auth/permission');
 const bcrypt = require('bcryptjs');
+const helper = require('../helper');
 
 router.get('/', async (req, res) => {
 	try {
@@ -56,7 +57,7 @@ router.post('/', [ authJwt.verifyToken, permit('admin') ], async (req, res) => {
 	try {
 		var data = req.body;
 		data.username = data.email;
-		data.passwordText = makeid(4);
+		data.passwordText = helper.makeid(4);
 		data.password = bcrypt.hashSync(data.passwordText, 8);
 		if (data) {
 			contextDb.Administrator.post(data).then(
@@ -120,13 +121,4 @@ router.delete('/:Id', [ authJwt.verifyToken, permit('admin') ], async (req, res)
 		res.status(400).json(err);
 	}
 });
-function makeid(length) {
-	var result = '';
-	var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-	var charactersLength = characters.length;
-	for (var i = 0; i < length; i++) {
-		result += characters.charAt(Math.floor(Math.random() * charactersLength));
-	}
-	return result;
-}
 module.exports = router;

@@ -38,6 +38,7 @@ AdministratorDb.profile = async (Id) => {
 			administrator.idadministrator,
 			administrator.nama,
 			administrator.telepon,
+			universitas.iduniversitas,
 			universitas.namauniversitas
 		  FROM
 			users

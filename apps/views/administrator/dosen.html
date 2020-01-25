@@ -3,48 +3,58 @@
         <div class="card">
             <div class="card-header">
                 <div class="card-title" style="display: inline; font-size: 20px;">Data Dosen</div>
-                <button class="btn btn-outline-primary fa-pull-right" data-toggle="modal" data-target="#addDosen"><span
-                        class="fas fa-plus"></span></button>
+                <button ng-if="fak && progdi" class="btn btn-outline-primary fa-pull-right" data-toggle="modal"
+                    data-target="#addDosen"><span class="fas fa-plus"></span></button>
             </div>
             <div class="card-body">
                 <div class="row">
                     <div class="col-md-3">
-                        <select name="fakultas" id="" class="form-control">
-                            <option value="">-- Select Fakultas --</option>
+                        <select ng-change="SelectFakultas(fak)" class="form-control" ng-model="fak"
+                            ng-options="option.namafakultas for option in Fakultas track by option.idfakultas">
+                            <option>--Pilih Program Studi--</option>
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select name="progdi" id="" class="form-control">
-                            <option value="">-- Select Progdi --</option>
+                        <select class="form-control"
+                            ng-options="option.namaprogramstudi for option in ProgramStudis track by option.idprogramstudi"
+                            ng-model="progdi">
+                            <option>--Pilih Program Studi--</option>
                         </select>
                     </div>
                 </div>
-                <div class="table table-responsive mt-3">
-                    <table class="table table-bordered table-hover" id="myTable">
+                <div class="table table-responsive">
+                    <table class="table table-bordered table-hover" datatable="ng" id="myTable">
                         <thead class=" bg-primary">
                             <tr>
                                 <th class="text-center">No</th>
                                 <th>NIDN</th>
-                                <th>Nama Dosen</th>
+                                <th>Nama</th>
                                 <th>Email</th>
                                 <th>Status</th>
                                 <th class="text-center">Opsi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td class="text-center">1</td>
-                                <td>457768988</td>
-                                <td>reinhard semboari</td>
-                                <td>reinsemboari@gmail.com</td>
-                                <td>Dosen</td>
+                            <tr
+                                ng-repeat="item in Datas|filter:{idfakultas:fak.idfakultas,idprogramstudi:progdi.idprogramstudi}">
+                                <td class="text-center">{{$index+1}}</td>
+                                <td>{{item.nidn}}</td>
+                                <td>{{item.namadosen}}</td>
+                                <td>{{item.email}}</td>
+                                <td ng-if="item.roles.length>1"><span ng-repeat="role in item.roles">
+                                        <div ng-if="role.rolename!='dosen'"> {{role.deskripsi}}</div>
+                                    </span></td>
+                                <td ng-if="item.roles.length==1">
+                                    <span>
+                                        <div> {{item.roles[0].deskripsi}}</div>
+                                    </span></td>
                                 <td class="text-center">
-                                    <button class="btn btn-outline-info" data-toggle="modal" data-target="#detileDosen">
-                                        <span class="fas fa-eye"></span>
-                                    </button>
-                                    <button class="btn btn-outline-info" data-toggle="modal" data-target="#statusDosen">
-                                        <span class="fas fa-pen"></span>
-                                    </button>
+                                    <button ng-click="SelectDosen(item)" class="btn btn-outline-success"
+                                        data-toggle="modal" data-target="#dosen"><span
+                                            class="fas fa-pencil-alt"></span></button>
+                                    <button ng-click="SelectDosen(item)" class="btn btn-outline-info"
+                                        data-toggle="modal" data-target="#detiledosen"><span
+                                            class="fas fa-eye"></span></button>
                                     <button class="btn btn-outline-success">
                                         <span class="fas fa-edit"></span>
                                     </button>
@@ -60,14 +70,100 @@
         </div>
 
 
-
-
-
     </div>
 </div>
 
+
+<!-- Modal tambah  dosen-->
+<div class="modal fade" id="addDosen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+    aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Tambah Dosen</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <form ng-submit="save(model)" class="form-group">
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">NIDN</label>
+                                <input ng-model="model.nidn" class="form-control" type="number"
+                                    placeholder="Example 5678900987" required="">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Nama</label>
+                                <input ng-model="model.namadosen" class="form-control" type="text"
+                                    placeholder="Example Reinhard Semboari" required="">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Email</label>
+                                <input ng-model="model.email" class="form-control" type="email"
+                                    placeholder="Example rein@gmail.com" required="">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">TTL</label>
+                                <input ng-model="model.tanggallahir" class="form-control" type="text"
+                                    placeholder="Example Jayapura 03, November 1990" required="">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Gender</label>
+                                <select class="form-control" ng-model="model.jeniskelamin">
+                                    <option> -- Pilih Gender -- </option>
+                                    <option value="Pria">Pria</option>
+                                    <option value="Wanita">Wanita</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="control-label">Pendidikan Terakhir</label>
+                                <input ng-model="model.pendidikanterakhir" class="form-control" type="text"
+                                    placeholder="Example S2" required="">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">No Seri Karpeg</label>
+                                <input ng-model="model.noserikarpeg" class="form-control" type="text"
+                                    placeholder="Example 6890897890" required="">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Jabatan Akademik</label>
+                                <input type="text" name="" id="" class="form-control"
+                                    placeholder="Example Ketua Program Studi">
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Jabatan Fungsional</label>
+                                <select class="form-control" ng-model="model.Jabatan"
+                                    ng-options="option.jabatan for option in Jabatans track by option.idjabatan"></select>
+                            </div>
+                            <div class="form-group">
+                                <label class="control-label">Masa Kerja</label>
+                                <input ng-model="model.masakerja" class="form-control" type="text"
+                                    placeholder="Example 5 Tahun" required="">
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal"> <span
+                            class="fas fa-close"></span>
+                        Close</button>
+                    <button type="submit" class="btn btn-primary"> <span class="fas fa-save"></span>
+                        Save</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+
 <!-- Modal detail  dosen-->
-<div class="modal fade" id="detileDosen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+<div class="modal fade" id="detiledosen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
     aria-hidden="true">
     <div class="modal-dialog modal-lg" role="document">
         <div class="modal-content">
@@ -157,98 +253,13 @@
     </div>
 </div>
 
-<!-- Modal tambah  dosen-->
-<div class="modal fade" id="addDosen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
-    <div class="modal-dialog modal-xl" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Tambah Dosen</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <form ng-submit="registrasi(model)" class="form-group">
-                <div class="modal-body">
-                    <div class="row">
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">NIDN</label>
-                                <input ng-model="model.nidn" class="form-control" type="number"
-                                    placeholder="Example 5678900987" required="">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Nama</label>
-                                <input ng-model="model.namadosen" class="form-control" type="text"
-                                    placeholder="Example Reinhard Semboari" required="">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Email</label>
-                                <input ng-model="model.email" class="form-control" type="email"
-                                    placeholder="Example rein@gmail.com" required="">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">TTL</label>
-                                <input ng-model="model.tanggallahir" class="form-control" type="text"
-                                    placeholder="Example Jayapura 03, November 1990" required="">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Gender</label>
-                                <select class="form-control" ng-model="model.jeniskelamin">
-                                    <option> -- Pilih Gender -- </option>
-                                    <option value="Pria">Pria</option>
-                                    <option value="Wanita">Wanita</option>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="col-md-6">
-                            <div class="form-group">
-                                <label class="control-label">Pendidikan Terakhir</label>
-                                <input ng-model="model.pendidikanterakhir" class="form-control" type="text"
-                                    placeholder="Example S2" required="">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">No Seri Karpeg</label>
-                                <input ng-model="model.noserikarpeg" class="form-control" type="text"
-                                    placeholder="Example 6890897890" required="">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Jabatan Akademik</label>
-                                <input type="text" name="" id="" class="form-control"
-                                    placeholder="Example Ketua Program Studi">
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Jabatan Fungsional</label>
-                                <select class="form-control" ng-model="Jabatan"
-                                    ng-options="option.jabatan for option in Jabatans track by option.idjabatan"></select>
-                            </div>
-                            <div class="form-group">
-                                <label class="control-label">Masa Kerja</label>
-                                <input ng-model="model.masakerja" class="form-control" type="text"
-                                    placeholder="Example 5 Tahun" required="">
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal"> <span
-                            class="fas fa-close"></span>
-                        Close</button>
-                    <button type="button" class="btn btn-primary"> <span class="fas fa-save"></span>
-                        Save</button>
-                </div>
-            </form>
-        </div>
-    </div>
-</div>
 
 <!-- Modal dosen-->
-<div class="modal fade" id="statusDosen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
-    aria-hidden="true">
+<div class="modal fade" id="dosen" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Status</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Status Pemeriksa</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -258,7 +269,7 @@
                 <div class="modal-body">
                     <div class="form-group">
                         <select ng-model="model.newrole" class="form-control">
-                            <option value="">-- Select Status --</option>
+                            <option value="">-- Select Status Pemeriksa --</option>
                             <option value="rektor">Rektor</option>
                             <option value="kaprodi">Kaprodi</option>
                             <option value="pemeriksa">Pemeriska Penelitian</option>

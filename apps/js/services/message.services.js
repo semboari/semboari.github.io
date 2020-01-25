@@ -46,15 +46,19 @@ function MessageServices(swangular, $q, $state) {
 					title = 'Hak Akses';
 					break;
 				default:
-					if (params.status > 0) title = params.status;
+					if (params.status > 0) {
+						title = params.status;
+					}
 					break;
 			}
 		}
 
-		if (params.data) text = params.data.message;
+		if (params.data) {
+			text = params.data.message;
+		}
 
 		swangular.swal({
-			title: title,
+			title: title.toString(),
 			text: text,
 			type: 'error'
 		});

@@ -1,5 +1,6 @@
 const pool = require('./dbconnection');
 const bcrypt = require('bcryptjs');
+const helper = require('../helper');
 
 const UserDb = {};
 
@@ -143,8 +144,9 @@ UserDb.registerDosen = async (dosen) => {
 							'insert into users (username, password, email) values(?,?,?)',
 							[ dosen.nidn, dosen.password, dosen.email ],
 							(err, userResult) => {
-								if (err) throw reject(err);
-								else dosen.iduser = userResult.insertId;
+								if (err) {
+									reject(err);
+								} else dosen.iduser = userResult.insertId;
 								connection.query(
 									'insert into userinrole(idusers, idrole) values (?,?)',
 									[ dosen.iduser, role.idrole ],
@@ -171,14 +173,28 @@ UserDb.registerDosen = async (dosen) => {
 													else {
 														dosen.iddosen = result.insertId;
 														dosen.role = 'dosen';
-														connection.commit(function(err) {
-															if (err) {
-																return connection.rollback(function() {
+														helper
+															.sendEmail({
+																to: dosen.email,
+																subject: 'Account',
+																password: dosen.passwordText
+															})
+															.then(
+																(x) => {
+																	connection.commit(function(err) {
+																		if (err) {
+																			return connection.rollback(function() {
+																				reject(err);
+																			});
+																		} else {
+																			resolve(dosen);
+																		}
+																	});
+																},
+																(err) => {
 																	reject(err);
-																});
-															}
-															resolve(dosen);
-														});
+																}
+															);
 													}
 												}
 											);
