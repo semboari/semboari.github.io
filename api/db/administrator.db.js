@@ -75,70 +75,89 @@ AdministratorDb.getByUserId = async (Id) => {
 
 AdministratorDb.post = async (data) => {
 	return new Promise((resolve, reject) => {
-		pool.getConnection((err, connection) => {
-			try {
-				connection.beginTransaction((err) => {
-					if (err) reject(err);
-					connection.query('select * from role where name=?', ['administrator'], (err, roleResult) => {
-						if (err) reject(err);
-						var role = roleResult[0];
-						connection.query(
-							'insert into users (username, password, email) values(?,?,?)',
-							[data.email, data.password, data.email],
-							(err, userResult) => {
+
+		helper.sendEmail({
+				to: data.email,
+				subject: 'Account',
+				password: data.passwordText
+			})
+			.then(
+				(x) => {
+					pool.getConnection((err, connection) => {
+						try {
+							connection.beginTransaction((err) => {
 								if (err) reject(err);
-								else data.iduser = userResult.insertId;
-								connection.query(
-									'insert into userinrole(idusers, idrole) values (?,?)',
-									[data.iduser, role.idrole],
-									(err, result) => {
-										if (err) reject(err);
-										else
-											data.idusers = connection.query(
-												`insert into administrator(idusers,iduniversitas,nama, telepon) values (?,?,?,?)`,
-												[data.iduser, data.iduniversitas, data.nama, data.telepon],
+								connection.query('select * from role where name=?', ['administrator'], (err, roleResult) => {
+									if (err) reject(err);
+									var role = roleResult[0];
+									connection.query(
+										'insert into users (username, password, email) values(?,?,?)',
+										[data.email, data.password, data.email],
+										(err, userResult) => {
+											if (err) reject(err);
+											else data.iduser = userResult.insertId;
+											connection.query(
+												'insert into userinrole(idusers, idrole) values (?,?)',
+												[data.iduser, role.idrole],
 												(err, result) => {
 													if (err) reject(err);
-													else {
-														data.idadministrator = result.insertId;
-														data.role = 'administrator';
-														helper.sendEmail({
-																to: data.email,
-																subject: 'Account',
-																password: data.passwordText
-															})
-															.then(
-																(x) => {
-																	connection.commit(function (err) {
-																		if (err) {
-																			return connection.rollback(function () {
-																				reject(err);
-																			});
-																		} else {
-																			resolve(data);
-																		}
-																	});
-																},
-																(err) => {
-																	reject(err);
-																}
-															);
-													}
+													else
+														data.idusers = result.insertId;
+													connection.query(
+														`insert into administrator(idusers,iduniversitas,nama, telepon) values (?,?,?,?)`,
+														[data.iduser, data.iduniversitas, data.nama, data.telepon],
+														(err, result) => {
+															if (err) reject(err);
+															else {
+																data.idadministrator = result.insertId;
+																data.role = 'administrator';
+																connection.commit(function (err) {
+																	if (err) {
+																		return connection.rollback(function () {
+																			reject(err);
+																		});
+																	} else {
+																		resolve(data);
+																	}
+																});
+															}
+														}
+													);
 												}
 											);
-									}
-								);
-							}
-						);
+										}
+									);
+								});
+							});
+						} catch (error) {
+							connection.rollback(function () {
+								connection.release();
+								reject(error);
+							});
+						}
 					});
-				});
-			} catch (error) {
-				connection.rollback(function () {
-					connection.release();
-					reject(error);
-				});
-			}
-		});
+				},
+				(err) => {
+					reject(err);
+				}
+			);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 	});
 };
 

@@ -1,7 +1,13 @@
 angular.module('message.service', []).factory('message', MessageServices);
 
 function MessageServices(swangular, $q, $state) {
-	return { info: info, error: error, warning: warning, dialog: dialog, errorText: errorText };
+	return {
+		info: info,
+		error: error,
+		warning: warning,
+		dialog: dialog,
+		errorText: errorText
+	};
 
 	function info(params) {
 		swangular.swal({
@@ -23,6 +29,8 @@ function MessageServices(swangular, $q, $state) {
 	}
 
 	function error(params) {
+
+
 		var title = 'Error';
 		var text = 'Terjadi Kesalahan';
 		if (params.status) {

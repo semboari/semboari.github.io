@@ -49,16 +49,16 @@
                                         <div> {{item.roles[0].deskripsi}}</div>
                                     </span></td>
                                 <td class="text-center">
-                                    <button ng-click="SelectDosen(item)" class="btn btn-outline-success"
+                                    <button ng-click="SelectItem(item)" class="btn btn-outline-success"
                                         data-toggle="modal" data-target="#dosen"><span
                                             class="fas fa-pencil-alt"></span></button>
-                                    <button ng-click="SelectDosen(item)" class="btn btn-outline-info"
-                                        data-toggle="modal" data-target="#detiledosen"><span
-                                            class="fas fa-eye"></span></button>
-                                    <button class="btn btn-outline-success">
+                                    <button ng-click="SelectItem(item)" class="btn btn-outline-info" data-toggle="modal"
+                                        data-target="#detiledosen"><span class="fas fa-eye"></span></button>
+                                    <button ng-click="SelectItem(item)" class="btn btn-outline-success"
+                                        data-toggle="modal" data-target="#addDosen">
                                         <span class="fas fa-edit"></span>
                                     </button>
-                                    <button class="btn btn-outline-danger">
+                                    <button ng-click="delete(item)" class="btn btn-outline-danger">
                                         <span" class="fas fa-trash"></span">
                                     </button>
                                 </td>
@@ -91,7 +91,7 @@
                         <div class="col-md-6">
                             <div class="form-group">
                                 <label class="control-label">NIDN</label>
-                                <input ng-model="model.nidn" class="form-control" type="number"
+                                <input ng-model="model.nidn" class="form-control" type="text"
                                     placeholder="Example 5678900987" required="">
                             </div>
                             <div class="form-group">

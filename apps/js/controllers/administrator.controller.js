@@ -5,11 +5,11 @@ angular
 	.controller('administrator.dosen.controller', administratorDosenController);
 
 function administratorHomeController($scope, AuthService, PenilaianService) {
-	AuthService.Init([ 'administrator' ]);
+	AuthService.Init(['administrator']);
 }
 
 function administratorController($scope, AuthService, PenilaianService) {
-	AuthService.Init([ 'administrator' ]);
+	AuthService.Init(['administrator']);
 }
 
 function administratorDosenController(
@@ -17,10 +17,10 @@ function administratorDosenController(
 	AuthService,
 	DosenService,
 	JabatanService,
-	FakultasService,
+	FakultasService, message,
 	ProgdiService
 ) {
-	AuthService.Init([ 'administrator' ]);
+	AuthService.Init(['administrator']);
 
 	AuthService.profile().then((x) => {
 		$scope.profile = x;
@@ -37,7 +37,7 @@ function administratorDosenController(
 			);
 		});
 	});
-	$scope.SelectFakultas = function(params) {
+	$scope.SelectFakultas = function (params) {
 		if (params) {
 			ProgdiService.getByParent(params.idfakultas).then(
 				(x) => {
@@ -48,7 +48,7 @@ function administratorDosenController(
 		}
 	};
 
-	$scope.ChangeRole = function(data) {
+	$scope.ChangeRole = function (data) {
 		DosenService.changeRole(data).then((x) => {
 			if (data.roles.lenght == 1)
 				data.roles.push({
@@ -56,8 +56,7 @@ function administratorDosenController(
 					deskripsi: data.newrole
 				});
 			else {
-				data.roles = [
-					{
+				data.roles = [{
 						rolename: 'dosen',
 						deskripsi: 'Dosen'
 					},
@@ -70,15 +69,34 @@ function administratorDosenController(
 		});
 	};
 
-	$scope.SelectDosen = function(item) {
+	$scope.SelectItem = function (item) {
 		$scope.model = item;
+		$scope.model.tanggallahir = new Date(item.tanggallahir);
+		$scope.model.Jabatan = $scope.Jabatans.find(x => x.idjabatan == item.idjabatan);
 	};
 
-	$scope.save = function(data) {
+	$scope.save = function (data) {
 		data.idjabatan = data.Jabatan.idjabatan;
-		data.idprogramstudi = $scope.progdi.idprogramstudi;
 		if (data.iddosen == undefined) {
-			AuthService.registerdosen(data).then((res) => {});
+			data.idprogramstudi = $scope.progdi.idprogramstudi;
+			AuthService.registerdosen(data).then((res) => {
+				$("#addDosen").modal('hide');
+				$scope.Datas.push(res);
+			});
+		} else {
+			DosenService.put(data).then((res) => {
+				$("#addDosen").modal('hide');
+				message.info("Data Berhasil DiUbah");
+			});
 		}
+	};
+
+	$scope.delete = function (params) {
+		DosenService.delete(params).then((result) => {
+			var index = $scope.Datas.indexOf(params);
+			$scope.Datas.splice(index, 1);
+			message.info('Data Berhasil dihapus !');
+			$('#delete').modal('hide');
+		});
 	};
 }

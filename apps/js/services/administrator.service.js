@@ -4,7 +4,12 @@ function AdministratorService($http, AuthService, helperServices, $q, message) {
 	var controller = '/api/administrator/';
 	var datas = [];
 
-	return { get: get, post: post, put: put, delete: deleteItem };
+	return {
+		get: get,
+		post: post,
+		put: put,
+		delete: deleteItem
+	};
 
 	function get(id) {
 		var defer = $q.defer();
@@ -39,7 +44,7 @@ function AdministratorService($http, AuthService, helperServices, $q, message) {
 				message.info('Data Tersimpan !');
 			},
 			(err) => {
-				message.error(err.message);
+				message.error(err);
 			}
 		);
 

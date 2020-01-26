@@ -21,7 +21,7 @@ router.get('/', async (req, res) => {
 	}
 });
 
-router.get('/:Id', [ authJwt.verifyToken ], async (req, res) => {
+router.get('/:Id', [authJwt.verifyToken], async (req, res) => {
 	try {
 		var id = req.params.Id;
 		contextDb.Administrator.getById(id).then(
@@ -37,7 +37,7 @@ router.get('/:Id', [ authJwt.verifyToken ], async (req, res) => {
 	}
 });
 
-router.get('/byuserid/:Id', [ authJwt.verifyToken ], async (req, res) => {
+router.get('/byuserid/:Id', [authJwt.verifyToken], async (req, res) => {
 	try {
 		var id = req.params.Id;
 		contextDb.Administrator.getByUserId(id).then(
@@ -53,7 +53,7 @@ router.get('/byuserid/:Id', [ authJwt.verifyToken ], async (req, res) => {
 	}
 });
 
-router.post('/', [ authJwt.verifyToken, permit('admin') ], async (req, res) => {
+router.post('/', [authJwt.verifyToken, permit('admin')], async (req, res) => {
 	try {
 		var data = req.body;
 		data.username = data.email;
@@ -63,22 +63,48 @@ router.post('/', [ authJwt.verifyToken, permit('admin') ], async (req, res) => {
 			contextDb.Administrator.post(data).then(
 				(result) => {
 					if (result) {
+						data.idadministrator = result.idadministrator;
+						data.role = result.role;
 						res.status(200).json(result);
 					} else {
-						res.status(400).json({ message: 'Data Tidak Tersimpan' });
+						res.status(400).json({
+							message: 'Data Tidak Tersimpan'
+						});
 					}
 				},
 				(err) => {
-					res.status(400).json(err);
+
+					if (err.errno) {
+						var message = "";
+						switch (err.errno) {
+							case 1062:
+								message = 'username/email user telah terdaftar'
+								break;
+
+							default:
+								message = err.message
+								break;
+						}
+
+						res.status(400).json({
+							message: message
+						});
+
+					} else {
+						res.status(400).json(err);
+					}
+
 				}
 			);
-		} else res.status(400).json({ message: 'Data Tidak Tersimpan' });
+		} else res.status(400).json({
+			message: 'Data Tidak Tersimpan'
+		});
 	} catch (err) {
 		res.status(400).json(err);
 	}
 });
 
-router.put('/', [ authJwt.verifyToken, permit('admin', 'administrator') ], async (req, res) => {
+router.put('/', [authJwt.verifyToken, permit('admin', 'administrator')], async (req, res) => {
 	try {
 		var data = req.body;
 		if (data) {
@@ -87,20 +113,24 @@ router.put('/', [ authJwt.verifyToken, permit('admin', 'administrator') ], async
 					if (result) {
 						res.status(200).json(result);
 					} else {
-						res.status(400).json({ message: 'Data Tidak Tersimpan' });
+						res.status(400).json({
+							message: 'Data Tidak Tersimpan'
+						});
 					}
 				},
 				(err) => {
 					res.status(400).json(err);
 				}
 			);
-		} else res.status(400).json({ message: 'Data Tidak Tersimpan' });
+		} else res.status(400).json({
+			message: 'Data Tidak Tersimpan'
+		});
 	} catch (err) {
 		res.status(400).json(err);
 	}
 });
 
-router.delete('/:Id', [ authJwt.verifyToken, permit('admin') ], async (req, res) => {
+router.delete('/:Id', [authJwt.verifyToken, permit('admin')], async (req, res) => {
 	try {
 		var id = req.params.Id;
 		if (id) {
@@ -109,14 +139,18 @@ router.delete('/:Id', [ authJwt.verifyToken, permit('admin') ], async (req, res)
 					if (result) {
 						res.status(200).json(result);
 					} else {
-						res.status(400).json({ message: 'Data Tidak Tersimpan' });
+						res.status(400).json({
+							message: 'Data Tidak Tersimpan'
+						});
 					}
 				},
 				(err) => {
 					res.status(400).json(err);
 				}
 			);
-		} else res.status(400).json({ message: 'Data Tidak Tersimpan' });
+		} else res.status(400).json({
+			message: 'Data Tidak Tersimpan'
+		});
 	} catch (err) {
 		res.status(400).json(err);
 	}

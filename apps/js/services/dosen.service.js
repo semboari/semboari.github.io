@@ -100,6 +100,7 @@ function DosenService($http, $q, helperServices, AuthService, message) {
 
 		return defer.promise;
 	}
+
 	function getByUniversitasId(id) {
 		var defer = $q.defer();
 		$http({
@@ -160,7 +161,7 @@ function DosenService($http, $q, helperServices, AuthService, message) {
 	function deleteItem(data) {
 		var defer = $q.defer();
 		$http({
-			url: helperServices.url + controller + data.idperaturan,
+			url: helperServices.url + controller + data.iddosen,
 			method: 'delete',
 			headers: AuthService.getHeader()
 		}).then(

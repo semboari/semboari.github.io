@@ -133,84 +133,94 @@ UserDb.changeFoto = async (user) => {
 
 UserDb.registerDosen = async (dosen) => {
 	return new Promise((resolve, reject, next) => {
-		pool.getConnection((err, connection) => {
-			try {
-				connection.beginTransaction((err) => {
-					if (err) reject(err);
-					connection.query('select * from role where name=?', ['dosen'], (err, roleResult) => {
-						if (err) reject(err);
-						var role = roleResult[0];
-						connection.query(
-							'insert into users (username, password, email) values(?,?,?)',
-							[dosen.nidn, dosen.password, dosen.email],
-							(err, userResult) => {
-								if (err) {
-									reject(err);
-								} else dosen.iduser = userResult.insertId;
-								connection.query(
-									'insert into userinrole(idusers, idrole) values (?,?)',
-									[dosen.iduser, role.idrole],
-									(err, result) => {
-										if (err) reject(err);
-										else
-											dosen.iduser = connection.query(
-												`insert into dosen(iduser,idjabatan, nidn, tanggallahir, tempatlahir, jeniskelamin, pendidikanterakhir,
-												 jabatanakademik, masakerja, idprogramstudi) values (?,?,?,?,?,?,?,?,?,?)`,
-												[
-													dosen.iduser,
-													dosen.idjabatan,
-													dosen.nidn,
-													dosen.tanggallahir,
-													dosen.tempatlahir,
-													dosen.jeniskelamin,
-													dosen.pendidikanterakhir,
-													dosen.jabatanakademik,
-													dosen.masakerja,
-													dosen.idprogramstudi
-												],
-												(err, result) => {
-													if (err) reject(err);
-													else {
-														dosen.iddosen = result.insertId;
-														dosen.role = 'dosen';
-														helper
-															.sendEmail({
-																to: dosen.email,
-																subject: 'Account',
-																password: dosen.passwordText
-															})
-															.then(
-																(x) => {
-																	connection.commit(function (err) {
-																		if (err) {
-																			return connection.rollback(function () {
-																				reject(err);
+
+		helper
+			.sendEmail({
+				to: dosen.email,
+				subject: 'Account',
+				password: dosen.passwordText
+			})
+			.then(
+				(x) => {
+					pool.getConnection((err, connection) => {
+						try {
+							connection.beginTransaction((err) => {
+								if (err) reject(err);
+								connection.query('select * from role where name=?', ['dosen'], (err, roleResult) => {
+									if (err) {
+										reject(err);
+									} else {
+										var role = roleResult[0];
+										connection.query(
+											'insert into users (username, password, email) values(?,?,?)',
+											[dosen.nidn, dosen.password, dosen.email],
+											(err, userResult) => {
+												if (err) {
+													reject(err);
+												} else {
+													dosen.iduser = userResult.insertId;
+													connection.query(
+														'insert into userinrole(idusers, idrole) values (?,?)',
+														[dosen.iduser, role.idrole],
+														(err, result) => {
+															if (err)
+																reject(err);
+															else {
+																connection.query(
+																	`insert into dosen(iduser,idjabatan, nidn, tanggallahir, tempatlahir, jeniskelamin, pendidikanterakhir,
+																	 jabatanakademik, masakerja, idprogramstudi, namadosen) values (?,?,?,?,?,?,?,?,?,?,?)`,
+																	[
+																		dosen.iduser,
+																		dosen.idjabatan,
+																		dosen.nidn,
+																		dosen.tanggallahir,
+																		dosen.tempatlahir,
+																		dosen.jeniskelamin,
+																		dosen.pendidikanterakhir,
+																		dosen.jabatanakademik,
+																		dosen.masakerja,
+																		dosen.idprogramstudi,
+																		dosen.namadosen
+																	],
+																	(err, result) => {
+																		if (err) reject(err);
+																		else {
+																			dosen.iddosen = result.insertId;
+																			dosen.role = 'dosen';
+																			connection.commit(function (err) {
+																				if (err) {
+																					return connection.rollback(function () {
+																						reject(err);
+																					});
+																				} else {
+																					resolve(dosen);
+																				}
 																			});
-																		} else {
-																			resolve(dosen);
 																		}
-																	});
-																},
-																(err) => {
-																	reject(err);
-																}
-															);
-													}
+																	}
+																);
+															}
+														}
+													);
 												}
-											);
+											}
+										);
 									}
-								);
-							}
-						);
+
+								});
+							});
+						} catch (error) {
+							connection.rollback(function () {
+								connection.release();
+								reject(error);
+							});
+						}
 					});
-				});
-			} catch (error) {
-				connection.rollback(function () {
-					connection.release();
-					reject(error);
-				});
-			}
-		});
+				},
+				(err) => {
+					reject(err);
+				}
+			);
 	});
 };
 
