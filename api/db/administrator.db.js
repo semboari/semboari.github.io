@@ -45,7 +45,7 @@ AdministratorDb.profile = async (Id) => {
 			LEFT JOIN administrator ON users.idusers = administrator.idusers
 			LEFT JOIN universitas ON administrator.iduniversitas =
 		  universitas.iduniversitas where users.idusers=? and idadministrator is not null`,
-			[ Id ],
+			[Id],
 			(err, result) => {
 				if (err) reject(err);
 				resolve(result[0]);
@@ -64,7 +64,7 @@ AdministratorDb.getByUserId = async (Id) => {
 			administrator
 			LEFT JOIN universitas ON administrator.iduniversitas =
 		  universitas.iduniversitas where idusers=?`,
-			[ Id ],
+			[Id],
 			(err, result) => {
 				if (err) reject(err);
 				resolve(result[0]);
@@ -79,40 +79,39 @@ AdministratorDb.post = async (data) => {
 			try {
 				connection.beginTransaction((err) => {
 					if (err) reject(err);
-					connection.query('select * from role where name=?', [ 'administrator' ], (err, roleResult) => {
+					connection.query('select * from role where name=?', ['administrator'], (err, roleResult) => {
 						if (err) reject(err);
 						var role = roleResult[0];
 						connection.query(
 							'insert into users (username, password, email) values(?,?,?)',
-							[ data.email, data.password, data.email ],
+							[data.email, data.password, data.email],
 							(err, userResult) => {
-								if (err) throw reject(err);
+								if (err) reject(err);
 								else data.iduser = userResult.insertId;
 								connection.query(
 									'insert into userinrole(idusers, idrole) values (?,?)',
-									[ data.iduser, role.idrole ],
+									[data.iduser, role.idrole],
 									(err, result) => {
 										if (err) reject(err);
 										else
 											data.idusers = connection.query(
 												`insert into administrator(idusers,iduniversitas,nama, telepon) values (?,?,?,?)`,
-												[ data.iduser, data.iduniversitas, data.nama, data.telepon ],
+												[data.iduser, data.iduniversitas, data.nama, data.telepon],
 												(err, result) => {
 													if (err) reject(err);
 													else {
 														data.idadministrator = result.insertId;
 														data.role = 'administrator';
-														helper
-															.sendEmail({
+														helper.sendEmail({
 																to: data.email,
 																subject: 'Account',
 																password: data.passwordText
 															})
 															.then(
 																(x) => {
-																	connection.commit(function(err) {
+																	connection.commit(function (err) {
 																		if (err) {
-																			return connection.rollback(function() {
+																			return connection.rollback(function () {
 																				reject(err);
 																			});
 																		} else {
@@ -134,7 +133,7 @@ AdministratorDb.post = async (data) => {
 					});
 				});
 			} catch (error) {
-				connection.rollback(function() {
+				connection.rollback(function () {
 					connection.release();
 					reject(error);
 				});
@@ -148,7 +147,7 @@ AdministratorDb.put = async (data) => {
 		try {
 			pool.query(
 				'update administrator set nama=?, telepon=? where idadministrator=? ',
-				[ data.nama, data.telepon, data.idadministrator ],
+				[data.nama, data.telepon, data.idadministrator],
 				(err, result) => {
 					if (err) {
 						reject(err);
@@ -166,7 +165,7 @@ AdministratorDb.put = async (data) => {
 AdministratorDb.delete = (id) => {
 	return new Promise((resolve, reject) => {
 		try {
-			pool.query('delete from administrator where idadministrator=? ', [ id ], (err, result) => {
+			pool.query('delete from administrator where idadministrator=? ', [id], (err, result) => {
 				if (err) {
 					reject(err);
 				}
