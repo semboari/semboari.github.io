@@ -21,21 +21,21 @@ UserDb.login = async (user) => {
 									if (result.length <= 0) {
 										var sql = 'insert into role (name,deskripsi) values ? ';
 										var values = [
-											[ 'admin', 'Admin' ],
-											[ 'administrator', 'Administrator' ],
-											[ 'dosen', 'Dosen' ],
-											[ 'kaprodi', 'Kaprodi' ],
-											[ 'pemeriksa', 'Pemeriksa Penelitian' ],
-											[ 'rektor', 'Rektor' ]
+											['admin', 'Admin'],
+											['administrator', 'Administrator'],
+											['dosen', 'Dosen'],
+											['kaprodi', 'Kaprodi'],
+											['pemeriksa', 'Pemeriksa Penelitian'],
+											['rektor', 'Rektor']
 										];
-										connection.query(sql, [ values ], (err, result) => {
+										connection.query(sql, [values], (err, result) => {
 											if (err) {
 												reject(err);
 											}
 											var password = bcrypt.hashSync(user.password, 8);
 											connection.query(
 												'insert into users (username,password,email) values(?,?,?)',
-												[ user.username, password, user.username ],
+												[user.username, password, user.username],
 												(err, result) => {
 													if (err) {
 														reject(err);
@@ -46,7 +46,7 @@ UserDb.login = async (user) => {
 
 														connection.query(
 															'select * from role where name=?',
-															[ 'admin' ],
+															['admin'],
 															(err, roleResult) => {
 																if (err) reject(err);
 
@@ -54,12 +54,12 @@ UserDb.login = async (user) => {
 
 																connection.query(
 																	'insert into userinrole(idusers,idrole) values(?,?)',
-																	[ user.idUser, data.idrole ],
+																	[user.idUser, data.idrole],
 																	(err, result) => {
 																		if (err) reject(err);
-																		connection.commit(function(err) {
+																		connection.commit(function (err) {
 																			if (err) {
-																				return connection.rollback(function() {
+																				return connection.rollback(function () {
 																					reject(err);
 																				});
 																			}
@@ -82,14 +82,14 @@ UserDb.login = async (user) => {
 									users LEFT JOIN
 									userinrole ON users.idusers = userinrole.idusers LEFT JOIN
 									role ON userinrole.idrole = role.idrole where users.username=? or users.email=?`,
-											[ user.username, user.username ],
+											[user.username, user.username],
 											(err, result) => {
 												if (err) {
 													reject(err);
 												} else {
-													connection.commit(function(err) {
+													connection.commit(function (err) {
 														if (err) {
-															connection.rollback(function() {
+															connection.rollback(function () {
 																reject(err);
 															});
 														} else resolve(result);
@@ -101,7 +101,7 @@ UserDb.login = async (user) => {
 								}
 							});
 					} catch (error) {
-						connection.rollback(function() {
+						connection.rollback(function () {
 							connection.release();
 							reject(error);
 						});
@@ -113,7 +113,7 @@ UserDb.login = async (user) => {
 
 UserDb.changepassword = async (user) => {
 	return new Promise((resolve, reject, nex) => {
-		pool.query('update users set password=? where idusers=?', [ user.newpassword, user.idusers ], (err, result) => {
+		pool.query('update users set password=? where idusers=?', [user.newpassword, user.idusers], (err, result) => {
 			if (err) {
 				return reject(err);
 			} else resolve(true);
@@ -123,7 +123,7 @@ UserDb.changepassword = async (user) => {
 
 UserDb.changeFoto = async (user) => {
 	return new Promise((resolve, reject, nex) => {
-		pool.query('update users set photo=? where idusers=?', [ user.photo, user.idusers ], (err, result) => {
+		pool.query('update users set photo=? where idusers=?', [user.photo, user.idusers], (err, result) => {
 			if (err) {
 				return reject(err);
 			} else resolve(true);
@@ -137,19 +137,19 @@ UserDb.registerDosen = async (dosen) => {
 			try {
 				connection.beginTransaction((err) => {
 					if (err) reject(err);
-					connection.query('select * from role where name=?', [ 'dosen' ], (err, roleResult) => {
+					connection.query('select * from role where name=?', ['dosen'], (err, roleResult) => {
 						if (err) reject(err);
 						var role = roleResult[0];
 						connection.query(
 							'insert into users (username, password, email) values(?,?,?)',
-							[ dosen.nidn, dosen.password, dosen.email ],
+							[dosen.nidn, dosen.password, dosen.email],
 							(err, userResult) => {
 								if (err) {
 									reject(err);
 								} else dosen.iduser = userResult.insertId;
 								connection.query(
 									'insert into userinrole(idusers, idrole) values (?,?)',
-									[ dosen.iduser, role.idrole ],
+									[dosen.iduser, role.idrole],
 									(err, result) => {
 										if (err) reject(err);
 										else
@@ -181,9 +181,9 @@ UserDb.registerDosen = async (dosen) => {
 															})
 															.then(
 																(x) => {
-																	connection.commit(function(err) {
+																	connection.commit(function (err) {
 																		if (err) {
-																			return connection.rollback(function() {
+																			return connection.rollback(function () {
 																				reject(err);
 																			});
 																		} else {
@@ -205,7 +205,7 @@ UserDb.registerDosen = async (dosen) => {
 					});
 				});
 			} catch (error) {
-				connection.rollback(function() {
+				connection.rollback(function () {
 					connection.release();
 					reject(error);
 				});
@@ -255,7 +255,7 @@ UserDb.profile = async (userId) => {
 		LEFT JOIN role ON userinrole.idrole = role.idrole
 		LEFT JOIN jabatanfungsional ON dosen.idjabatan =
 	  jabatanfungsional.idjabatan where iduser =?`,
-			[ userId ],
+			[userId],
 			(err, result) => {
 				if (err) {
 					return reject(err);

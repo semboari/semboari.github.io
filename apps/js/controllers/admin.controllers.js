@@ -11,16 +11,16 @@ angular
 	.controller('peraturanAndUnsurController', peraturanAndUnsurController);
 
 function adminController(AuthService) {
-	AuthService.Init([ 'admin' ]);
+	AuthService.Init(['admin']);
 }
 
 function universitasController($scope, AuthService, UniversitasService, message) {
-	AuthService.Init([ 'admin' ]);
+	AuthService.Init(['admin']);
 	UniversitasService.get().then((result) => {
 		$scope.Datas = result;
 	});
 
-	$scope.Save = function(data) {
+	$scope.Save = function (data) {
 		if (data.iduniversitas === undefined) {
 			UniversitasService.post(data).then((result) => {
 				message.info('Data Berhasil disimpan !');
@@ -38,11 +38,11 @@ function universitasController($scope, AuthService, UniversitasService, message)
 		}
 	};
 
-	$scope.SelectedItem = function(params) {
+	$scope.SelectedItem = function (params) {
 		$scope.model = angular.copy(params);
 	};
 
-	$scope.delete = function(params) {
+	$scope.delete = function (params) {
 		UniversitasService.delete(params).then((result) => {
 			message.info('Data Berhasil dihapus !');
 			$('#delete').modal('hide');
@@ -51,14 +51,14 @@ function universitasController($scope, AuthService, UniversitasService, message)
 }
 
 function fakultasController($scope, AuthService, UniversitasService, FakultasService, message) {
-	AuthService.Init([ 'admin' ]);
+	AuthService.Init(['admin']);
 	$scope.Datas = [];
 	$scope.model = {};
 	UniversitasService.get().then((x) => {
 		$scope.Universitas = x;
 	});
 
-	$scope.Save = function(data, univ) {
+	$scope.Save = function (data, univ) {
 		data.iduniversitas = univ.iduniversitas;
 		if (data.idfakultas === undefined) {
 			FakultasService.post(data).then((result) => {
@@ -78,7 +78,7 @@ function fakultasController($scope, AuthService, UniversitasService, FakultasSer
 		}
 	};
 
-	$scope.SelectUniversitas = function(params) {
+	$scope.SelectUniversitas = function (params) {
 		$scope.Datas = [];
 		setTimeout((x) => {
 			FakultasService.getByParent(params.iduniversitas).then(
@@ -90,10 +90,10 @@ function fakultasController($scope, AuthService, UniversitasService, FakultasSer
 		}, 100);
 	};
 
-	$scope.SelectItem = function(data) {
+	$scope.SelectItem = function (data) {
 		$scope.model = angular.copy(data);
 	};
-	$scope.delete = function(params) {
+	$scope.delete = function (params) {
 		FakultasService.delete(params).then((result) => {
 			var index = $scope.Datas.indexOf(params);
 			$scope.Datas.splice(index, 1);
@@ -104,12 +104,12 @@ function fakultasController($scope, AuthService, UniversitasService, FakultasSer
 }
 
 function progdiController($scope, AuthService, UniversitasService, FakultasService, ProgdiService, message) {
-	AuthService.Init([ 'admin' ]);
+	AuthService.Init(['admin']);
 	UniversitasService.get().then((x) => {
 		$scope.Universitas = x;
 	});
 
-	$scope.Save = function(data, univ, fak) {
+	$scope.Save = function (data, univ, fak) {
 		data.iduniversitas = univ.iduniversitas;
 		data.idfakultas = fak.idfakultas;
 		if (data.idprogramstudi === undefined) {
@@ -131,14 +131,14 @@ function progdiController($scope, AuthService, UniversitasService, FakultasServi
 			});
 		}
 	};
-	$scope.SelectUniversitas = function(params) {
+	$scope.SelectUniversitas = function (params) {
 		if (params) {
 			FakultasService.getByParent(params.iduniversitas).then((result) => {
 				$scope.Fakultas = result;
 			});
 		}
 	};
-	$scope.SelectFakultas = function(params) {
+	$scope.SelectFakultas = function (params) {
 		if (params) {
 			ProgdiService.getByParent(params.idfakultas).then(
 				(x) => {
@@ -149,10 +149,10 @@ function progdiController($scope, AuthService, UniversitasService, FakultasServi
 		}
 	};
 
-	$scope.SelectedItem = function(params) {
+	$scope.SelectedItem = function (params) {
 		$scope.model = angular.copy(params);
 	};
-	$scope.delete = function(params) {
+	$scope.delete = function (params) {
 		ProgdiService.delete(params).then((result) => {
 			var index = $scope.Datas.indexOf(params);
 			$scope.Datas.splice(index, 1);
@@ -163,14 +163,14 @@ function progdiController($scope, AuthService, UniversitasService, FakultasServi
 }
 
 function peraturanAndUnsurController($scope, AuthService, PeraturanService, UnsurService, message) {
-	AuthService.Init([ 'admin' ]);
+	AuthService.Init(['admin']);
 	$scope.Peraturan = [];
 	$scope.modelPeraturan = {};
 	PeraturanService.get().then((x) => {
 		$scope.Peraturan = x;
 	});
 
-	$scope.SavePeraturan = function(data, univ) {
+	$scope.SavePeraturan = function (data, univ) {
 		if (data.idperaturan === undefined) {
 			PeraturanService.post(data).then((result) => {
 				message.info('Data Berhasil disimpan !');
@@ -189,11 +189,11 @@ function peraturanAndUnsurController($scope, AuthService, PeraturanService, Unsu
 		$('#tahun').modal('hide');
 	};
 
-	$scope.SelectItemPeraturan = function(data) {
+	$scope.SelectItemPeraturan = function (data) {
 		$scope.modelPeraturan = angular.copy(data);
 	};
 
-	$scope.deletePeraturan = function(params) {
+	$scope.deletePeraturan = function (params) {
 		message.dialog('Yakin Hapus Data Peraturan ?').then(
 			(x) => {
 				PeraturanService.delete(params).then((result) => {
@@ -215,7 +215,7 @@ function peraturanAndUnsurController($scope, AuthService, PeraturanService, Unsu
 		$scope.Unsur = x;
 	});
 
-	$scope.SaveUnsur = function(data, univ) {
+	$scope.SaveUnsur = function (data, univ) {
 		if (data.idunsur === undefined) {
 			UnsurService.post(data).then((result) => {
 				message.info('Data Berhasil disimpan !');
@@ -234,11 +234,11 @@ function peraturanAndUnsurController($scope, AuthService, PeraturanService, Unsu
 		$('#unsur').modal('hide');
 	};
 
-	$scope.SelectItemUnsur = function(data) {
+	$scope.SelectItemUnsur = function (data) {
 		$scope.modelUnsur = angular.copy(data);
 	};
 
-	$scope.deleteUnsur = function(params) {
+	$scope.deleteUnsur = function (params) {
 		message.dialog('Yakin Hapus Data Unsur ?').then(
 			(x) => {
 				UnsurService.delete(params).then((result) => {
@@ -253,6 +253,7 @@ function peraturanAndUnsurController($scope, AuthService, PeraturanService, Unsu
 		);
 	};
 }
+
 function subUnsurController(
 	$scope,
 	AuthService,
@@ -262,7 +263,7 @@ function subUnsurController(
 	UnsurService,
 	message
 ) {
-	AuthService.Init([ 'admin' ]);
+	AuthService.Init(['admin']);
 	UnsurService.get().then((x) => {
 		$scope.Unsurs = x;
 		PeraturanService.get().then((x) => {
@@ -273,7 +274,7 @@ function subUnsurController(
 		});
 	});
 
-	$scope.SelectPeraturan = function() {
+	$scope.SelectPeraturan = function () {
 		if ($scope.Peraturan) {
 			SubUnsurService.get($scope.Peraturan.idperaturan).then((x) => {
 				$scope.Datas = x;
@@ -281,13 +282,13 @@ function subUnsurController(
 		}
 	};
 
-	$scope.SelectItem = function(item) {
+	$scope.SelectItem = function (item) {
 		$scope.model = angular.copy(item);
 		$scope.model.unsur = $scope.Unsurs.find((x) => x.idunsur == item.idunsur);
 		$scope.model.jabatan = $scope.Jabatans.find((x) => x.idjabatan == item.idjabatan);
 	};
 
-	$scope.save = function(data) {
+	$scope.save = function (data) {
 		if ($scope.Peraturan) {
 			data.idtahunaturan = $scope.Peraturan.idperaturan;
 		}
@@ -320,8 +321,8 @@ function subUnsurController(
 		}
 	};
 
-	$scope.delete = function(params) {
-		message.dialog('Yakin Hapus Data Jabatan ?').then(
+	$scope.delete = function (params) {
+		message.dialog('Yakin Hapus Data Sub Unsur ?').then(
 			(x) => {
 				SubUnsurService.delete(params).then((result) => {
 					var index = $scope.Datas.indexOf(params);
@@ -336,14 +337,14 @@ function subUnsurController(
 }
 
 function JabatanController($scope, AuthService, JabatanService, message) {
-	AuthService.Init([ 'admin' ]);
-	$scope.Golongans = [ 'I', 'II', 'III', 'IV' ];
-	$scope.Ruangs = [ 'a', 'b', 'c', 'd' ];
+	AuthService.Init(['admin']);
+	$scope.Golongans = ['I', 'II', 'III', 'IV'];
+	$scope.Ruangs = ['a', 'b', 'c', 'd'];
 	JabatanService.get().then((result) => {
 		$scope.Datas = result;
 	});
 
-	$scope.Save = function(data) {
+	$scope.Save = function (data) {
 		if (data.idjabatan === undefined) {
 			JabatanService.post(data).then((result) => {
 				message.info('Data Berhasil disimpan !');
@@ -361,11 +362,11 @@ function JabatanController($scope, AuthService, JabatanService, message) {
 		}
 	};
 
-	$scope.SelectItem = function(params) {
+	$scope.SelectItem = function (params) {
 		$scope.model = angular.copy(params);
 	};
 
-	$scope.delete = function(params) {
+	$scope.delete = function (params) {
 		message.dialog('Yakin Hapus Data Jabatan ?').then(
 			(x) => {
 				JabatanService.delete(params).then((result) => {
@@ -381,7 +382,7 @@ function JabatanController($scope, AuthService, JabatanService, message) {
 }
 
 function DosenController($scope, AuthService, DosenService, UniversitasService, FakultasService, ProgdiService) {
-	AuthService.Init([ 'admin' ]);
+	AuthService.Init(['admin']);
 	DosenService.get().then((x) => {
 		$scope.Datas = x;
 		UniversitasService.get().then((x) => {
@@ -389,7 +390,7 @@ function DosenController($scope, AuthService, DosenService, UniversitasService, 
 		});
 	});
 
-	$scope.SelectUniversitas = function(params) {
+	$scope.SelectUniversitas = function (params) {
 		setTimeout((x) => {
 			FakultasService.getByParent(params.iduniversitas).then(
 				(x) => {
@@ -399,7 +400,7 @@ function DosenController($scope, AuthService, DosenService, UniversitasService, 
 			);
 		}, 100);
 	};
-	$scope.SelectFakultas = function(params) {
+	$scope.SelectFakultas = function (params) {
 		if (params) {
 			ProgdiService.getByParent(params.idfakultas).then(
 				(x) => {
@@ -410,7 +411,7 @@ function DosenController($scope, AuthService, DosenService, UniversitasService, 
 		}
 	};
 
-	$scope.ChangeRole = function(data) {
+	$scope.ChangeRole = function (data) {
 		DosenService.changeRole(data).then((x) => {
 			if (data.roles.lenght == 1)
 				data.roles.push({
@@ -418,8 +419,7 @@ function DosenController($scope, AuthService, DosenService, UniversitasService, 
 					deskripsi: data.newrole
 				});
 			else {
-				data.roles = [
-					{
+				data.roles = [{
 						rolename: 'dosen',
 						deskripsi: 'Dosen'
 					},
@@ -432,7 +432,7 @@ function DosenController($scope, AuthService, DosenService, UniversitasService, 
 		});
 	};
 
-	$scope.SelectDosen = function(item) {
+	$scope.SelectDosen = function (item) {
 		$scope.model = item;
 	};
 }
@@ -454,7 +454,7 @@ function AdministratorController(
 		});
 	});
 
-	$scope.save = function(data) {
+	$scope.save = function (data) {
 		data.iduniversitas = data.Universitas.iduniversitas;
 		if (data.idadministrator === undefined) {
 			AdministratorService.post(data).then((x) => {
@@ -479,7 +479,7 @@ function AdministratorController(
 		}
 	};
 
-	$scope.SelectedItem = function(data) {
+	$scope.SelectedItem = function (data) {
 		$scope.model = angular.copy(data);
 		$scope.model.Universitas = $scope.Universitases.find((x) => x.iduniversitas == data.iduniversitas);
 	};
