@@ -79,8 +79,8 @@
                                 <textarea ng-class="{red:error}" type="text" placeholder="Cari Kegiatan"
                                     ng-change="changeSubUnsur()" ng-model="model.namasubunsur"
                                     typeahead-on-select="selectTypeAhead(model,$item)" typeahead="state.namasubunsur for state in SubUnsurs | 
-                                    filter:{idunsur:Unsur.idunsur,  namasubunsur:$viewValue} | limitTo:8"
-                                    class="form-control"></textarea>
+                                    filter:{ idjabatan:Profile.idjabatan,idunsur:Unsur.idunsur,  namasubunsur:$viewValue}
+                                    | limitTo:8" class="form-control"></textarea>
                             </div>
                             <div class="form-group">
                                 <label class="control-label">Uraian Kegiatan</label>
