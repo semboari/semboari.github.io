@@ -30,7 +30,7 @@
     "nodemon": "^1.19.2",
     "popper.js": "^1.16.0",
     "rxjs": "^6.5.3",
-    "sequelize": "^4.39.0",
+    "sequelize": "^5.15.1",
     "swangular": "^1.4.3",
     "uuid": "^3.4.0"
   },
